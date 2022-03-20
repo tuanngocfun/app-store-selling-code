@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> My First Web Page </title>
+    <meta name="description" content="Page Description Here"/>
+    <meta http-equiv="Content-Type" content="text/html"; charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <style type="text/css">
+        Body {
+            color: rgb(9, 229, 236);
+        }
+
+    </style>
+
+    <script>
+        function myFunction() {
+            var x = document.getElementById("fname");
+            x.value = x.value.toUpperCase();
+        }
+    </script>
+</head>
+
+<body>
+<p>This is a Sample HTML Document.</p>
+<p>This Javascript function will capitalize my name:</p>
+Enter your name: <input type="text" id="fname" onchange="myFunction()">
+</body>
+
+<p>This is line 1. <br> This is line 2. &nbsp;This is non-breaking space.</p>
+
+<p>
+    <h1>Contents</h1>
+
+    <ul>
+        <li><a href="#Sport">My favorite sport</a><br></li>
+        <li><a href="#Vacation">My favorite vacation</a><br></li>
+        <li><a href="#Image">Vacation picture</a><br></li>
+        <li><a href="#Audio">Random audio</a><br></li>
+    </ul>
+</p>
+
+<p><h1><a id="Sport"></a>My favorite sport</h1></p>
+<!-- <h3>My favorite sport</h3> -->
+
+<ul>
+    <li>Football</li>
+    <li>Basketball</li>
+    <li>Tennis</li>
+    <li>Badminton</li>
+    <li>Swimming</li>
+    <li>Game Online</li>
+</ul>
+
+<p><h1><a id="Vacation"></a>My favorite vacation</h1></p>
+<!-- <h3>My favorite vacation</h3> -->
+
+<ol>
+    <li>Nha Trang</li>
+    <li>Can Tho</li>
+    <li>HCM city</li>
+    <li>Vinh Ha Long</li>
+    <li>Phong Nha Ke Bang</li>
+</ol>
+
+<p><h1><a id="Image"></a>Vacation picture</h1></p>
+<!-- <h1>Vacation picture</h1> -->
+
+<p>
+
+    <a href="https://vinpearl.com/vi/nha-trang-o-dau-co-gi-dang-kham-pha-trai-nghiem"><img src="NT.jpg" width="350" height="250"></a>
+    <a href="https://canthotourism.vn/en/home"><img src="CT.jpg" width="350" height="250"></a>
+    <a href="https://www.tripadvisor.com/Attractions-g293925-Activities-c47-Ho_Chi_Minh_City.html"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Ho_Chi_Minh_City_Skyline_%28night%29.jpg/268px-Ho_Chi_Minh_City_Skyline_%28night%29.jpg" width="350" height="250"></a>
+    <a href="https://vinpearl.com/vi/review-du-lich-vinh-ha-long-tu-a-z-di-dau-o-dau-an-gi-ngon"><img src="VHL.jpg" width="350" height="250"></a>
+    <a href="https://phongnhakebang.vn/"><img src="PNKB.jpg" width="350" height="250"></a>
+
+</p>
+
+<p>
+    <a href="https://vinpearl.com/vi/nha-trang-o-dau-co-gi-dang-kham-pha-trai-nghiem" target="_blank">vinpearl.com</a> <br>
+    <a href="https://canthotourism.vn/en/home" target="_blank">canthotourism.vn</a> <br>
+    <a href="https://www.tripadvisor.com/Attractions-g293925-Activities-c47-Ho_Chi_Minh_City.html" target="_blank">tripadvisor.com</a> <br>
+    <a href="https://vinpearl.com/vi/review-du-lich-vinh-ha-long-tu-a-z-di-dau-o-dau-an-gi-ngon" target="_blank">vinpearl.com</a> <br>
+    <a href="https://phongnhakebang.vn/" target="_blank">phongnhakebang.vn</a>
+</p>
+
+<p><h1><a id="Audio"></a>Random audio</h1></p>
+<!-- <h3>Some random audio</h3> -->
+<video width="100%" controls>
+    <source src="ya.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+</html>
