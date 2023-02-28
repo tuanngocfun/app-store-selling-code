@@ -1,6 +1,13 @@
 # vgupe2023_team10
-
-
+## Project: Game Store Application
+## Members:
+ 1. Vo Nguyen Duy Bach - 16770 - @167701
+ 2. Nguyen Gia Bao - 16885 - @168851
+ 3. Hoang Duc Hung - 16207 - @162071
+ 4. Hoang Ngoc Anh Khoi - 15900 - @159001
+ 5. Pham Phuc Khoa - 16765 - @167651 (inccorect)
+ 6. Le Duc Minh - 16669 - @169991
+ 7. Nguyen Tuan Ngoc - 15809 - @tuanngocfun
 
 ## Getting started
 
