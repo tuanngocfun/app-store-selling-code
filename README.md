@@ -8,6 +8,8 @@
  5. Pham Phuc Khoa - 16765 - @167651 (inccorect)
  6. Le Duc Minh - 16669 - @169991
  7. Nguyen Tuan Ngoc - 15809 - @tuanngocfun
+ 8. Nguyen Quang Duy -16773 - @16773
+ 9. Vo Nhu Duc Nghia -16299 - @vonhuducnghia
 
 ## Getting started
 
