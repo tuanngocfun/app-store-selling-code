@@ -1,0 +1,86 @@
+.trust-panel-container {
+  height: 150px;
+  background-color: #101010;
+}
+
+.trust-panel-container .trust-panel-content-container {
+  margin-left: 165px;
+  margin-right: 165px;
+  height: 100%;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+}
+
+.trust-panel-container .trust-panel-content-container .feature {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-column-gap: 15px;
+          column-gap: 15px;
+}
+
+.trust-panel-container .trust-panel-content-container .feature .icon {
+  width: 40px;
+  height: 40px;
+  color: #01D47A;
+}
+
+.trust-panel-container .trust-panel-content-container .feature .icon-logo {
+  height: 60px;
+  height: 60px;
+}
+
+.trust-panel-container .trust-panel-content-container .feature .icon-logo img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.trust-panel-container .trust-panel-content-container .feature .content {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.trust-panel-container .trust-panel-content-container .feature .content h1 {
+  font-size: 1.5rem;
+}
+
+.trust-panel-container .trust-panel-content-container .feature .content span {
+  font-family: "SFProTextReg";
+  color: #A5A5A5;
+}
+
+.trust-panel-container .trust-panel-content-container .space {
+  height: 70px;
+  width: 1px;
+  background-color: #323232;
+}
+/*# sourceMappingURL=trustpanel.css.map */

@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,cAAc,CAAA;EACV,MAAM,EAAE,KAAK;CAChB",
+    "sources": [
+        "termsOfUse.scss",
+        "../../_variables.scss"
+    ],
+    "names": [],
+    "file": "termsOfUse.css"
+}

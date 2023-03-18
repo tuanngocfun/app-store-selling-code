@@ -1,0 +1,115 @@
+.pseudo-nav-container{
+    height: 80px;
+    max-height: 80px;
+    width: 100%;
+    position: fixed;
+    z-index: 120;
+    transition: 0.1s ;
+
+    
+
+    .logo-container-one{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        height: 35px;
+        #logo{
+            height: 100%;
+        }
+        z-index: 23;
+
+    }
+
+    .nav-container{ 
+        display: flex;
+        flex-direction: row;
+        background-color: transparent;
+        height: 80px;
+        max-height: 80px;
+        position: fixed;
+        width: 100%;
+        padding-left: 30px;
+        padding-right: 30px;
+        align-items: center;
+        justify-content: space-between;
+        transition: 0.2s ease;
+
+        .language-container{
+            cursor: pointer;
+            .dropdown-menu{
+                position: absolute;
+                width: 150px;
+                height: 80px;
+                background-color: #272727;
+                border-radius: 5px;
+                transform: translate(50px, -35px);
+                display: flex;
+                flex-direction: column;
+                padding-top: 20px;
+                padding-left: 30px;
+                padding-bottom: 20px;
+                padding-right: 20px;
+                justify-content: space-between;
+                h3{
+                    color: #ffffff;
+                    font-family: "SFProTextReg";
+                    font-size: 1;
+                }
+            }
+        }
+
+        &.active{
+            background-color: #101010;
+            animation: fadeIn 0.1s;
+        }
+
+        .icon{
+            color: #ffffff;
+            height: 25px;
+            width: 25px;
+        }
+
+        .logo-container{
+            height: 35px;
+            #logo{
+                height: 100%;
+            }
+        }
+
+        .right-nav{
+            display: flex;
+            width: 150px;
+            justify-content: space-between;
+            align-items: center;
+            .icon{
+                color: #ffffff;
+                height: 25px;
+                width: 25px;
+                transition: 0.4s;
+                &:hover{
+                    color: #01D47A;
+                    transition: 0.4s;
+                }
+            }
+        }
+    }
+
+    @keyframes fadeIn {
+        from{
+            opacity: 0;
+        }
+        to{
+            opacity: 1;
+        }
+    }
+
+    @keyframes fadeOut {
+        from{
+            opacity: 1;
+        }
+        to{
+            opacity: 0;
+        }
+    }
+}

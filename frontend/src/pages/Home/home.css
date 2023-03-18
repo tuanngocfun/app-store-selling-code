@@ -1,0 +1,410 @@
+.home-container {
+  height: 100%;
+  width: 100%;
+  z-index: 10;
+}
+
+.home-container .main-content {
+  height: 100%;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.home-container .main-content .top-banner {
+  position: relative;
+  top: 0;
+  left: 0;
+  height: 70vh;
+  width: 100%;
+}
+
+.home-container .main-content .top-banner .parallax {
+  height: 100%;
+  width: 100%;
+}
+
+.home-container .main-content .top-banner .parallax .top-banner-gradient {
+  background: -webkit-gradient(linear, left top, left bottom, from(#000), to(transparent));
+  background: linear-gradient(#000, transparent);
+  opacity: 0.7;
+  top: 0;
+  width: 100%;
+  height: 20%;
+  z-index: 1;
+  content: "";
+  position: absolute;
+}
+
+.home-container .main-content .top-banner .parallax .loading-container {
+  width: 100%;
+  height: 100%;
+  background-color: #272727;
+}
+
+.home-container .main-content .top-banner .parallax img {
+  width: 100%;
+  height: 100%;
+  -o-object-position: center;
+     object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.home-container .main-content .top-banner .parallax .bottom-banner-gradient {
+  background: -webkit-gradient(linear, left top, left bottom, from(transparent), to(#000));
+  background: linear-gradient(transparent, #000);
+  opacity: .5;
+  bottom: 0;
+  width: 100%;
+  height: 10%;
+  z-index: 1;
+  content: "";
+  position: absolute;
+}
+
+.home-container .main-content .top-banner .content {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  height: 80%;
+  width: 100%;
+  padding-left: 150px;
+  padding-right: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.home-container .main-content .top-banner .content .banner-product {
+  height: 100%;
+  width: 100%;
+  z-index: 2;
+  color: white;
+  text-decoration: none;
+}
+
+.home-container .main-content .top-banner .content .banner-product-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  width: 30%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.home-container .main-content .top-banner .content .banner-product-wrapper .newest-trending {
+  background-color: #01D47A;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 6px;
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: "DTphuduMedium";
+  color: #ffffff;
+}
+
+.home-container .main-content .top-banner .content .banner-product-wrapper .title {
+  font-size: 2rem;
+  font-family: "DTphudu";
+  margin-bottom: 4px;
+}
+
+.home-container .main-content .top-banner .content .banner-product-wrapper .price {
+  font-size: 1.8rem;
+  font-family: "DTphuduMedium";
+}
+
+.home-container .main-content .trend-container {
+  top: 70vh;
+  min-height: 900px;
+  background-color: transparent;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.home-container .main-content .preorder-container {
+  min-height: 900px;
+  background-color: transparent;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.home-container .main-content .bestsellers-container {
+  min-height: 900px;
+  background-color: transparent;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.home-container .main-content .review-container {
+  background-color: #323232;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.home-container .main-content .review-container .sub-review-container {
+  height: 50vh;
+  width: 100%;
+  background-color: #272727;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home-container .main-content .review-container .sub-review-container-pseudo {
+  height: 100%;
+  width: 100%;
+  margin-right: 165px;
+  margin-left: 165px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.home-container .main-content .review-container .sub-review-container-pseudo .sub-review-item {
+  cursor: pointer;
+  height: 200px;
+  width: 23%;
+  border-radius: 0.8rem;
+  background-color: #323232;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.home-container .main-content .review-container .sub-review-container-pseudo .sub-review-item:hover {
+  border: solid 1.5px #01D47A;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.home-container .main-content .review-container .sub-review-container-pseudo .sub-review-item .sub-review-actor {
+  height: 100%;
+  width: 70%;
+}
+
+.home-container .main-content .review-container .sub-review-container-pseudo .sub-review-item .sub-review-actor img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.home-container .main-content .review-container .sub-review-container-pseudo .sub-review-item .rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #EDA72B;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-column-gap: 3px;
+          column-gap: 3px;
+  margin-bottom: 2rem;
+  scale: 0.8;
+  -webkit-transform: translate(-50%, 10%);
+          transform: translate(-50%, 10%);
+}
+
+.home-container .main-content .review-container .pseudo-container {
+  position: absolute;
+  height: 50px;
+  width: 100%;
+  background-color: #272727;
+}
+
+.home-container .main-content .review-container .review-content-container {
+  height: 350px;
+  margin-left: 165px;
+  margin-right: 165px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.home-container .main-content .review-container .review-content-container .review-actor {
+  z-index: 40;
+  overflow: hidden;
+}
+
+.home-container .main-content .review-container .review-content-container .review-actor img {
+  width: 100%;
+  height: 135%;
+}
+
+.home-container .main-content .review-container .review-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-family: "SFProTextReg";
+  width: 40vw;
+  margin-left: 10%;
+}
+
+.home-container .main-content .review-container .review-content .rating {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  color: #EDA72B;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-column-gap: 3px;
+          column-gap: 3px;
+  margin-bottom: 2rem;
+}
+
+.home-container .main-content .review-container .review-content p {
+  text-align: center;
+  color: #A5A5A5;
+  font-size: 1.2rem;
+}
+
+.home-container .main-content .review-container .review-content span {
+  font-family: "DTphudu";
+  color: #01D47A;
+  font-size: 1.3rem;
+  margin-right: 3px;
+}
+
+.home-container .main-content .banner-container {
+  position: relative;
+  height: 650px;
+  width: 100%;
+  background-image: url("../../images/abstract.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.home-container .main-content .banner-container-filter {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #272727;
+  z-index: 50;
+  opacity: 0.4;
+}
+
+.home-container .main-content .banner-container .banner-content-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 100%;
+  margin-left: 165px;
+  margin-right: 165px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  row-gap: 25px;
+  position: relative;
+  z-index: 51;
+}
+
+.home-container .main-content .banner-container .banner-content-container img {
+  width: 9rem;
+}
+
+.home-container .main-content .banner-container .banner-content-container h1 {
+  font-family: "DTphudu";
+  font-size: 1.5rem;
+}
+
+.home-container .main-content .banner-container .banner-content-container h2 {
+  font-family: "SFProTextReg";
+  font-weight: 200;
+  font-size: 1.1rem;
+  margin-top: -20px;
+  color: #ffffff;
+}
+
+.home-container .main-content .categories-outer-container {
+  min-height: 900px;
+  background-color: transparent;
+  margin-left: 150px;
+  margin-right: 150px;
+}
+
+.home-container .main-content .news-container {
+  height: 265px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #323232;
+}
+
+.home-container .main-content .news-container .icon {
+  color: #01D47A;
+  width: 35px;
+  height: 35px;
+}
+
+.home-container .main-content .news-container h1 {
+  font-family: "DTphudu";
+  font-size: 1.5rem;
+}
+
+.home-container .main-content .news-container h2 {
+  font-family: "SFProTextReg";
+  font-weight: 200;
+  font-size: 1rem;
+  margin-top: -20px;
+  color: #a5a5a5;
+}
+/*# sourceMappingURL=home.css.map */
