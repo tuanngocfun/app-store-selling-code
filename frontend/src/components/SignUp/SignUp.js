@@ -26,7 +26,6 @@ function SignUp(prop) {
         // handleValidate()
     }
 
-
     // const handleValidate = () => {
 
     //     if( form.password.length < 8 || form.password.length > 30 ||

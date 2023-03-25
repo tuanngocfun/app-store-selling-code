@@ -6,33 +6,46 @@ import axios from 'axios';
 
 
 
-function ProductList(){
+function ProductList(props){
     const [products, setProducts] = useState([])
 
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('api')
-                setProducts(res.data)
+                const response = await fetch('/api')
+                .then((res) => res.json())
+                .then((data) => {
+                    setProducts(data)
+                })
             } catch(err){
                 console.log("Fail")
             }
         }
-       
+        
         getData();
     },[])
+
+    // products.map((product) => {
+    //     console.log(product)
+    // })
+    // console.log(products)
 
     return(
         <div className='product-container'> 
 
             {
-                products && products.map(product => {
+                products && products.map((product, index) => {
+                    if(index > 9){
+                        return;
+                    }
+
                     return(
-                        <Product key={ product.id } title={product.title} price = {product.price} thumb = {product.thumb}></Product>
+                        <Product key={ product.productid } id = { product.productid } title={product.title} price = {product.price} thumb = {product.filecover1}></Product>
                     )
                 })
             }
         </div>
+
     );
 }
 

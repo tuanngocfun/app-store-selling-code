@@ -9,6 +9,7 @@ import Footer from './components/Footer/Footer';
 import TermsOfUse from './pages/TermsOfUse/TermsOfUse';
 import Login from './components/Login/Login';
 import Admin from './pages/Admin/Admin';
+import ProductPage from './components/ProductList/ProductPages/ProductPage';
 function App() {
   const isAuthenticated = window.localStorage.getItem("accessToken")
   return (
@@ -22,6 +23,7 @@ function App() {
               <Route path='/admin/signin' element={<AdminSignin title = 'admin'></AdminSignin>}></Route>
               <Route path='/admin/signup' element={<SignUp title = 'admin'></SignUp>}></Route>
               <Route path='/admin' element={!isAuthenticated? <Navigate to = '/admin/signin' replace/> : <Admin></Admin>}></Route>
+              <Route path='/:id' element={<ProductPage></ProductPage>}></Route>
           </Routes>
         <Footer></Footer>
         

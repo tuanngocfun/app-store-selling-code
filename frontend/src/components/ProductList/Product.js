@@ -4,10 +4,15 @@ import { useEffect, useState } from 'react';
 
 
 function Product(props){
+    // console.log(props)
+    const [url, setURL] = useState('')
+    const titleUrl = props.title
+    const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
+    const itemUrl = `${props.id}-buy-${newTitleUrl}`
 
     return(
         <div className='item-container'>
-            <Link className='product-link'>
+            <Link to = {{pathname: `/${itemUrl}/`}} className='product-link'>
                 <img src={props.thumb} alt=''></img>
             </Link>
             <div className='item-description'>

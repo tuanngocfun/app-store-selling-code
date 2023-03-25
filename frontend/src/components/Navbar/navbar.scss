@@ -35,28 +35,69 @@
         justify-content: space-between;
         transition: 0.2s ease;
 
-        .language-container{
-            cursor: pointer;
-            .dropdown-menu{
-                position: absolute;
-                width: 150px;
-                height: 80px;
-                background-color: #272727;
-                border-radius: 5px;
-                transform: translate(50px, -35px);
-                display: flex;
-                flex-direction: column;
-                padding-top: 20px;
-                padding-left: 30px;
-                padding-bottom: 20px;
-                padding-right: 20px;
-                justify-content: space-between;
-                h3{
-                    color: #ffffff;
-                    font-family: "SFProTextReg";
-                    font-size: 1;
+        // .language-container{
+        //     cursor: pointer;
+        //     .dropdown-menu{
+        //         position: absolute;
+        //         width: 150px;
+        //         height: 80px;
+        //         background-color: #272727;
+        //         border-radius: 5px;
+        //         transform: translate(50px, -35px);
+        //         display: flex;
+        //         flex-direction: column;
+        //         padding-top: 20px;
+        //         padding-left: 30px;
+        //         padding-bottom: 20px;
+        //         padding-right: 20px;
+        //         justify-content: space-between;
+        //         h3{
+        //             color: #ffffff;
+        //             font-family: "SFProTextReg";
+        //             font-size: 1;
+        //         }
+        //     }
+        // }
+
+
+        .left-nav{
+            width: 80px;
+            // background-color: #01D47A;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .icon{
+                &.globe{
+                    height: 22px;
+                    width: 22px;
                 }
             }
+            
+
+            .admin{
+                display: none;
+                
+                &.active{
+                    display: flex;
+                    align-items: center;
+                    &:hover{
+                        .adminIcon{
+                            color: #01D47A;
+                            transition: 0.4s;
+                        }
+                    }
+                    
+                    
+                    .adminIcon{
+                        height: 24px;
+                        width: 24px;
+                        color: #ffffff;
+                        transition: 0.4s;
+                    }
+                }
+            }
+            
         }
 
         &.active{

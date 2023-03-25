@@ -39,7 +39,7 @@ function Admin() {
 
   return (
     <div className='admin-container'>
-    <Separator status ='2'></Separator>
+    {/* <Separator status ='2'></Separator> */}
     <Separator></Separator>
       <div className='admin-profile-container'>
         <div className='admin-avatar'>

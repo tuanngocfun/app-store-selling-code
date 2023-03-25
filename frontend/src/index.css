@@ -17,6 +17,18 @@
     }
 
 @font-face {
+    font-family: "SFProTextMedium";
+    src: local("SFPro"),
+    url("./fonts/SFProText-Medium.otf") format("opentype");
+    }
+
+@font-face {
+    font-family: "SFProDisplayReg";
+    src: local("SFPro"),
+    url("./fonts/SFProDisplay-Regular.otf") format("opentype");
+    }
+
+@font-face {
     font-family: "SFProTextBold";
     src: local("SFPro"),
     url("./fonts/SFProText-Bold.otf") format("opentype");

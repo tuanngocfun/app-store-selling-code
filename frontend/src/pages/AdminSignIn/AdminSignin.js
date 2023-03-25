@@ -20,6 +20,7 @@ function AdminSignin(prop) {
     const handleChange = (e) =>{
         const {name, value} = e.target
         setAdmin({...admin, [name] : value})
+        console.log(admin)
     }
 
     const onSubmitForm = async (e) =>{

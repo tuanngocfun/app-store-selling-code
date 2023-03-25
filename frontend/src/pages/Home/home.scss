@@ -77,7 +77,6 @@
                         display: flex;
                         flex-direction: column;
                         height: 100%;
-                        width: 30%;
                         justify-content: center;
 
                         .newest-trending{
@@ -99,8 +98,8 @@
                         }
 
                         .price{
-                            font-size: 1.8rem;
-                            font-family: "DTphuduMedium";
+                            font-size: 2.5rem;
+                            font-family: "DTphudu";
                             
                         }
                     }
@@ -112,7 +111,7 @@
         
         .trend-container{  
             top: 70vh;
-            min-height: 900px;
+            min-height: 950px;
             background-color: transparent;
             margin-left: 150px;
             margin-right: 150px;

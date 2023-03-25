@@ -1,11 +1,10 @@
 import './home.scss'
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
+// import axios from 'axios'
 import LogoWord from '../../images/logo/logo-word.png';
 import levi from '../../images/levi.png';
-import keria from '../../images/keria.png'
-
+// import keria from '../../images/keria.png'
 
 import Headline from '../../components/Headline/Headline';
 import ProductList from '../../components/ProductList/ProductList';
@@ -14,7 +13,7 @@ import TrustPanel from '../../components/TrustPanel/TrustPanel';
 import GreenButton from '../../components/Button/GreenButton/GreenButton';
 import Categories from '../../components/Categories/Categories';
 
-import {BsStarFill} from 'react-icons/bs'
+import { BsStarFill } from 'react-icons/bs'
 import { BsFillEnvelopeFill} from 'react-icons/bs'
 
 function Home(){
@@ -24,16 +23,30 @@ function Home(){
     useEffect(() => {
         const getData = async () => {
             try {
-                const res = await axios.get('api')
-                setProducts(res.data)
+                const response = await fetch('/api', {
+                    method: "GET"
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    setProducts(data)
+                })
             } catch(err){
                 console.log("Fail")
             }
         }
-       
+        
         getData();
-    },[])
-    var first = products[5]
+    }, [])
+
+    // console.log(products[0])
+    // var first = products[5]
+
+
+    
+    
+    // const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
+    // const itemUrl = `${products[8].productid}-buy-${newTitleUrl}`
+    // console.log(itemUrl)
 
     return(
         <div className="home-container">
@@ -41,30 +54,32 @@ function Home(){
                 <div className='top-banner'>
                     <div className='parallax'>
                         <div className='top-banner-gradient'></div>
-                            {(typeof first === 'undefined')? (
+                            {(!products.length) ? (
                                 <div className='loading-container'></div>
-                            ): (
-                                <img src= {first.thumb} alt=''></img>
+                            ) : (
+                                <img src = {products[8].filecover2} alt=''></img>
                             )}
+
+                            {/* {console.log(products.filebanner)} */}
                         <div className='bottom-banner-gradient'></div>
                     </div>
                     
                     <div className='content'>
-                        <Link to = '/' className='banner-product'>
+                        <Link to = '/'  className='banner-product'>
                         
                             <div className='banner-product-wrapper'>
                                 <div className='newest-trending'>New</div>
-                                {(typeof first === 'undefined') ? (
+                                {(!products.length) ? (
                                     <div></div>
                                 ): (
-                                    <div className='title'>{first.title}</div>
+                                    <div className='title'>{products[8].title}</div>
                                 )}
                                 
                                 
-                                {(typeof first === 'undefined')? (
+                                {(!products.length)? (
                                     <div></div>
                                 ): (
-                                    <div className='price'>{`$`+first.price}</div>
+                                    <div className='price'>{`$${products[8].price}`}</div>
                                 )}
                             </div>                          
                         </Link>  
