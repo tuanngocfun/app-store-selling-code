@@ -1,7 +1,9 @@
 import './productpage.scss'
 import React, { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
+import { useParams, Link, useNavigate } from 'react-router-dom'
 import parse from 'html-react-parser'
+
+import noIMG from '../../../images/no-image-black.png'
 
 //Icons
 import {RiSteamFill} from 'react-icons/ri'
@@ -16,20 +18,21 @@ import Separator from '../../Separator/Separator'
 import GreenButton from '../../Button/GreenButton/GreenButton'
 import Parallax from '../Parallax/Parallax'
 import Headings from './Headings/Headings'
+import Login from '../../Login/Login'
 
 function ProductPage() {
     const params = useParams()
     const filteredID = params.id.substring(0, params.id.indexOf('-'))
 
     const [productDetails, setProductDetails] = useState([])
-    
+    const [wishlist, setWishList] = useState(false)
     
 
 
     
     useEffect(() => {
         const url = '/api/' + filteredID
-        console.log(url)
+        // console.log(url)
         const getDetails = async () => {
             try {
                 const response = await fetch(url)
@@ -45,6 +48,21 @@ function ProductPage() {
         getDetails()
     }, [])
 
+    const navigate = useNavigate()
+    const handleClick = () => {
+        const authUser = window.localStorage.getItem("userAuthenticated")
+        // console.log(authUser)
+        if(!authUser){
+            // window.location = ('/    user/signin')
+            navigate('/user/signin')
+            // console.log("hello")
+        }
+        else{
+            setWishList(!wishlist)
+        }
+        
+    }
+
     // console.log(productDetails)
     
     // setID(filteredID)
@@ -58,11 +76,18 @@ function ProductPage() {
             <div className='product-main-container'>
                 <div className='top-data-container'>
                     <div className='cover-container'>
-                      
-                        <img src = {productDetails.filecover1} alt={productDetails.title}></img>
+                        {
+                            productDetails.filecover1 === undefined ? <img src={noIMG}></img> :
+                            <img src = {productDetails.filecover1} alt={productDetails.title}></img> 
+                        }
+                        
                     </div>
                     <div className='main-data-container'>
-                        <AiOutlineHeart className='wishlist'></AiOutlineHeart>
+                        {
+                            wishlist ? <AiFillHeart className='wishlist active' onClick={() => handleClick()}></AiFillHeart>
+                            : <AiOutlineHeart className='wishlist' onClick={() => handleClick()}></AiOutlineHeart>
+                        }
+                        
                         <h1 className='title'>{productDetails.title}</h1>
 
                         <div className='sub-info'>
@@ -126,24 +151,24 @@ function ProductPage() {
 
                 <div className='visual-container'>
                     <div className='video-container'>
-                        <img src={productDetails.filebanner}></img>
+                        <img src={productDetails.filebanner} alt={productDetails.title}></img>
                     </div>
                     <div className='showcase-container'>
                         <div className='showcase-left'>
-                            <img src={productDetails.filecover2}></img>
+                            <img src={productDetails.filecover2} alt={productDetails.title}></img>
                         </div>
                         <div className='showcase-right'>
                             <div className='showcase-child'>
-                                <img src={productDetails.fileimg1}></img>
+                                <img src={productDetails.fileimg1} alt={productDetails.title}></img>
                             </div>
                             <div className='showcase-child'>
-                                <img src={productDetails.fileimg2}></img>
+                                <img src={productDetails.fileimg2} alt={productDetails.title}></img>
                             </div>
                             <div className='showcase-child'>
-                                <img src={productDetails.fileimg3}></img>
+                                <img src={productDetails.fileimg3} alt={productDetails.title}></img>
                             </div>
                             <div className='showcase-child'>
-                                <img src={productDetails.fileimg4}></img>
+                                <img src={productDetails.fileimg4} alt={productDetails.title}></img>
                             </div>
                         </div>
                     </div>

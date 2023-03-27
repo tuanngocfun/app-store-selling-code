@@ -81,10 +81,10 @@ function Add() {
     formData.append('fileImg3', data.fileImg3)
     formData.append('fileImg4', data.fileImg4)
 
-    for (const entry of formData.entries()) {
-      console.log(entry);
+    // for (const entry of formData.entries()) {
+    //   console.log(entry);
       
-    }
+    // }
 
     // for (const value of formData.values()) {
     //   console.log(value);
@@ -142,15 +142,15 @@ function Add() {
             <label>Product Genre</label>
             <select id='genre' name='genre' value={data.genre} onChange = {handleChange}>
               <option className='default' disabled></option>
-              <option value="action">Action</option>
-              <option value="adventure">Adventure</option>
-              <option value="single">Single-Player</option>
-              <option value="survival">Survival</option>
-              <option value="fps">FPS</option>
-              <option value="rpg">RPG</option>
-              <option value="fighting">Fighting</option>
-              <option value="sports">Sports</option>
-              <option value="arcade">Arcade</option>
+              <option value="Action">Action</option>
+              <option value="Adventure">Adventure</option>
+              <option value="Single-player">Single-Player</option>
+              <option value="Survival">Survival</option>
+              <option value="First Person Shooter">FPS</option>
+              <option value="Role-play">RPG</option>
+              <option value="Fighting">Fighting</option>
+              <option value="Sports">Sports</option>
+              <option value="Arcade">Arcade</option>
             </select>
           </div>
           <div className='field-container'>

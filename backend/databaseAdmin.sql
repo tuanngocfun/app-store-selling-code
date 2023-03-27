@@ -14,6 +14,7 @@ CREATE TABLE rsn_product(
 	genre varchar(256),
 	price DECIMAL(10,2),
 	developer varchar(256),
+	publisher varchar(256),
 	date varchar(256),
 	descriptions VARCHAR,
 	fileCover1 varchar(256),
@@ -22,9 +23,36 @@ CREATE TABLE rsn_product(
 	fileImg1 varchar(256),
 	fileImg2 varchar(256),
 	fileImg3 varchar(256),
-	fileImg4 varchar(256)
+	fileImg4 varchar(256),
+	created_At timestamp default current_timestamp
 )
 
+CREATE TABLE rsn_user(
+	userID SERIAL PRIMARY KEY,
+	firstname varchar(50) NOT NULL,
+	middlename varchar(50),
+	lastname varchar(50) NOT NULL,
+	email CITEXT,
+	age INT NOT NULL,
+	password varchar(256) NOT NULL,
+	role_ID INT,
+	created_At timestamp default current_timestamp,
+	CONSTRAINT fk_roleid
+	FOREIGN KEY(role_ID) REFERENCES rsn_role(role_id)
+)
+
+CREATE TABLE rsn_admin(
+	userID SERIAL PRIMARY KEY,
+	firstname varchar(50) NOT NULL,
+	middlename varchar(50),
+	lastname varchar(50) NOT NULL,
+	email CITEXT,
+	age INT NOT NULL,
+	password varchar(256) NOT NULL,
+	role_ID INT,
+	CONSTRAINT fk_roleid
+	FOREIGN KEY(role_ID) REFERENCES rsn_role(role_id)
+)
 
 
 

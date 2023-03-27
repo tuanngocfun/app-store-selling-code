@@ -17,6 +17,13 @@ function Navbar(){
     const [isClicked, setIsClicked] = useState(false);
     const [isActive, setIsActive] = useState(null)
     const [state, setState] = useState(undefined)
+    const [signedIn, setSignedIn] = useState(undefined)
+
+    const handleSignOut = () => {
+        window.localStorage.clear()
+        setSignedIn(!signedIn)
+        window.location = '/'
+    }
 
 
     // useEffect(() => {
@@ -34,9 +41,6 @@ function Navbar(){
 
     window.addEventListener('scroll', changeBackground);
 
-    const updateState = (isClicked) =>{
-        setIsClicked(false)
-    }
  
     useEffect(() => {
         const status = window.localStorage.getItem('authenticated')
@@ -46,17 +50,25 @@ function Navbar(){
         else{
             setState(false)
         }
-    },[])
-    // console.log(state)
-    // setState(status)
+    })
 
+    useEffect(() => {
+        const userStatus = window.localStorage.getItem('userAuthenticated')
+        if(userStatus === 'true'){
+            setSignedIn(true)
+        }
+        else{
+            setSignedIn(false)
+        }
+    })
+    
     return (
         <div className='pseudo-nav-container'>
-                {/* <Login clicked = {isClicked} updateState={updateState}></Login> */}
+            {/* <Login clicked = {isClicked} updateState={updateState}></Login> */}
             <Link to = "/" className='logo-container-one'>
                     <img src={logoWord} alt='' id='logo'></img>
             </Link>
-        
+            <div className={isClicked ? 'shadow active' : 'shadow'} onClick={() => setIsClicked(!isClicked)}></div>
             <div className={navbar ? "nav-container active" : 'nav-container'}>
                 {/* <div className='language-container'>
                     <FaGlobe className='icon globe'></FaGlobe>
@@ -85,16 +97,35 @@ function Navbar(){
                     <Link to = '/'>
                         <BsFillCartFill className='icon'></BsFillCartFill>
                     </Link>
-                    {/* <Link to='/user/signin' onClick={() => setIsClicked(!isClicked)}> */}
-                    <Link to='/user/signin'>
-                        <MdAccountCircle className='icon'></MdAccountCircle>
-                    </Link>
-                    
 
+                    
+                    {/* <Link to='/user/signin' onClick={() => setIsClicked(!isClicked)}> */}
+                    
+                    {
+                        signedIn ? 
+                        <div className='profile-container'>
+                            <MdAccountCircle className={ isClicked ? 'icon active' : 'icon' } onClick={() => setIsClicked(!isClicked)}></MdAccountCircle>
+                            <div className={isClicked ? 'profile-dropdown-container active' : 'profile-dropdown-container'}>
+                                <Link to = '/user/dashboard' className='dropdown-button'>Dashboard</Link>
+                                <Link to = '/user/dashboard' className='dropdown-button'>Activate code</Link>
+                                <div className='space'></div>
+                                <button onClick={handleSignOut} className='signout-button'>Sign out</button>
+                            </div>
+                            
+                        </div>
+
+                        :
+                        <Link to= '/user/signin'>
+                            <MdAccountCircle className='icon'></MdAccountCircle>
+                        </Link> 
+                    }
+                    
+                    
                 </div>
 
+                
             </div>
-
+            
         </div>
     )
 }

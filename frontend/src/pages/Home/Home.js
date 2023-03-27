@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 // import axios from 'axios'
 import LogoWord from '../../images/logo/logo-word.png';
+import noIMG from '../../images/img-placeholder.png'
 import levi from '../../images/levi.png';
 // import keria from '../../images/keria.png'
 
@@ -19,29 +20,40 @@ import { BsFillEnvelopeFill} from 'react-icons/bs'
 function Home(){
     
     const [products, setProducts] = useState([])
-
+    const [newProduct, setNewProduct] = useState([])
+    const [url, setURL] = useState('')
     useEffect(() => {
-        const getData = async () => {
+        const getProduct = async () => {
             try {
-                const response = await fetch('/api', {
+                const response = await fetch('/newest', {
                     method: "GET"
                 })
                 .then((res) => res.json())
                 .then((data) => {
-                    setProducts(data)
+                    setNewProduct(data)
                 })
             } catch(err){
                 console.log("Fail")
             }
         }
         
-        getData();
+        getProduct();
     }, [])
 
-    // console.log(products[0])
-    // var first = products[5]
-
-
+    useEffect(() => {
+        const getUrl = async () => {
+        if(newProduct === undefined){
+            return
+        }
+        else{
+            const titleUrl = newProduct.title
+            const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
+            const itemUrl = `${newProduct.productid}-buy-${newTitleUrl}`
+            setURL(itemUrl)
+        }
+    }
+    getUrl()
+    },)
     
     
     // const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
@@ -54,10 +66,10 @@ function Home(){
                 <div className='top-banner'>
                     <div className='parallax'>
                         <div className='top-banner-gradient'></div>
-                            {(!products.length) ? (
-                                <div className='loading-container'></div>
+                            {(newProduct.filecover2 === undefined) ? (
+                                <img src= {noIMG} alt = ''></img>
                             ) : (
-                                <img src = {products[8].filecover2} alt=''></img>
+                                <img src = {newProduct.filecover2} alt=''></img>
                             )}
 
                             {/* {console.log(products.filebanner)} */}
@@ -65,21 +77,21 @@ function Home(){
                     </div>
                     
                     <div className='content'>
-                        <Link to = '/'  className='banner-product'>
+                        <Link to = {{pathname: `/${url}/`}}  className='banner-product'>
                         
                             <div className='banner-product-wrapper'>
                                 <div className='newest-trending'>New</div>
-                                {(!products.length) ? (
-                                    <div></div>
+                                {(newProduct.title === undefined) ? (
+                                    <div className='title'>...</div>
                                 ): (
-                                    <div className='title'>{products[8].title}</div>
+                                    <div className='title'>{newProduct.title}</div>
                                 )}
                                 
                                 
-                                {(!products.length)? (
-                                    <div></div>
+                                {(newProduct.price === undefined)? (
+                                    <div className='price'>...</div>
                                 ): (
-                                    <div className='price'>{`$${products[8].price}`}</div>
+                                    <div className='price'>{`$${newProduct.price}`}</div>
                                 )}
                             </div>                          
                         </Link>  

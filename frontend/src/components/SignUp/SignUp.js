@@ -56,7 +56,7 @@ function SignUp(prop) {
             }
         
             const url = window.location.href;
-
+            console.log(url)
             // if(isValid === true){
                 const response = await fetch(url, {
                     method: "POST",
@@ -71,7 +71,7 @@ function SignUp(prop) {
                     if(data.error === false){
                         setIsError(false)
                         // console.log(isError)
-                        window.location = '/admin/signin'
+                        window.location = `/${prop.title}/signin`
                     }
                     else{
                         setIsError(true)

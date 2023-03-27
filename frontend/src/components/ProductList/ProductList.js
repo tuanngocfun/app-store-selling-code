@@ -6,7 +6,7 @@ import axios from 'axios';
 
 
 
-function ProductList(props){
+function ProductList(){
     const [products, setProducts] = useState([])
 
     useEffect(() => {

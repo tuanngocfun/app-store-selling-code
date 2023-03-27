@@ -146,7 +146,7 @@ app.get('/api', async (req,res) => {
         const getProduct = async () => {
             const product = await pool.query("SELECT * FROM rsn_product")
             productDetails = product.rows
-            console.log(productDetails)
+            // console.log(productDetails)
             res.json(productDetails)
         }
 
@@ -156,6 +156,23 @@ app.get('/api', async (req,res) => {
     }
 
     // res.send(loadProducts());
+})
+
+
+//Get a Product By Newest Date
+app.get('/newest', async (req,res) => {
+    try {
+        const getDetails = async () =>{
+            const product = await pool.query("SELECT * FROM rsn_product ORDER BY created_at DESC")
+            newproductDetails = product.rows[0]
+            
+            res.json(newproductDetails)
+        }
+
+        getDetails()
+    } catch (error) {
+        console.log(error.message)
+    }
 })
 
 //Get a Product By ID
@@ -234,6 +251,8 @@ app.post('/admin/addProduct', async (req, res) => {
                 imagePaths: imagePaths
             }
 
+            // console.log(product)
+
             try {
                 const newProduct = await pool.query("INSERT INTO rsn_product (title, genre, price, developer, publisher, date, descriptions, filecover1, filecover2, filebanner, fileimg1, fileimg2, fileimg3, fileimg4) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)",
                 [product.title, product.genre, product.price, product.developer, product.publisher, product.date, product.descriptions, 
@@ -255,6 +274,78 @@ app.post('/admin/addProduct', async (req, res) => {
         console.log("Fail")
     }
 })
+
+
+//Create a USER
+app.post('/user/signup', async(req ,res) =>{
+    try{
+        const {firstname, middlename, lastname, email, age, password} = req.body
+        
+
+        const check = await pool.query("SELECT EXISTS(SELECT 1 FROM rsn_user WHERE email = $1)", [email])
+        
+        const isRegistered = check.rows[0]
+        if(isRegistered.exists){
+            console.log("error")
+            res.json({error: true})
+        }
+        else{
+            const hashPwd = await bcrypt.hash(password, salt)
+            const newAdmin = await pool.query("INSERT INTO rsn_user (firstname, middlename, lastname, email, age, password, role_id) VALUES($1, $2, $3, $4, $5, $6, 2) RETURNING *", 
+            [firstname, middlename, lastname, email, age, hashPwd])
+            res.json({error: false})
+            console.log("ok")
+        }
+
+
+        
+        // console.log(newAdmin)
+    }
+    catch(err){
+        console.log(err.message)
+    }
+})
+
+//User Sign In
+app.post('/user/signin', async(req, res) => {
+    try {
+        const {email, password} = req.body;
+
+        const user = await pool.query(
+            "SELECT * FROM rsn_user WHERE email = $1 AND EXISTS (SELECT 1 FROM rsn_user WHERE email = $1)",
+            [email])
+
+       
+        const registeredUser = user.rows[0]
+        
+        if(!registeredUser){
+            res.json({isAuthenticated: false})
+            console.log("Login Failed")
+        }
+        else
+        {
+            if(await bcrypt.compare(password, registeredUser.password))
+            {
+                // console.log(req.body)
+                const token = jwt.sign({email: registeredUser.email, password: registeredUser.password}, 
+                JWT_SECRET_KEY)
+                res.json({isAuthenticated : true, accessToken: token}) 
+                console.log("Login Successful")
+            }
+            else{
+                res.json({isAuthenticated: false})
+            }
+            
+        } 
+
+    }
+    catch (error) {
+        console.log(error.message)
+    }
+})
+
+
+
 
 app.listen(5000, () =>{
     console.log("Server started on PORT 5000")
