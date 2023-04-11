@@ -56,6 +56,7 @@
                         color: #ffffff;
                     }
 
+                    
                 }
 
                 input{
@@ -70,6 +71,10 @@
                     border: 0;
                     border-radius: 8px;
                     color: #ffffff;
+
+                    &::placeholder{
+                        font-family: "SFProTextReg";
+                    }
 
                     &:focus{
                         border: 2px solid #01D47A;
@@ -245,6 +250,14 @@
             }
             .submit-button{
                 width: 215px;
+                background-color: #01D47A;
+                border: 0;
+                border-radius: 8px;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                font-family: "DTphuduMedium";
+                color: white;
+                cursor: pointer;
             }
         }
         

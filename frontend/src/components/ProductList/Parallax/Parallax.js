@@ -1,6 +1,6 @@
 import React from 'react'
 import './parallax.scss'
-import noIMG from '../../../images/no-image-black.png'
+import noIMG from '../../../images/img-placeholder.png'
 
 function Parallax(prop) {
   return (

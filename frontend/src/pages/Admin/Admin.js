@@ -5,10 +5,12 @@ import './admin.scss'
 import Separator from '../../components/Separator/Separator';
 import Dashboard from '../../components/DashNav/Routes/Dashboard/Dashboard';
 import DashNav from '../../components/DashNav/DashNav';
+import logoMascot from '../../images/logo/mascot-green.png'
 function Admin() {
 
   const handleClick = async () =>{
-    window.localStorage.clear()
+    window.localStorage.removeItem("accessToken")
+    window.localStorage.removeItem("authenticated")
     window.location = '/admin'
   }
 
@@ -41,33 +43,18 @@ function Admin() {
     <div className='admin-container'>
     {/* <Separator status ='2'></Separator> */}
     <Separator></Separator>
+
       <div className='admin-profile-container'>
         <div className='admin-avatar'>
-            <RiAccountCircleFill className='icon'></RiAccountCircleFill>
+            {/* <RiAccountCircleFill className='icon'></RiAccountCircleFill> */}
+            <img src = {logoMascot}></img>
         </div>
+        {/* <Separator></Separator> */}
         <h1>Welcome Back, <span>{admin.firstname} {admin.lastname}</span>!</h1>
-        <DashNav></DashNav>
+        <DashNav id = {admin.adid} fname = {admin.firstname} mname = {admin.middlename} 
+        lname = {admin.lastname} age = {admin.age} email = {admin.email}
+        ></DashNav>
         
-        {/* <div className='admin-profile-info-container'>
-          <label className='title'>Admin ID: </label>
-          <label className='info'>{admin.adid}</label>
-        </div>
-        <div className='admin-profile-info-container'>
-          <label className='title'>Name: </label>
-          <label className='info'> {admin.lastname} {admin.middlename} {admin.firstname}  </label>
-        </div>
-        <div className='admin-profile-info-container'>
-          <label className='title'>Email: </label>
-          <label className='info'>{admin.email}</label>
-        </div>
-        <div className='admin-profile-info-container'>
-          <label className='title'>Age: </label>
-          <label className='info'>{admin.age}</label>
-        </div>
-        <div className='admin-profile-info-container'>
-          <label className='title'>Role: </label>
-          <label className='info'>{admin.role_name}</label>
-        </div> */}
       </div>
       <button onClick={handleClick}>Sign Out</button>
       <Separator></Separator>

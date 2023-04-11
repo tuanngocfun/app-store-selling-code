@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 function GreenButton(prop){
     const title = prop.title
     return(
-        <Link className="green-button">{title}</Link>
+        <Link to = {prop.link === 'payment' ? "/cart/payment": "/"} className="green-button" onClick={prop.event}>{title}</Link>
     );
 }
 

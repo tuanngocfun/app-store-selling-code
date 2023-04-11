@@ -2,7 +2,7 @@ import './navbar.scss';
 
 import logoWord from '../../images/logo/logo-word.png';
 import { Link } from "react-router-dom";
-import { useState, createContext, useEffect } from 'react';
+import { useState, createContext, useEffect, useRef, useContext } from 'react';
 
 import { MdAccountCircle } from 'react-icons/md';
 import { BiSearch } from 'react-icons/bi';
@@ -10,25 +10,34 @@ import { BsFillCartFill } from 'react-icons/bs';
 import {FaGlobe} from 'react-icons/fa'
 import {RiAdminFill} from 'react-icons/ri'
 import Login from '../Login/Login';
+import Cart from '../../pages/Cart/Cart';
 
+import { CartContext } from '../../Context/CartContext';
 
 function Navbar(){
+    const {quantity, setIsClicked} = useContext(CartContext)
     const [navbar, setNavbar] = useState(false);
-    const [isClicked, setIsClicked] = useState(false);
-    const [isActive, setIsActive] = useState(null)
+    const [isSelected, setIsSelected] = useState(false);
+    const [isActive, setIsActive] = useState(false)
     const [state, setState] = useState(undefined)
     const [signedIn, setSignedIn] = useState(undefined)
 
+
+    // useEffect(() => {
+    //     ref.current = localStorage.getItem('cartNumb')
+    //     setQuantity(ref.current)
+        
+    // })
+   
+
     const handleSignOut = () => {
-        window.localStorage.clear()
+        window.localStorage.removeItem("accessUserToken")
+        window.localStorage.removeItem("userAuthenticated")
+
         setSignedIn(!signedIn)
         window.location = '/'
     }
 
-
-    // useEffect(() => {
-    //     // status = window.localStorage.getItem("authenticated")
-    // },[])
 
     const changeBackground = () => {
         if(window.scrollY >= 100){
@@ -50,7 +59,7 @@ function Navbar(){
         else{
             setState(false)
         }
-    })
+    }, [state])
 
     useEffect(() => {
         const userStatus = window.localStorage.getItem('userAuthenticated')
@@ -60,7 +69,8 @@ function Navbar(){
         else{
             setSignedIn(false)
         }
-    })
+    }, [signedIn])
+
     
     return (
         <div className='pseudo-nav-container'>
@@ -68,7 +78,7 @@ function Navbar(){
             <Link to = "/" className='logo-container-one'>
                     <img src={logoWord} alt='' id='logo'></img>
             </Link>
-            <div className={isClicked ? 'shadow active' : 'shadow'} onClick={() => setIsClicked(!isClicked)}></div>
+            <div className={isSelected ? 'shadow active' : 'shadow'} onClick={() => setIsSelected(!isSelected)}></div>
             <div className={navbar ? "nav-container active" : 'nav-container'}>
                 {/* <div className='language-container'>
                     <FaGlobe className='icon globe'></FaGlobe>
@@ -91,12 +101,25 @@ function Navbar(){
                 </div>
                 
                 <div className='right-nav'>
-                    <Link to = '/'>
+                    {/* <Link to = '/'> */}
                         <BiSearch className='icon'></BiSearch>
-                    </Link>
-                    <Link to = '/'>
-                        <BsFillCartFill className='icon'></BsFillCartFill>
-                    </Link>
+                    {/* </Link> */}
+
+                    {
+                        signedIn ? 
+                        <Link to = '/cart'>
+                            {quantity > 0 ? <div className='indicator'>
+                                <label>{quantity}</label>
+                            </div> : null}
+                            <BsFillCartFill className={ isActive ? 'icon active' : 'icon' } onClick={() => setIsActive(!isActive)}></BsFillCartFill>
+                        </Link>
+                         :
+
+                        <Link to = '/user/signin'>
+                            <BsFillCartFill className='icon'></BsFillCartFill>
+                        </Link>
+                    }
+                    
 
                     
                     {/* <Link to='/user/signin' onClick={() => setIsClicked(!isClicked)}> */}
@@ -104,10 +127,25 @@ function Navbar(){
                     {
                         signedIn ? 
                         <div className='profile-container'>
-                            <MdAccountCircle className={ isClicked ? 'icon active' : 'icon' } onClick={() => setIsClicked(!isClicked)}></MdAccountCircle>
-                            <div className={isClicked ? 'profile-dropdown-container active' : 'profile-dropdown-container'}>
-                                <Link to = '/user/dashboard' className='dropdown-button'>Dashboard</Link>
-                                <Link to = '/user/dashboard' className='dropdown-button'>Activate code</Link>
+                            <MdAccountCircle className={ isSelected ? 'icon active' : 'icon' } onClick={() => setIsSelected(!isSelected)}></MdAccountCircle>
+                            <div className={isSelected ? 'profile-dropdown-container active' : 'profile-dropdown-container'}>
+                                <Link to = '/user' className='dropdown-button' onClick={() => {
+                                    setIsSelected(!isSelected)
+                                    setIsClicked('dashboard')
+                                    }}>Dashboard</Link>
+                                <Link to = '/user' className='dropdown-button' onClick={() => {
+                                    setIsSelected(!isSelected)
+                                    setIsClicked('orders')
+                                    }}>My orders</Link>
+                                <Link to = '/user' className='dropdown-button' onClick={() => {
+                                    setIsSelected(!isSelected)
+                                    setIsClicked('wishlist')
+                                    }}>Wishlist</Link>
+                                <Link to = '/activate-code' className='dropdown-button' onClick={() => setIsSelected(!isSelected)}>Activate code</Link>
+                                <Link to = '/user' className='dropdown-button' onClick={() => {
+                                    setIsSelected(!isSelected)
+                                    setIsClicked('settings')
+                                    }}>Settings</Link>
                                 <div className='space'></div>
                                 <button onClick={handleSignOut} className='signout-button'>Sign out</button>
                             </div>

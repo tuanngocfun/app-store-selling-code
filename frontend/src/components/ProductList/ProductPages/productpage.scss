@@ -58,6 +58,8 @@
                     &:hover{
                         color: $clr-green;
                         transition: 0.2s ease-in;
+
+                        
                     }
 
                     &.active{
@@ -156,7 +158,8 @@
                         align-items: center;
                         justify-content: center;
                         transition: 0.2s ease-in-out;
-
+                        user-select:none;
+                        cursor: pointer;
                         &:hover{
                             background-color: #02f089;
                             transition: 0.2s ease-in-out;
@@ -180,7 +183,7 @@
                         background-color: $clr-green;
                         font-size: 1.2rem;
                         transition: 0.2s ease-in-out;
-
+                        user-select:none;
                         &:hover{
                             background-color: #02f089;
                             transition: 0.2s ease-in-out;
@@ -276,13 +279,13 @@
             flex-direction: column;
             width: 100%;
             row-gap: 30px;
+            cursor: pointer;
             .video-container{
                 height: calc(350px * 1.5);
                 width: 100%;
                 background-color: #A5A5A5;
                 border-radius: 12px;
                 overflow: hidden;
-
                 img{
                     width: 100%;
                     height: 100%;
@@ -347,6 +350,93 @@
         }
 
         
+        .config-container{
+            width: 100%;
+            display: flex;
+            column-gap: 100px;
+            .config-left{
+                display: flex;
+                flex-direction: column;
+                font-family: "SFProTextBold";
+                row-gap: 20px;
+                width: 50%;
+                label{
+                    font-size: 1.2rem;
+
+                    span{
+                        color: #A5A5A5;
+                    }
+                }
+
+                .specs{
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 10px;
+                    .row{
+                        display: flex;
+                        .cell{
+                            min-width: 150px;
+                            color: #A5A5A5;
+                            .main-text{
+                                font-family: "SFProTextReg";
+                                font-size: 1rem;
+                            }
+    
+                            .sub-text{
+                                font-family: "SFProTextReg";
+                                font-size: 1rem;
+                            }
+
+                            p{
+                                line-height: 25px;
+                            }
+                        }
+                    }
+                }
+                
+            }
+
+            .config-right{
+                display: flex;
+                flex-direction: column;
+                font-family: "SFProTextBold";
+                row-gap: 20px;
+                width: 50%;
+                label{
+                    font-size: 1.2rem;
+
+                    span{
+                        color: #A5A5A5;
+                    }
+                }
+
+                .specs{
+                    display: flex;
+                    flex-direction: column;
+                    row-gap: 10px;
+                    .row{
+                        display: flex;
+                        .cell{
+                            min-width: 150px;
+                            color: #A5A5A5;
+                            .main-text{
+                                font-family: "SFProTextReg";
+                                font-size: 1rem;
+                            }
+    
+                            .sub-text{
+                                font-family: "SFProTextReg";
+                                font-size: 1rem;
+                            }
+
+                            p{
+                                line-height: 25px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .activation-container{

@@ -5,15 +5,15 @@
     width: 385px;
     position: relative;
     justify-content: space-between;
-    row-gap: 10px;
+    row-gap: 15px;
     .product-link{
         border-radius: 0.8rem;
         overflow: hidden;
-        transition: ease-out 0.3s;
+        transition: 0.3s;
         height: 250px;
         &:hover{
             transform: scale(1.05);
-            transition: ease-out 0.3s;
+            transition: 0.3s;
         }
 
         img{

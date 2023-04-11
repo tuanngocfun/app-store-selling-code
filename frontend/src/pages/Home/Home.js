@@ -41,19 +41,19 @@ function Home(){
     }, [])
 
     useEffect(() => {
-        const getUrl = async () => {
-        if(newProduct === undefined){
+        var getUrl = async () => {
+        if(newProduct == undefined){
             return
         }
         else{
-            const titleUrl = newProduct.title
-            const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
-            const itemUrl = `${newProduct.productid}-buy-${newTitleUrl}`
+            var titleUrl = newProduct.title
+            var newTitleUrl = titleUrl?.replace(/\s/g, '-').toLowerCase()
+            var itemUrl = `${newProduct.productid}-buy-${newTitleUrl}`
             setURL(itemUrl)
         }
     }
     getUrl()
-    },)
+    })
     
     
     // const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
@@ -103,7 +103,7 @@ function Home(){
                     <ProductList></ProductList>
                 </div>
 
-                <Separator status = '1'></Separator>
+                <Separator></Separator>
                 <TrustPanel></TrustPanel>
                 <Separator status = '0'></Separator>
 
@@ -117,7 +117,7 @@ function Home(){
                     <div className='pseudo-container'></div>
                     <div className='review-content-container'>
                         <div className='review-actor'>
-                            <img src={levi} alt=''></img>
+                            <img src={levi} alt='levi' loading='lazy'></img>
                         </div>
                         <div className='review-content'>
                             <div className='rating'>
@@ -199,7 +199,7 @@ function Home(){
                     <div className='banner-container-filter'></div>
                     <div className='banner-content-container'>
                         <div className='logo'>
-                            <img src = {LogoWord} alt=''></img>
+                            <img src = {LogoWord} alt='logoWord' loading='lazy'></img>
                         </div>
                         <h1>Follow us now on Social Media Platforms to hear from us first!</h1>
                         <h2>We are available on Facebook, Youtube, Discord, Instagram and more.</h2>
@@ -214,7 +214,6 @@ function Home(){
                     <Headline title='Categories'></Headline>
                     <Categories></Categories>
                 </div>
-                <Separator></Separator>
                 <Separator status ='2'></Separator>
 
                 <div className='news-container'>

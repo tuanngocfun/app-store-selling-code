@@ -3,11 +3,13 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
 const app = express()
-const {readFileSync} = require('fs')
+const fs = require('fs')
+const { unlink } = require('fs/promises')
 const multiparty = require('multiparty')
 
 const pool = require('./connection')
 const { verify } = require('crypto')
+const { get } = require('http')
 
 //Middleware
 app.use(cors());
@@ -92,7 +94,39 @@ app.post('/admin/signin', async(req, res) => {
     }
 })
 
-//Get Admin Details
+//Get User Details
+
+app.post("/user", async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, (err, userDetails) => {
+                if(err) {
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+
+                const getUser = async () => {
+                    const user = await pool.query("SELECT * FROM rsn_user WHERE email = $1", [validUser.email])     
+                    userDetails = user.rows[0]
+                    const wishNumb = await pool.query("SELECT COUNT (productid) FROM rsn_wishlist INNER JOIN rsn_user ON rsn_wishlist.userid = rsn_user.userid WHERE rsn_user.userid = $1", [userDetails.userid])
+                    const wishDetails = await pool.query("SELECT productid, title, filecover1, price, wished_At FROM rsn_wishlist NATURAL JOIN rsn_user NATURAL JOIN rsn_product ORDER BY wished_At DESC LIMIT 2")
+                    
+                    const responseData = [
+                        userDetails,
+                        wishNumb.rows[0],
+                        wishDetails.rows
+                    ]
+                    res.json(responseData)
+                }
+                getUser()
+            })
+        }
+    } catch (error) {
+        console.log("Failed to Fetch")
+    }
+})
 
 app.post("/admin", async (req, res) => {
     try {
@@ -101,7 +135,7 @@ app.post("/admin", async (req, res) => {
             const token = authHeader.split(" ")[1]
             jwt.verify(token, JWT_SECRET_KEY, (err, adminDetails) => {
                 if(err){
-                    return res.status(401).json("Token is not valid")
+                    return res.status(401).json("Token is not valid.")
                 }
                 const validAdmin = jwt.decode(token)
                 // console.log(validAdmin.email)
@@ -121,7 +155,7 @@ app.post("/admin", async (req, res) => {
             })
         }
     } catch (error) {
-        
+        console.log("Failed to Fetch")
     }
 })
 
@@ -146,7 +180,6 @@ app.get('/api', async (req,res) => {
         const getProduct = async () => {
             const product = await pool.query("SELECT * FROM rsn_product")
             productDetails = product.rows
-            // console.log(productDetails)
             res.json(productDetails)
         }
 
@@ -154,8 +187,39 @@ app.get('/api', async (req,res) => {
     } catch (error) {
         console.log(error.message)
     }
+})
 
-    // res.send(loadProducts());
+//Get 5 Random Products
+
+// app.post('/api/recommended', async (req,res) => {
+//     try {
+//         const getProduct = async () => {
+//             const getSQL = "SELECT title, price, filecover1 FROM rsn_product ORDER BY RAND() LIMIT 5 "
+//         }
+//     } catch (error) {
+//         console.log(error.message)
+//     }
+// })
+
+app.post('/api/wishlist', async(req, res) => {
+    try {
+        const userID = req.body.userID
+        const authHeader =  req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, wishList) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const query = await pool.query("SELECT * FROM rsn_wishlist NATURAL JOIN rsn_product WHERE userid = $1", [userID])
+                wishList = query.rows
+                res.json(wishList)
+                }
+            )
+        }
+    } catch (error) {
+        console.log("fail")
+    }
 })
 
 
@@ -163,7 +227,7 @@ app.get('/api', async (req,res) => {
 app.get('/newest', async (req,res) => {
     try {
         const getDetails = async () =>{
-            const product = await pool.query("SELECT * FROM rsn_product ORDER BY created_at DESC")
+            const product = await pool.query("SELECT * FROM rsn_product ORDER BY created_at ASC")
             newproductDetails = product.rows[0]
             
             res.json(newproductDetails)
@@ -183,7 +247,13 @@ app.get('/api/:id', async (req,res) =>{
         const productID = req.params.id
         const getDetails = async () => {
             const product = await pool.query("SELECT * FROM rsn_product where productid = $1", [productID])
-            productDetails = product.rows[0]
+            const wishNumb = await pool.query("SELECT COUNT (productid) FROM rsn_wishlist WHERE productid = $1" , [productID])
+            const number = wishNumb.rows[0]
+            // productDetails = product.rows[0]
+            productDetails = [
+                product.rows[0],
+                number
+            ]
             // console.log(productDetails)
             res.json(productDetails)
         }
@@ -211,8 +281,6 @@ app.post('/admin/addProduct', async (req, res) => {
 
             // console.log(`fields = ${(JSON.stringify(fields, null, 2))}`)
             // console.log(`files = ${(JSON.stringify(files, null, 2))}`)
-
-
 
             const uploadedImages = {
                 cover1: files.fileCover1[0].path.slice(files.fileCover1[0].path.lastIndexOf("\\") + 1),
@@ -263,15 +331,167 @@ app.post('/admin/addProduct', async (req, res) => {
             } catch (error) {
                 console.log("fail")
             }
-
-
-
+            
             // res.send({status :"OK"})
         })
         
-        
     } catch (error) {
         console.log("Fail")
+    }
+})
+
+//Update a product
+app.put('/admin/:id', async(req,res) => {
+    try {
+        const productID = req.params.id
+        // console.log(productID)
+        let form = new multiparty.Form({uploadDir: IMAGE_UPLOAD_DIR})
+        form.parse(req, async function(err, fields, files){
+            if(err) return res.send({status :"Error"})
+
+            const uploadedImages = {
+                cover1: files.fileCover1[0].path.slice(files.fileCover1[0].path.lastIndexOf("\\") + 1),
+                cover2 : files.fileCover2[0].path.slice(files.fileCover2[0].path.lastIndexOf("\\") + 1),
+                banner: files.fileBanner[0].path.slice(files.fileBanner[0].path.lastIndexOf("\\") + 1),
+                img1: files.fileImg1[0].path.slice(files.fileImg1[0].path.lastIndexOf("\\") + 1),
+                img2: files.fileImg2[0].path.slice(files.fileImg2[0].path.lastIndexOf("\\") + 1),
+                img3: files.fileImg3[0].path.slice(files.fileImg3[0].path.lastIndexOf("\\") + 1),
+                img4: files.fileImg4[0].path.slice(files.fileImg4[0].path.lastIndexOf("\\") + 1)
+            }
+
+            const imagePaths = {
+                fileCover1URL : IMAGE_BASE_URL + uploadedImages.cover1,
+                fileCover2URL : IMAGE_BASE_URL + uploadedImages.cover2,
+                fileBannerURL : IMAGE_BASE_URL + uploadedImages.banner,
+                fileImg1URL : IMAGE_BASE_URL + uploadedImages.img1,
+                fileImg2URL : IMAGE_BASE_URL + uploadedImages.img2,
+                fileImg3URL : IMAGE_BASE_URL + uploadedImages.img3,
+                fileImg4URL : IMAGE_BASE_URL + uploadedImages.img4,
+            }
+            
+            const product = {
+                title: fields.title[0],
+                genre: fields.genre[0],
+                price: fields.price[0],
+                developer: fields.developer[0],
+                publisher: fields.publisher[0],
+                date: fields.date[0],
+                descriptions: fields.descriptions[0],
+                imagePaths: imagePaths
+            }
+
+            const productFile = await pool.query("SELECT productid, filecover1, filecover2, filebanner, fileimg1, fileimg2, fileimg3, fileimg4 FROM rsn_product WHERE productid = $1",[productID])
+            const productDetails = productFile.rows[0]
+
+            const directoryPath1 = productDetails.filecover1.split('/')
+            const directoryPath2 = productDetails.filecover2.split('/')
+            const directoryPath3 = productDetails.filebanner.split('/')
+            const directoryPath4 = productDetails.fileimg1.split('/')
+            const directoryPath5 = productDetails.fileimg2.split('/')
+            const directoryPath6 = productDetails.fileimg3.split('/')
+            const directoryPath7 = productDetails.fileimg4.split('/')
+
+            const deletePath1 = IMAGE_UPLOAD_DIR + '/' + directoryPath1[4]
+            const deletePath2 = IMAGE_UPLOAD_DIR + '/' + directoryPath2[4]
+            const deletePath3 = IMAGE_UPLOAD_DIR + '/' + directoryPath3[4]
+            const deletePath4 = IMAGE_UPLOAD_DIR + '/' + directoryPath4[4]
+            const deletePath5 = IMAGE_UPLOAD_DIR + '/' + directoryPath5[4]
+            const deletePath6 = IMAGE_UPLOAD_DIR + '/' + directoryPath6[4]
+            const deletePath7 = IMAGE_UPLOAD_DIR + '/' + directoryPath7[4]
+
+        
+            const deletePaths = [
+                deletePath1, deletePath2, deletePath3, deletePath4, deletePath5, deletePath6, deletePath7
+            ]
+
+            const deleteImgFiles = async (paths) => {
+                try {
+                    const promises = paths.map((img) => unlink(img))
+                    await Promise.all(promises)
+                    console.log("All images deleted successfully")
+                } catch (error) {
+                    console.log("Delete images failed")
+                }
+            }
+
+            try {   
+                const newProduct = await pool.query("UPDATE rsn_product SET title = $1, genre = $2, price = $3, developer = $4, publisher = $5, date = $6, descriptions = $7, filecover1 = $8, filecover2 = $9, filebanner = $10, fileimg1 = $11, fileimg2 = $12, fileimg3 = $13, fileimg4 = $14 WHERE productid = $15",
+                [product.title, product.genre, product.price, product.developer, product.publisher, product.date, product.descriptions, 
+                 product.imagePaths.fileCover1URL, product.imagePaths.fileCover2URL, product.imagePaths.fileBannerURL,
+                 product.imagePaths.fileImg1URL, product.imagePaths.fileImg2URL, product.imagePaths.fileImg3URL, product.imagePaths.fileImg4URL, productID])
+                 
+                 deleteImgFiles(deletePaths)
+                 res.json({status: "updated"})
+                console.log("ok")
+            } catch (error) {
+                console.log("fail")
+            }
+            
+        })
+        console.log("Update success")
+    } catch (error) {
+        console.log("Update failed")
+    }
+})
+
+//Delete a product
+app.delete('/api', async(req,res) => {
+    try {
+        const productID = req.body.productID
+        const receivedToken =  req.headers.authorization
+        const token = receivedToken.slice(receivedToken.lastIndexOf(" ") + 1)
+
+        const product = await pool.query("SELECT productid, filecover1, filecover2, filebanner, fileimg1, fileimg2, fileimg3, fileimg4 FROM rsn_product WHERE productid = $1",[productID])
+        const productDetails = product.rows[0]
+
+        const directoryPath1 = productDetails.filecover1.split('/')
+        const directoryPath2 = productDetails.filecover2.split('/')
+        const directoryPath3 = productDetails.filebanner.split('/')
+        const directoryPath4 = productDetails.fileimg1.split('/')
+        const directoryPath5 = productDetails.fileimg2.split('/')
+        const directoryPath6 = productDetails.fileimg3.split('/')
+        const directoryPath7 = productDetails.fileimg4.split('/')
+
+        const deletePath1 = IMAGE_UPLOAD_DIR + '/' + directoryPath1[4]
+        const deletePath2 = IMAGE_UPLOAD_DIR + '/' + directoryPath2[4]
+        const deletePath3 = IMAGE_UPLOAD_DIR + '/' + directoryPath3[4]
+        const deletePath4 = IMAGE_UPLOAD_DIR + '/' + directoryPath4[4]
+        const deletePath5 = IMAGE_UPLOAD_DIR + '/' + directoryPath5[4]
+        const deletePath6 = IMAGE_UPLOAD_DIR + '/' + directoryPath6[4]
+        const deletePath7 = IMAGE_UPLOAD_DIR + '/' + directoryPath7[4]
+
+        
+        const deletePaths = [
+            deletePath1, deletePath2, deletePath3, deletePath4, deletePath5, deletePath6, deletePath7
+        ]
+
+        console.log(deletePaths)
+        const deleteImgFiles = async (paths) => {
+            try {
+                const promises = paths.map((img) => unlink(img))
+                await Promise.all(promises)
+                console.log("All images deleted successfully")
+            } catch (error) {
+                console.log("Delete images failed")
+            }
+        }
+
+        const deleteProduct = async () => {
+            const deleteQuery = await pool.query("DELETE FROM rsn_product WHERE productid = $1" , [productID])
+            deleteImgFiles(deletePaths)
+            res.json({status: 'Success'})
+        }
+        
+        deleteProduct()
+        
+        // fs.existsSync(IMAGE_UPLOAD_DIR, function(exists){
+            
+        // })
+        
+        
+        // console.log(req.body)
+    } catch (error) {
+        console.log("Delete Fail")
     }
 })
 
@@ -296,9 +516,6 @@ app.post('/user/signup', async(req ,res) =>{
             res.json({error: false})
             console.log("ok")
         }
-
-
-        
         // console.log(newAdmin)
     }
     catch(err){
@@ -329,7 +546,7 @@ app.post('/user/signin', async(req, res) => {
                 // console.log(req.body)
                 const token = jwt.sign({email: registeredUser.email, password: registeredUser.password}, 
                 JWT_SECRET_KEY)
-                res.json({isAuthenticated : true, accessToken: token}) 
+                res.json({isAuthenticated : true, accessUserToken: token}) 
                 console.log("Login Successful")
             }
             else{
@@ -344,8 +561,356 @@ app.post('/user/signin', async(req, res) => {
     }
 })
 
+//Get purchased products
+
+// app.post('/get/purchased' ,(req, res) => {
+//     try {
+//         const authHeader = req.headers.authorization
+//         if(authHeader) {
+//             const token = authHeader.split(" ")[1]
+//             jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+//                 if(err){
+//                     return res.status(401).json("Token is not valid.")
+//                 }
+//                     const validUser = jwt.decode(token)
+                    
+//                     // const query = await pool.query("SELECT productid, title, filecover1 FROM rsn_purchased NATURAL JOIN rsn_product")
+//                     // const purchasedList = query.rows
+//                     console.log("Success")
+//                     // res.json(purchasedList)
+//                 }
+//             )
+//         }
+//     } catch (error) {
+        
+//     }
+// })
 
 
+//Get wishlist
+
+app.post('/get/wishlist', (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+                const productid = req.body.productid
+                const query = await pool.query("SELECT userid FROM rsn_user WHERE email = $1", [validUser.email])
+                const userID = query.rows[0].userid
+                const getQuery = await pool.query("SELECT status FROM rsn_wishlist WHERE productid = $1 AND userid = $2", [productid ,userID])
+                const wishlist = getQuery.rows[0]
+                res.json(wishlist)
+                }
+            )
+        }
+    } catch (error) {
+        console.log("Failed to Fetch")
+    }
+})
+
+//Wishlist a Product 
+
+app.post('/wishlist', (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+                const productid = req.body.productid
+                const query = await pool.query("SELECT userid FROM rsn_user WHERE email = $1", [validUser.email])
+                const userID = query.rows[0].userid
+                const queryWish = await pool.query("INSERT INTO rsn_wishlist(productid, userid, status) VALUES ($1, $2 , true)", [productid, userID])
+                res.json({status: "Wishlisted"})
+                // console.log("Added wishlist")
+            })
+        }
+    } catch (error) {
+        console.log("Fail to wishlist")
+    }
+})
+
+//Unwishlist Product
+
+app.post('/unwishlist', (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+                const productid = req.body.productid
+                
+                const query = await pool.query("SELECT userid FROM rsn_user WHERE email = $1", [validUser.email])
+                const userID = query.rows[0].userid
+                const queryUnwish = await pool.query("DELETE FROM rsn_wishlist WHERE productid = $1 AND userid = $2", [productid, userID])
+                // console.log(productid)
+                res.json({status: "Unwishlisted"})
+                // console.log("Deleted wishlist")
+            })
+        }
+    } catch (error) {
+        console.log("Fail to Unwishlist")
+    }
+})
+
+app.post('/cart', async(req, res) =>{
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader){
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+                const {productid, title, thumb, price, total, quantity} = req.body
+                const selectSQL = "SELECT userid FROM rsn_user WHERE email = $1"
+                const query = await pool.query(selectSQL, [validUser.email])
+                const userID = query.rows[0].userid
+                const checkQuery = await pool.query("SELECT EXISTS(SELECT userid FROM rsn_user NATURAL JOIN rsn_cart WHERE userid = $1)", [userID])
+                const check = checkQuery.rows[0].exists
+                if(!check){
+                    const insertSQL = "INSERT INTO rsn_cart(userid, totalcart, quantity) VALUES ($1, $2, $3)"
+                    const insertQuery = await pool.query(insertSQL, [userID, total, quantity]).then( async ()=> {
+                        const cartQuery = await pool.query("SELECT cartid FROM rsn_user NATURAL JOIN rsn_cart where userid = $1", [userID])
+                        const cartID = cartQuery.rows[0].cartid
+                        const insertSubSQL = "INSERT INTO rsn_inventory(cartid, productid) VALUES ($1, $2)"
+                        const insertSubQuery = await pool.query(insertSubSQL, [cartID, productid])
+                    }).then(res.json({'status' : 'added'}))
+                }
+                else{
+                    const cartQuery = await pool.query("SELECT cartid FROM rsn_user NATURAL JOIN rsn_cart where userid = $1", [userID])
+                    const cartID = cartQuery.rows[0].cartid
+                    const updateSQL = "UPDATE rsn_cart SET totalcart = $1, quantity = $2 WHERE cartid = $3"
+                    const updateQuery = await pool.query(updateSQL, [total, quantity, cartID]).then(async() => {
+                        const insertSubSQL = "INSERT INTO rsn_inventory(cartid, productid) VALUES ($1, $2)"
+                        const insertSubQuery = await pool.query(insertSubSQL, [cartID, productid])
+                    }).then(res.json({'status' : 'updated'}) ) 
+                }
+                
+
+                // console.log(productid)
+               
+                // console.log("Deleted wishlist")
+            })
+        }
+
+    } catch (error) {
+        console.log("Add to cart failed")
+    }
+})
+
+//Get Cart Info
+
+app.post('/cart/info', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader){
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, cartInfo) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+
+                const selectSQL = "SELECT userid FROM rsn_user WHERE email = $1"
+                const query = await pool.query(selectSQL, [validUser.email])
+                const userID = query.rows[0].userid
+
+                const selectCartSQL = "SELECT cartid, totalcart, quantity FROM rsn_user NATURAL JOIN rsn_cart WHERE userid = $1"
+                const selectCartQuery = await pool.query(selectCartSQL, [userID])
+                res.json(selectCartQuery.rows[0])
+            })
+        }
+    } catch (error) {
+        console.log("failed")
+    }
+})
+
+
+app.post('/cart/inventory/info', async (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader){
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, cartInfo) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+
+                const selectSQL = "SELECT EXISTS (SELECT cartid FROM rsn_user NATURAL JOIN rsn_cart WHERE email = $1)"
+                const query = await pool.query(selectSQL, [validUser.email])
+                if(query.rows[0].exists === false){
+                    return
+                }
+                else{
+                    const selectCart = await pool.query("SELECT cartid FROM rsn_user NATURAL JOIN rsn_cart WHERE email = $1", [validUser.email])
+                    const cartID = selectCart.rows[0].cartid
+                    const selectInventSQL = "SELECT inventid, productid, title, filecover1, price from rsn_product NATURAL JOIN rsn_inventory WHERE cartid = $1"
+                    const selectInventQuery = await pool.query(selectInventSQL, [cartID])
+                    res.json(selectInventQuery.rows)     
+                }
+                
+                
+            })
+        }
+    } catch (error) {
+        console.log("failed")
+    }
+})
+
+
+//Remove Product from Cart
+
+app.delete('/cart/remove', async(req,res) => {
+    try {
+        const removeProduct = async () => {
+        const {price, inventid, cartid, quantity} = req.body
+        const deleteQuery = await pool.query("DELETE FROM rsn_inventory WHERE inventid = $1 AND cartid = $2" , [inventid, cartid])
+        .then(async () => {
+            const updateQuery = await pool.query("UPDATE rsn_cart SET totalcart = totalcart - $1,  quantity = $2 WHERE cartid = $3", [price, quantity, cartid])
+        })
+        .then(() => res.json({status: 'Success'}))
+        }
+        removeProduct()
+    } catch (error) {
+        
+    }
+
+})
+
+app.post('/pay' , (req, res) => {
+    try {
+        const authHeader = req.headers.authorization
+
+        const card = {
+            cardNumb : req.body.creditNumb,
+            cardName : req.body.creditName,
+            cardDate : req.body.creditDate,
+            cardCVC : req.body.creditCVC
+        }
+
+        
+
+        if(authHeader){
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, cartInfo) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+                const checkCard = async () => {
+                    try {
+                        const checkQuery = await pool.query("SELECT EXISTS (SELECT 1 FROM rsn_credit WHERE creditnumber = $1 AND creditname = $2 AND creditdate = $3 AND creditcvc = $4)",
+                            [card.cardNumb, card.cardName, card.cardDate, card.cardCVC]
+                        )
+                        const result = checkQuery.rows[0].exists
+                        console.log(result)
+                        if(result === false){
+                            res.json({status : 'invalid card'})
+                        }
+                        else{
+                            const price = req.body.totalPrice
+                            const quantity = req.body.quantity
+
+                            const transaction = async () => {
+                                const amountQuery = await pool.query("UPDATE rsn_credit SET amount = amount - $1", [price])
+                                .then( async () => {
+                                    const userQuery = await pool.query("SELECT userid FROM rsn_user WHERE email = $1", [validUser.email])
+                                    .then(async (userQuery) =>{
+                                        const userid = userQuery.rows[0].userid
+                                        const insertOrder = await pool.query("INSERT INTO rsn_order(userid, totalprice, quantity) VALUES ($1, $2, $3)", [userid, price, quantity])
+                                        .then(async () => {
+                                            const getOrderDetails = await pool.query("SELECT orderid FROM rsn_user NATURAL JOIN rsn_order where userid = $1", [userid])
+                                            const orderID = getOrderDetails.rows[0].orderid
+                                            const items = req.body.order
+                                            for(let i = 0; i < quantity; i++){
+                                                const insertItem = async () => {
+                                                    const insertOrderItem = await pool.query("INSERT INTO rsn_order_items (productid, orderid) VALUES ($1, $2)", [items[i].productid, orderID])
+                                                }
+                                                insertItem()
+                                            }
+                                        })
+                                        .then(async () => {
+                                            const getCart = await pool.query("SELECT cartid FROM rsn_cart NATURAL JOIN rsn_user WHERE userid = $1", [userid])
+                                            .then( async (getCartQuery) => {
+                                                const cartID = getCartQuery.rows[0].cartid
+                                                const deleteInventoryQuery = await pool.query("DELETE FROM rsn_inventory WHERE cartid = $1" , [cartID])
+                                                .then( async () => {
+                                                    const deleteCartQuery = await pool.query("DELETE FROM rsn_cart WHERE cartid = $1", [cartID])
+                                                })
+                                            })     
+                                        })                                 
+                                    })
+                                    
+                                    
+                                })
+                                .then(() => {
+                                    res.json({status : "Purchased successfull!"})
+                                })
+                            }
+                            try {
+                                const checkQuery = async () => {
+                                    const checkAmountQuery = await pool.query("SELECT amount FROM rsn_credit WHERE creditnumber = $1 AND creditname = $2 AND creditdate = $3 AND creditcvc = $4",
+                                    [card.creditNumb, card.creditName, card.creditDate, card.creditCVC])
+                                    .then((check) => {
+                                        const checkAmount = check.rows[0].amount - price
+
+                                        if(checkAmount < 0){
+                                            res.json({status : "Insufficient fund"})
+                                        }
+                                        else{
+                                            transaction()
+                                        }
+                                    })
+                                }
+                                
+                                transaction()
+                            } catch (error) {
+                                
+                            }
+                        }
+                    } catch (error) {
+                        console.log(error.message)
+                    }
+                }
+
+                checkCard()
+                
+            })
+        }
+    
+        
+        
+
+        
+    } catch (error) {
+        console.log("Failed to connect!")
+    }
+})
+
+app.post('/sso', async (req, res) => {
+    try {
+        
+        res.json({status: 'fetched'})
+        console.log(req.body)
+    } catch (error) {
+        console.log("Failed")
+    }
+})
 
 app.listen(5000, () =>{
     console.log("Server started on PORT 5000")

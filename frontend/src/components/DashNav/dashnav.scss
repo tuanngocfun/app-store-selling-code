@@ -94,6 +94,76 @@
                     position: absolute;
                 }
             }
+
+            &.orders{
+                color: $clr-green;
+                transition: 0.2s;
+                position: relative;
+                &::before{
+                    content: "";
+                    transition: 0.2s;
+                    display: block;
+                    height: 3px;
+                    width: 100%;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 32;
+                    background-color: $clr-green;
+                    position: absolute;
+                }
+            }
+
+            &.wishlist{
+                color: $clr-green;
+                transition: 0.2s;
+                position: relative;
+                &::before{
+                    content: "";
+                    transition: 0.2s;
+                    display: block;
+                    height: 3px;
+                    width: 100%;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 32;
+                    background-color: $clr-green;
+                    position: absolute;
+                }
+            }
+            &.library{
+                color: $clr-green;
+                transition: 0.2s;
+                position: relative;
+                &::before{
+                    content: "";
+                    transition: 0.2s;
+                    display: block;
+                    height: 3px;
+                    width: 100%;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 32;
+                    background-color: $clr-green;
+                    position: absolute;
+                }
+            }
+            &.wallet{
+                color: $clr-green;
+                transition: 0.2s;
+                position: relative;
+                &::before{
+                    content: "";
+                    transition: 0.2s;
+                    display: block;
+                    height: 3px;
+                    width: 100%;
+                    left: 0;
+                    bottom: 0;
+                    z-index: 32;
+                    background-color: $clr-green;
+                    position: absolute;
+                }
+            }
             &.settings{
                 color: $clr-green;
                 transition: 0.2s;

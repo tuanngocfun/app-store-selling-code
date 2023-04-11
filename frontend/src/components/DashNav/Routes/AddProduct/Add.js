@@ -8,7 +8,7 @@ import {MdUploadFile} from 'react-icons/md'
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
-function Add() {
+function Add(props) {
 
   const [data, setData] = useState({
     title: "",
@@ -65,7 +65,7 @@ function Add() {
     e.preventDefault()
 
     const formData = new FormData()
-    // console.log(data)
+
     formData.append('title' , data.title)
     formData.append('genre' , data.genre)
     formData.append('price', data.price)
@@ -80,51 +80,49 @@ function Add() {
     formData.append('fileImg2', data.fileImg2)
     formData.append('fileImg3', data.fileImg3)
     formData.append('fileImg4', data.fileImg4)
-
-    // for (const entry of formData.entries()) {
-    //   console.log(entry);
-      
-    // }
-
-    // for (const value of formData.values()) {
-    //   console.log(value);
-      
-    // }
-
-    // console.log(formData)
     
 
-    try {
-      // const body = {
-      //   title: data.title,
-      //   genre: data.genre,
-      //   price: data.price,
-      //   developer: data.developer,
-      //   publisher: data.publisher,
-      //   date: data.date,
-      //   descriptions: data.descriptions,
-
-      // }
-      // console.log(formData)
-
-      // const url = window.location.href;
-      // const check = url +'/addProduct'
-      // console.log(check)
-      const token = window.localStorage.getItem('accessToken')
-      const response = await fetch("/admin/addProduct", {
-        method: "POST",
-        // headers: {"Authorization" : "Bearer " + token},
-        body: formData
-      })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data)
-        window.location = '/'
-      })
-      
-    } catch (error) {
-      console.log(error.message)
+    if(props.method === undefined){
+      console.log("Add")
+        try {
+          // const token = window.localStorage.getItem('accessToken')
+          const response = await fetch("/admin/addProduct", {
+            method: "POST",
+            // headers: {"Authorization" : "Bearer " + token},
+            body: formData
+          })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data)
+            window.location = '/'
+          })
+      } catch (error) {
+        console.log(error.message)
+      }
     }
+    else{
+      console.log("Edit")
+        try {
+        // const token = window.localStorage.getItem('accessToken')
+        const url = `/admin/${props.id}`
+        // console.log(url)
+        const response = await fetch(url, {
+          method: "PUT",
+          // headers: {"Authorization" : "Bearer " + token},
+          body: formData
+        })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data)
+          window.location = '/'
+        })
+        
+      } catch (error) {
+        console.log(error.message)
+      }
+    }
+
+
     
   }
 
@@ -136,12 +134,12 @@ function Add() {
         <div className='form-container-level'>
           <div className='field-container'>
             <label>Product Title</label>
-            <input type='text' name='title' value={data.title} onChange = {handleChange}></input>
+            <input type='text' name='title' value={data.title} placeholder = {props.title} onChange = {handleChange}></input>
           </div>
           <div className='field-container'>
             <label>Product Genre</label>
             <select id='genre' name='genre' value={data.genre} onChange = {handleChange}>
-              <option className='default' disabled></option>
+              <option className='default' value={props.genre} disabled></option>
               <option value="Action">Action</option>
               <option value="Adventure">Adventure</option>
               <option value="Single-player">Single-Player</option>
@@ -155,22 +153,22 @@ function Add() {
           </div>
           <div className='field-container'>
             <label>Price</label>
-            <input type='number' name='price' value={data.price} onChange= {handleChange}></input>
+            <input type='number' name='price' value={data.price} onChange= {handleChange} placeholder = {props.price}></input>
           </div>
         </div>
 
         <div className='form-container-level'>
           <div className='field-container'>
             <label>Developer</label>
-            <input type='text' name='developer' value={data.developer} onChange= {handleChange}></input>
+            <input type='text' name='developer' value={data.developer} onChange= {handleChange} placeholder = {props.developer}></input>
           </div>
           <div className='field-container'>
             <label>Publisher</label>
-            <input type='text' name='publisher' value={data.publisher} onChange= {handleChange}></input>
+            <input type='text' name='publisher' value={data.publisher} onChange= {handleChange} placeholder = {props.publisher}></input>
           </div>
           <div className='field-container'>
             <label>Release Date</label>
-            <input type = 'date' name='date' value={data.date} onChange= {handleChange}></input>
+            <input type = 'date' name='date' value={data.date} onChange= {handleChange} placeholder = {props.date}></input>
           </div>
         </div>
 

@@ -29,6 +29,12 @@
     }
 
 @font-face {
+    font-family: "SFProDisplayBold";
+    src: local("SFPro"),
+    url("./fonts/SFProDisplay-Bold.otf") format("opentype");
+    }
+
+@font-face {
     font-family: "SFProTextBold";
     src: local("SFPro"),
     url("./fonts/SFProText-Bold.otf") format("opentype");

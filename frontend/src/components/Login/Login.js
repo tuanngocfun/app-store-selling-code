@@ -41,7 +41,7 @@ function Login(prop) {
                 const apiAuth = window.localStorage.getItem("userAuthenticated")
                 setAuthenticated(apiAuth)
                 if(data.isAuthenticated){
-                    window.localStorage.setItem("accessToken", data.accessToken)                    
+                    window.localStorage.setItem("accessUserToken", data.accessUserToken)                    
                     window.location = '/'
                     setAuthenticated(data.isAuthenticated)
                 }
@@ -56,6 +56,33 @@ function Login(prop) {
 
     const navigate = useNavigate()
 
+    const handleSSOFB = () => {
+        const id = localStorage.getItem('editID')
+        try {
+            const body = {
+                editID : id
+            }
+
+            const handleRequest = async () =>{
+                const response  =  await fetch('/sso', {
+                    method: 'POST',
+                    headers: {"Content-type" : "application/json"},
+                    body: JSON.stringify(body)
+                })
+                .then((res) => res.json())
+                .then((data) => {
+                    if(data.status === 'fetched'){
+                        window.location = '/'
+                    }
+                })
+
+            }
+            handleRequest()
+        } catch (error) {
+            console.log("Failed to fetch")
+        }
+
+    }
 
   return (
     <div className= 'login-container'>
@@ -66,13 +93,13 @@ function Login(prop) {
             
         </div>
         <div className='login-container-inner'>
-            <img src={logoVertical} alt=''></img>
+            <img src={logoVertical} alt = ''></img>
             <span className='header'>Sign In</span>
 
             <div className='sso-container'>
-                <Link to='/' className='social-method face'>
+                <div className='social-method face' onClick={handleSSOFB}>
                     <FaFacebookF className='icon'></FaFacebookF>
-                </Link>
+                </div>
                 <Link to='/' className='social-method google'>
                     <FcGoogle className='icon'></FcGoogle>
                 </Link>
