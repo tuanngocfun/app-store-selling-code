@@ -111,12 +111,15 @@ app.post("/user", async (req, res) => {
                     const user = await pool.query("SELECT * FROM rsn_user WHERE email = $1", [validUser.email])     
                     userDetails = user.rows[0]
                     const wishNumb = await pool.query("SELECT COUNT (productid) FROM rsn_wishlist INNER JOIN rsn_user ON rsn_wishlist.userid = rsn_user.userid WHERE rsn_user.userid = $1", [userDetails.userid])
-                    const wishDetails = await pool.query("SELECT productid, title, filecover1, price, wished_At FROM rsn_wishlist NATURAL JOIN rsn_user NATURAL JOIN rsn_product ORDER BY wished_At DESC LIMIT 2")
-                    
+                    const wishDetails = await pool.query("SELECT productid, title, filecover1, price, wished_At FROM rsn_wishlist NATURAL JOIN rsn_user NATURAL JOIN rsn_product WHERE rsn_user.userid = $1 ORDER BY wished_At DESC LIMIT 2", [userDetails.userid])
+                    const getLibrary = await pool.query("WITH allGames AS( SELECT productid FROM rsn_order NATURAL JOIN rsn_user NATURAL JOIN rsn_order_items WHERE userid = $1 GROUP BY productid) SELECT productid, title, filecover1 FROM allGames NATURAL JOIN rsn_product",
+                    [userDetails.userid])
+                    const library = getLibrary.rows
                     const responseData = [
                         userDetails,
                         wishNumb.rows[0],
-                        wishDetails.rows
+                        wishDetails.rows,
+                        library
                     ]
                     res.json(responseData)
                 }
@@ -201,6 +204,16 @@ app.get('/api', async (req,res) => {
 //     }
 // })
 
+app.get('/api/top/wishlist', async(req, res) => {
+    try {
+        const query = await pool.query("WITH topWish AS ( SELECT COUNT(productid), productid FROM rsn_wishlist GROUP BY productid) SELECT productid, title, price, filecover1, count FROM topWish NATURAL JOIN rsn_product ORDER BY count DESC")
+        wishList = query.rows
+        res.json(wishList)
+    } catch (error) {
+        console.log("fail")
+    }
+})
+
 app.post('/api/wishlist', async(req, res) => {
     try {
         const userID = req.body.userID
@@ -263,6 +276,8 @@ app.get('/api/:id', async (req,res) =>{
         console.log(error.message)
     }
 })
+
+app.get
 
 //Add a Product
 const IMAGE_UPLOAD_DIR = './public/images'
@@ -465,7 +480,6 @@ app.delete('/api', async(req,res) => {
             deletePath1, deletePath2, deletePath3, deletePath4, deletePath5, deletePath6, deletePath7
         ]
 
-        console.log(deletePaths)
         const deleteImgFiles = async (paths) => {
             try {
                 const promises = paths.map((img) => unlink(img))
@@ -561,30 +575,76 @@ app.post('/user/signin', async(req, res) => {
     }
 })
 
-//Get purchased products
-
-// app.post('/get/purchased' ,(req, res) => {
-//     try {
-//         const authHeader = req.headers.authorization
-//         if(authHeader) {
-//             const token = authHeader.split(" ")[1]
-//             jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
-//                 if(err){
-//                     return res.status(401).json("Token is not valid.")
-//                 }
-//                     const validUser = jwt.decode(token)
-                    
-//                     // const query = await pool.query("SELECT productid, title, filecover1 FROM rsn_purchased NATURAL JOIN rsn_product")
-//                     // const purchasedList = query.rows
-//                     console.log("Success")
-//                     // res.json(purchasedList)
-//                 }
-//             )
-//         }
-//     } catch (error) {
+//Get orders
+app.post('/get/orders', (req,res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const validUser = jwt.decode(token)
+                const productid = req.body.productid
+                const query = await pool.query("SELECT userid FROM rsn_user WHERE email = $1", [validUser.email])
+                .then(async (query) => {
+                    const userID = query.rows[0].userid
+                    const getOrders = await pool.query("SELECT orderid, totalprice, ordered_at FROM rsn_order WHERE userid = $1 ORDER BY ordered_at DESC", [userID])
+                    .then((query) =>  res.json(query.rows))
+                })
+            
+                }
+            )
+        }
+    } catch (error) {
         
-//     }
-// })
+    }
+})
+
+app.post('/get/order/id', (req,res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const orderid = req.body.orderID
+                const query = await pool.query("SELECT orderid, totalprice, ordered_at FROM rsn_order WHERE orderid = $1", [orderid])
+                .then((query) =>  res.json(query.rows))
+                }
+            )
+        }
+    } catch (error) {
+        
+    }
+})
+
+
+app.post('/get/orders/details', (req,res) => {
+    try {
+        const authHeader = req.headers.authorization
+        if(authHeader) {
+            const token = authHeader.split(" ")[1]
+            jwt.verify(token, JWT_SECRET_KEY, async (err, userDetails) => {
+                if(err){
+                    return res.status(401).json("Token is not valid.")
+                }
+                const orderid = req.body.orderID
+                const query = await pool.query("SELECT productid, title, price, filecover1, code FROM rsn_order NATURAL JOIN rsn_order_items NATURAL JOIN rsn_product WHERE orderid = $1", [orderid])
+                .then(async (query) => {
+                    res.json(query.rows)
+                })
+            }
+            )
+        }
+    } catch (error) {
+        
+    }
+})
+
 
 
 //Get wishlist
@@ -792,6 +852,32 @@ app.delete('/cart/remove', async(req,res) => {
 
 })
 
+const generateCode = () => {
+    var chars = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+
+    function generateString() {
+        var result = "";
+        for (var i = 0; i < 5; i++) {
+          result += chars[Math.floor(Math.random() * 36)];
+        }
+        return result;
+      }
+
+    var string = "";
+    for (var i = 0; i < 3; i++) {
+      if (string === "") {
+        string += generateString();
+      } else {
+        string += "-" + generateString();
+      }
+    }
+
+    return string
+}
+
+
+
+
 app.post('/pay' , (req, res) => {
     try {
         const authHeader = req.headers.authorization
@@ -834,12 +920,13 @@ app.post('/pay' , (req, res) => {
                                         const userid = userQuery.rows[0].userid
                                         const insertOrder = await pool.query("INSERT INTO rsn_order(userid, totalprice, quantity) VALUES ($1, $2, $3)", [userid, price, quantity])
                                         .then(async () => {
-                                            const getOrderDetails = await pool.query("SELECT orderid FROM rsn_user NATURAL JOIN rsn_order where userid = $1", [userid])
+                                            const getOrderDetails = await pool.query("SELECT orderid FROM rsn_user NATURAL JOIN rsn_order where userid = $1 ORDER BY ordered_at DESC LIMIT 1", [userid])
                                             const orderID = getOrderDetails.rows[0].orderid
                                             const items = req.body.order
                                             for(let i = 0; i < quantity; i++){
+                                                const code = generateCode()
                                                 const insertItem = async () => {
-                                                    const insertOrderItem = await pool.query("INSERT INTO rsn_order_items (productid, orderid) VALUES ($1, $2)", [items[i].productid, orderID])
+                                                    const insertOrderItem = await pool.query("INSERT INTO rsn_order_items (productid, orderid, code) VALUES ($1, $2, $3)", [items[i].productid, orderID, code])
                                                 }
                                                 insertItem()
                                             }

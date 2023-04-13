@@ -6,6 +6,8 @@ import {RxGear} from 'react-icons/rx'
 import UserDash from '../UserDash/UserDash'
 import Wishlist from '../Wishlist/Wishlist'
 import { CartContext } from '../../../Context/CartContext'
+import Library from '../UserDash/Library/Library'
+import Orders from '../Orders/Orders'
 function UserNav(props) {
 
     const {isClicked, setIsClicked} = useContext(CartContext)
@@ -31,10 +33,6 @@ function UserNav(props) {
             : <div className= 'link' onClick={() => {setIsClicked("library")}}>Library</div>
             }
             
-            {isClicked === 'wallet'
-            ? <div className= 'link wallet' onClick={() => {setIsClicked("wallet")}}>Wallet</div>
-            : <div className= 'link' onClick={() => {setIsClicked("wallet")}}>Wallet</div>
-            }
 
             {isClicked === 'settings'
             ? <div className= 'link settings' id='settings' onClick={() => {setIsClicked("settings")}}><RxGear className='icon settings'></RxGear>Settings</div>
@@ -44,7 +42,9 @@ function UserNav(props) {
         </div>
         <Separator></Separator>
         {isClicked === 'dashboard' && <UserDash wish = {props.wish}></UserDash>}
+        {isClicked === 'orders' && <Orders id = {props.id}></Orders>}
         {isClicked === 'wishlist' && <Wishlist id = {props.id}></Wishlist>}
+        {isClicked === 'library' && <Library id = {props.id}></Library>}
         <Separator status = '2'></Separator>
     </div>
   )

@@ -8,7 +8,7 @@ import Separator from '../../components/Separator/Separator'
 import UserNav from './UserNav/UserNav'
 import { CartContext } from '../../Context/CartContext'
 function User() {
-  const { wishDetails, setWishDetails, libray, setLibrary} = useContext(CartContext)
+  const { setWishDetails, setLibrary, setLibraryNumb} = useContext(CartContext)
   useEffect(() => {
     const url = window.location.href
     const getUser = async () => {
@@ -23,6 +23,8 @@ function User() {
           setUser(data[0])
           setWishNumb(data[1].count)
           setWishDetails(data[2])
+          setLibrary(data[3])
+          setLibraryNumb(data[3].length)
         })
       }
       catch (error){
@@ -54,10 +56,17 @@ function User() {
   //   getLibrary()
   // }, [])
 
-
-
   const [user, setUser] = useState([])
   const [wishNumb, setWishNumb] = useState(0)
+
+  const dayCovertion = (date) => {
+    const getDate = new Date(date)
+    return getDate.toLocaleString([] , {
+        year : "numeric",
+        day : "2-digit",
+        month : "short"
+    })
+  }
 
   return (
     <div className='user-container'>
@@ -70,7 +79,7 @@ function User() {
             </Link>
             <div className='title-container'>
               <label className='title'>{user.firstname}{user.lastname}#{user.userid}</label>
-              <label className='date'>Member since: {user.registered_at}</label>
+              <label className='date'>Member since: {dayCovertion(user.registered_at)}</label>
             </div>
         </div>  
 

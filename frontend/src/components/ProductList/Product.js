@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 
 
 function Product(props){
-    const [url, setURL] = useState('')
     const titleUrl = props.title
     const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
     const itemUrl = `${props.id}-buy-${newTitleUrl}`
@@ -15,7 +14,10 @@ function Product(props){
             </Link>
             <div className='item-description'>
                 <h1 className='item-name'>{props.title}</h1>
-                <h1 className='item-price'>{`$` + props.price}</h1>
+                {
+                    props.price !== undefined ?  <h1 className='item-price'>{`$` + props.price}</h1>  : null  
+                }
+                
             </div>
         </div>
 )

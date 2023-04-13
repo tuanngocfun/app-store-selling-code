@@ -143,7 +143,12 @@ function Cart(props) {
                                 <label className='price'>${total}</label>
                             </div>
                         </div>
-                        <GreenButton title = 'Go To Payment' link = 'payment' event = {handleMakePayment}></GreenButton>
+                        {
+                            inventory?.length === 0 ?  
+                            <GreenButton title = 'Go To Payment' link = 'payment-none'></GreenButton>:
+                            <GreenButton title = 'Go To Payment' link = 'payment' event = {handleMakePayment}></GreenButton>
+                        }
+                        
                         <div className='divider'>
                             <div className='spacer'></div>
                             <label>or</label>

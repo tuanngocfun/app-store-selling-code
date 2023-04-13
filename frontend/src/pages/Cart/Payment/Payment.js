@@ -64,7 +64,7 @@ function Payment() {
         .then((data) => {
             setStatus(data.status)
             if(data.status !== 'invalid card'){
-                window.location = '/'
+                window.location = '/cart/activate'
             }
         })
     }

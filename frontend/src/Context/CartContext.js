@@ -10,6 +10,8 @@ export const CartProvider = ({children}) => {
     const [quantity, setQuantity] = useState(0)
     const [wishDetails, setWishDetails] = useState([])
     const [library, setLibrary] = useState([])
+    const [orders, setOrders] = useState([])
+    const [libraryNumb, setLibraryNumb] = useState(0)
     const [payment, setPayment] = useState([])
     const token = localStorage.getItem("accessUserToken")
 
@@ -47,7 +49,9 @@ export const CartProvider = ({children}) => {
                         wishDetails, setWishDetails,
                         isClicked, setIsClicked,
                         payment, setPayment,
-                        library, setLibrary
+                        orders, setOrders,
+                        library, setLibrary,
+                        libraryNumb, setLibraryNumb
                     }
                 }
             >

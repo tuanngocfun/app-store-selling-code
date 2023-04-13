@@ -9,6 +9,15 @@
     font-size: 1.1rem;
     width: max-content;
     transition: 0.4s;
+
+    &.none{
+        pointer-events: none;
+        background-color: #007e47;
+
+        &:hover{
+            background-color: #007e47;
+        }
+    }
     &:hover{
         background-color: #02f089;
         transition: 0.4s;

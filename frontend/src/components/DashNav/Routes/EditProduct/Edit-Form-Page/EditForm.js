@@ -9,7 +9,7 @@ import {MdOutlineArrowBack} from 'react-icons/md'
 function EditForm() {
   const id = window.localStorage.getItem("editID")
   const [editData, setEditData] = useState([])
-  
+
 
   useEffect(() => {
     const url = '/api/' + id
@@ -17,13 +17,14 @@ function EditForm() {
       try {
         const response = await fetch(url)
         .then((res) => res.json())
-        .then((data) => setEditData(data))
+        .then((data) => setEditData(data[0]))
       } catch (error) {
         console.log("Error")
       }
     }
     getProduct()
   },[])
+
 
   const navigate = useNavigate()
 

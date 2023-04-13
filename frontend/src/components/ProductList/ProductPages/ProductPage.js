@@ -174,13 +174,16 @@ function ProductPage() {
             headers: {"Content-type": "application/json", "Authorization" : "Bearer " + token},
             body: JSON.stringify(body)
         }).then((res) => res.json())
-        // .then((data) => {})
-
     }
-    // console.log("Added to Cart ", cart)
-    // const  = window.localStorage.getItem('cart')
-    // console.log(cartNumb.productID)
-    
+
+    const dayCovertion = (date) => {
+        const getDate = new Date(date)
+        return getDate.toLocaleString('en-GB' , {
+            year : "numeric",
+            day : "2-digit",
+            month : "long"
+        })
+    }
 
     return (
         <div className='product-outer-container'>
@@ -215,7 +218,7 @@ function ProductPage() {
                             productDetails.title === undefined ? <h1 className='title'>...</h1> :
                             <h1 className='title'>{productDetails.title}</h1>
                         }
-                        {/* <h1 className='title'>{productDetails.title}</h1> */}
+
                         <div className='sub-info'>
                             <div className='steam-container'>
                                 <RiSteamFill className='icon'></RiSteamFill>
@@ -265,7 +268,7 @@ function ProductPage() {
                         </div>
                         <div className='row four'>
                             <div className='cell-left'>Release date:</div>
-                            <div className='cell-right'>{productDetails.date}</div>
+                            <div className='cell-right'>{dayCovertion(productDetails.date)}</div>
                         </div>
                         <div className='row five'>
                             <div className='cell-left'>Genre:</div>

@@ -119,6 +119,7 @@ CREATE TABLE rsn_order(
 	orderid SERIAL PRIMARY KEY,
 	userid INT,
 	totalprice DECIMAL(10,2),
+	ordered_At timestamp default current_timestamp,
 	CONSTRAINT fk_userid
 	FOREIGN KEY(userid) REFERENCES rsn_user(userid)
 )

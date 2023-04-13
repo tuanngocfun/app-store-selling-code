@@ -55,10 +55,6 @@ function Home(){
     getUrl()
     })
     
-    
-    // const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase()
-    // const itemUrl = `${products[8].productid}-buy-${newTitleUrl}`
-    // console.log(itemUrl)
 
     return(
         <div className="home-container">
@@ -108,8 +104,8 @@ function Home(){
                 <Separator status = '0'></Separator>
 
                 <div className='preorder-container'>
-                    <Headline title='Pre-Orders'></Headline>
-                    <ProductList></ProductList>
+                    <Headline title='User-choices'></Headline>
+                    <ProductList type = 'top-wish'></ProductList>
                 </div>
                 <Separator status = '2'></Separator>
 

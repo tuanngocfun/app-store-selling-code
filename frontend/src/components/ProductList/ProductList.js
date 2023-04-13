@@ -1,12 +1,15 @@
 import './productlist.scss';
 import Product from './Product';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext} from 'react';
 import axios from 'axios';
+import { CartContext } from '../../Context/CartContext';
 // import Items from '../../data/products.json'
 
 function ProductList(props){
+    const {library, setLibrary} = useContext(CartContext)
     const [products, setProducts] = useState([])
     const [wishlist, setWishList] = useState([])
+    const [topWish, setTopWish] = useState([])
     const [type, setType] = useState(props.type)
     useEffect(() => {
 
@@ -16,6 +19,18 @@ function ProductList(props){
                 .then((res) => res.json())
                 .then((data) => {
                     setProducts(data)
+                })
+            } catch(err){
+                console.log("Fail")
+            }
+        }
+
+        const getTopWish = async () => {
+            try {
+                const response = await fetch('/api/top/wishlist')
+                .then((res) => res.json())
+                .then((data) => {
+                    setTopWish(data)
                 })
             } catch(err){
                 console.log("Fail")
@@ -46,6 +61,10 @@ function ProductList(props){
         else if(type === 'wishlist'){
             getWishlist()
         }
+        else if(type === 'top-wish'){
+            getTopWish()
+        }
+
     },[type, props.id])
 
 
@@ -70,6 +89,26 @@ function ProductList(props){
 
             {
                 type === 'wishlist' && wishlist && wishlist.map((product, index) => {
+                    return(
+                        <Product key={ product.productid } id = { product.productid } title={product.title} price = {product.price} thumb = {product.filecover1}></Product>
+                    )
+                })
+            }
+
+            {
+                type === 'library' && library && library.map((product, index) => {
+                    return(
+                        <Product key={ product.productid } id = { product.productid } title={product.title} thumb = {product.filecover1}></Product>
+                    )
+                })
+            }
+
+            {
+                type === 'top-wish' && topWish && topWish.map((product, index) => {
+                    if(index > 8){
+                        return
+                    }
+
                     return(
                         <Product key={ product.productid } id = { product.productid } title={product.title} price = {product.price} thumb = {product.filecover1}></Product>
                     )
