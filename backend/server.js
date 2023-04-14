@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const express = require('express')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
@@ -20,8 +22,8 @@ app.use(express.json())
 const salt = bcrypt.genSaltSync(12)
 
 //JWT_SECRET_KEY
-const JWT_SECRET_KEY = "9876543210"
 
+const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY || "default-secret-key"
 //Routes
 
 //Create Admin
@@ -999,6 +1001,8 @@ app.post('/sso', async (req, res) => {
     }
 })
 
-app.listen(5000, () =>{
-    console.log("Server started on PORT 5000")
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server started on PORT ${PORT}`)
 })
