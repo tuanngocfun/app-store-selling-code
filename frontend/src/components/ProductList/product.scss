@@ -1,47 +1,46 @@
-.item-container{
+.item-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 285px;
+  width: 385px;
+  position: relative;
+  justify-content: space-between;
+  row-gap: 15px;
+  .product-link {
+    border-radius: 0.8rem;
+    overflow: hidden;
+    transition: 0.3s;
+    height: 250px;
+    &:hover {
+      transform: scale(1.05);
+      transition: 0.3s;
+    }
+
+    img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .item-description {
     display: flex;
-    flex-direction: column;
-    max-height: 285px;
-    width: 385px;
-    position: relative;
     justify-content: space-between;
-    row-gap: 15px;
-    .product-link{
-        border-radius: 0.8rem;
-        overflow: hidden;
-        transition: 0.3s;
-        height: 250px;
-        &:hover{
-            transform: scale(1.05);
-            transition: 0.3s;
-        }
-
-        img{
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-        }
+    align-items: center;
+    .item-name {
+      font-family: 'DTphuduReg';
+      font-size: 1.1rem;
     }
 
-    .item-description{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        .item-name{
-            font-family: "DTphuduReg";
-            font-size: 1.1rem;
-        }
-
-        .item-price{
-            font-family: "DTphuduReg";
-            font-size: 1.2rem;
-        }
+    .item-price {
+      font-family: 'DTphuduReg';
+      font-size: 1.2rem;
     }
+  }
 
+  $breakpoint-pc: 1600px;
 
-    $breakpoint-pc: 1600px;
-
-    @media (min-width: $breakpoint-pc) {
-        max-width: 510px;
-    }
+  @media (min-width: $breakpoint-pc) {
+    max-width: 510px;
+  }
 }

@@ -1,18 +1,18 @@
-version:  "3.9"  # Use a more recent version of the compose file format
+version: '3.9' # Use a more recent version of the compose file format
 services:
   api-backend:
     build: .
     environment:
-      - DB_HOST=database  # Use the service name "database" as the host name
+      - DB_HOST=database # Use the service name "database" as the host name
       - DB_USER=postgres
       - DB_PASSWORD=123456789
       - DB_NAME=Risen
       - DB_PORT=5432
-    command: "npm run start_dev"
+    command: 'npm run start_dev'
     ports:
-      - "3000:5000" 
+      - '3000:5000'
     depends_on:
-      - database  # Make sure the database service starts before the api-backend service
+      - database # Make sure the database service starts before the api-backend service
     # volumes:
     #   - .:/app
 
@@ -26,6 +26,5 @@ services:
       - ./init_db:/docker-entrypoint-initdb.d
       # - ../db:/var/lib/postgresql/data
     ports:
-      - "6789:5432" # HOST_PORT:CONTAINER_PORT, the container can communicate via container port, and the outsider can 
+      - '6789:5432' # HOST_PORT:CONTAINER_PORT, the container can communicate via container port, and the outsider can
       # communicate via host port
-      

@@ -12,11 +12,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <CartProvider>
     <BrowserRouter>
-      <Loading status = 'true'></Loading>
+      <Loading status="true"></Loading>
       <ScrollToTop></ScrollToTop>
       <App />
     </BrowserRouter>
   </CartProvider>
-  
 );
-

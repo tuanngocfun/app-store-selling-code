@@ -13,7 +13,7 @@
   top: 50%;
   left: 50%;
   -webkit-transform: translate(-50%, -50%);
-          transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   height: 35px;
   z-index: 23;
 }
@@ -28,8 +28,8 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
   background-color: transparent;
   height: 80px;
   max-height: 80px;
@@ -38,11 +38,11 @@
   padding-left: 30px;
   padding-right: 30px;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-transition: 0.2s ease;
   transition: 0.2s ease;
 }
@@ -58,33 +58,33 @@
   background-color: #272727;
   border-radius: 5px;
   -webkit-transform: translate(50px, -35px);
-          transform: translate(50px, -35px);
+  transform: translate(50px, -35px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   padding-top: 20px;
   padding-left: 30px;
   padding-bottom: 20px;
   padding-right: 20px;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
 }
 
 .pseudo-nav-container .nav-container .language-container .dropdown-menu h3 {
   color: #ffffff;
-  font-family: "SFProTextReg";
+  font-family: 'SFProTextReg';
   font-size: 1;
 }
 
 .pseudo-nav-container .nav-container.active {
   background-color: #101010;
   -webkit-animation: fadeIn 0.1s;
-          animation: fadeIn 0.1s;
+  animation: fadeIn 0.1s;
 }
 
 .pseudo-nav-container .nav-container .icon {
@@ -107,11 +107,11 @@
   display: flex;
   width: 150px;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 
 .pseudo-nav-container .nav-container .right-nav .icon {
@@ -123,7 +123,7 @@
 }
 
 .pseudo-nav-container .nav-container .right-nav .icon:hover {
-  color: #01D47A;
+  color: #01d47a;
   -webkit-transition: 0.4s;
   transition: 0.4s;
 }

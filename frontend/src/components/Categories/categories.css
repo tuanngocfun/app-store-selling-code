@@ -6,10 +6,10 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 .categories-inner-container .categories-item-container {
@@ -20,11 +20,11 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   position: relative;
   color: #ffffff;
   border-radius: 0 0 0.8rem 0.8rem;
@@ -37,7 +37,9 @@
   transition: 0.4s;
 }
 
-.categories-inner-container .categories-item-container .categories-item-content {
+.categories-inner-container
+  .categories-item-container
+  .categories-item-content {
   position: relative;
   width: 100%;
   height: 90%;
@@ -47,20 +49,25 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
   overflow: hidden;
 }
 
-.categories-inner-container .categories-item-container .categories-item-content .categories-cover {
+.categories-inner-container
+  .categories-item-container
+  .categories-item-content
+  .categories-cover {
   position: absolute;
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
 
-.categories-inner-container .categories-item-container .categories-item-content:after {
+.categories-inner-container
+  .categories-item-container
+  .categories-item-content:after {
   content: '';
   position: absolute;
   height: 100%;
@@ -70,7 +77,10 @@
   overflow: hidden;
 }
 
-.categories-inner-container .categories-item-container .categories-item-content h1 {
+.categories-inner-container
+  .categories-item-container
+  .categories-item-content
+  h1 {
   position: relative;
   font-size: 1.7rem;
   z-index: 16;
@@ -86,11 +96,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
   -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: end;
+  -ms-flex-align: end;
+  align-items: end;
 }
 
 .categories-inner-container .categories-item-container .characters img {
@@ -101,7 +111,7 @@
 
 .categories-inner-container .categories-item-container .characters #chief {
   -webkit-transform: translateX(12%);
-          transform: translateX(12%);
+  transform: translateX(12%);
   height: 88%;
 }
 
@@ -117,7 +127,7 @@
   }
   .categories-inner-container .categories-item-container .characters .marine {
     -webkit-transform: translateX(12%);
-            transform: translateX(12%);
+    transform: translateX(12%);
   }
 }
 /*# sourceMappingURL=categories.css.map */
