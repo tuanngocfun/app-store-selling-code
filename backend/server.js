@@ -8,10 +8,16 @@ const app = express()
 const fs = require('fs')
 const { unlink } = require('fs/promises')
 const multiparty = require('multiparty')
+const cron = require("node-cron");
+const schedule = require('node-schedule');
 
-const pool = require('./connection')
+const pool = require('./database/connection')
 const { verify } = require('crypto')
 const { get } = require('http')
+
+// Import the sendBirthdayDiscount function
+const sendBirthdayDiscount = require("./utils/sendBirthdayDiscount"); 
+const generateCode = require('./utils/generateCode')
 
 //Middleware
 app.use(cors())
@@ -83,6 +89,7 @@ app.post('/admin/signin', async (req, res) => {
                     },
                     JWT_SECRET_KEY
                 )
+                console.log('Generated token in /admin/signin:', token) // Add this line to log the generated token in /admin/signin
                 res.json({ isAuthenticated: true, accessToken: token })
                 console.log('Login Successful')
             } else {
@@ -95,21 +102,21 @@ app.post('/admin/signin', async (req, res) => {
 })
 
 //Get User Details
-
 app.post('/user', async (req, res) => {
     try {
         const authHeader = req.headers.authorization
         if (authHeader) {
             const token = authHeader.split(' ')[1]
+            console.log('Received token:', token) // Add this line to log the received token
             jwt.verify(token, JWT_SECRET_KEY, (err, userDetails) => {
                 if (err) {
                     return res.status(401).json('Token is not valid.')
                 }
                 const validUser = jwt.decode(token)
-
+                console.log('Decoded user details:', validUser) // Add this line to log the decoded user details
                 const getUser = async () => {
                     const user = await pool.query(
-                        'SELECT * FROM rsn_user WHERE email = $1',
+                        'SELECT userid, firstname, middlename, lastname, email, age, role_id, registered_at, walletid FROM rsn_user WHERE email = $1',
                         [validUser.email]
                     )
                     userDetails = user.rows[0]
@@ -118,7 +125,10 @@ app.post('/user', async (req, res) => {
                         [userDetails.userid]
                     )
                     const wishDetails = await pool.query(
-                        'SELECT productid, title, filecover1, price, wished_At FROM rsn_wishlist NATURAL JOIN rsn_user NATURAL JOIN rsn_product WHERE rsn_user.userid = $1 ORDER BY wished_At DESC LIMIT 2',
+                        'SELECT productid, title, filecover1, price, wished_At \
+                        FROM rsn_wishlist NATURAL JOIN rsn_user NATURAL JOIN rsn_product \
+                        WHERE rsn_user.userid = $1 \
+                        ORDER BY wished_At DESC LIMIT 2',
                         [userDetails.userid]
                     )
                     const getLibrary = await pool.query(
@@ -228,7 +238,7 @@ app.get('/api/top/wishlist', async (req, res) => {
     try {
         const query = await pool.query(
             'WITH topWish AS \
-      ( \
+        ( \
         SELECT COUNT(productid), productid FROM rsn_wishlist \
         GROUP BY productid)\
         SELECT productid, title, price, filecover1, count\
@@ -311,7 +321,9 @@ app.get('/api/:id', async (req, res) => {
     }
 })
 
-app.get()
+app.get('/some-path', (req, res) => {
+    res.send('Hello World!')
+})
 
 //Add a Product
 const IMAGE_UPLOAD_DIR = './public/images'
@@ -387,12 +399,12 @@ app.post('/admin/addProduct', async (req, res) => {
             try {
                 const newProduct = await pool.query(
                     'INSERT INTO rsn_product \
-          (title, genre, price, developer, \
-          publisher, date, descriptions, filecover1,\
-          filecover2, filebanner, fileimg1, fileimg2,\
-          fileimg3, fileimg4) \
-          VALUES \
-          ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
+            (title, genre, price, developer, \
+            publisher, date, descriptions, filecover1,\
+            filecover2, filebanner, fileimg1, fileimg2,\
+            fileimg3, fileimg4) \
+            VALUES \
+            ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)',
                     [
                         product.title,
                         product.genre,
@@ -522,11 +534,11 @@ app.put('/admin/:id', async (req, res) => {
             try {
                 const newProduct = await pool.query(
                     'UPDATE rsn_product SET title = $1,\
-                      genre = $2, price = $3, developer = $4,\
-                      publisher = $5, date = $6, descriptions = $7,\
-                      filecover1 = $8, filecover2 = $9, filebanner = $10,\
-                      fileimg1 = $11, fileimg2 = $12, fileimg3 = $13,\
-                      fileimg4 = $14 WHERE productid = $15',
+            genre = $2, price = $3, developer = $4,\
+            publisher = $5, date = $6, descriptions = $7,\
+            filecover1 = $8, filecover2 = $9, filebanner = $10,\
+            fileimg1 = $11, fileimg2 = $12, fileimg3 = $13,\
+            fileimg4 = $14 WHERE productid = $15',
                     [
                         product.title,
                         product.genre,
@@ -632,8 +644,10 @@ app.delete('/api', async (req, res) => {
 //Create a USER
 app.post('/user/signup', async (req, res) => {
     try {
-        const { firstname, middlename, lastname, email, age, password } =
+        const { firstname, middlename, lastname, email, age, password, birthday } =
             req.body
+            console.log("Received values:", firstname, middlename, lastname, email, age, password, birthday);
+
 
         const check = await pool.query(
             'SELECT EXISTS(SELECT 1 FROM rsn_user WHERE email = $1)',
@@ -646,20 +660,27 @@ app.post('/user/signup', async (req, res) => {
             res.json({ error: true })
         } else {
             const hashPwd = await bcrypt.hash(password, salt)
+            console.log("hashPwd: ", hashPwd)
             const newAdmin = await pool.query(
                 'INSERT INTO rsn_user (firstname, middlename, lastname, email, age, password, role_id) VALUES($1, $2, $3, $4, $5, $6, 2) RETURNING *',
                 [firstname, middlename, lastname, email, age, hashPwd]
             )
+
+            // Insert the user's birthday into the rsn_user_birth table
+            const newUserBirthday = await pool.query(
+                'INSERT INTO rsn_user_birth (user_id, birthday) VALUES ($1, $2)',
+                [newAdmin.rows[0].userid, new Date(birthday)]
+            );
+            
             res.json({ error: false })
             console.log('ok')
         }
-        // console.log(newAdmin)
     } catch (err) {
         console.log(err.message)
     }
 })
 
-//User Sign In
+// User Sign In
 app.post('/user/signin', async (req, res) => {
     try {
         const { email, password } = req.body
@@ -676,15 +697,19 @@ app.post('/user/signin', async (req, res) => {
             console.log('Login Failed')
         } else {
             if (await bcrypt.compare(password, registeredUser.password)) {
-                // console.log(req.body)
                 const token = jwt.sign(
                     {
                         email: registeredUser.email,
-                        password: registeredUser.password,
+                        userid: registeredUser.userid,
                     },
                     JWT_SECRET_KEY
                 )
-                res.json({ isAuthenticated: true, accessUserToken: token })
+                res.json({
+                    isAuthenticated: true,
+                    accessUserToken: token,
+                    email: registeredUser.email,
+                    userid: registeredUser.userid,
+                })
                 console.log('Login Successful')
             } else {
                 res.json({ isAuthenticated: false })
@@ -694,7 +719,7 @@ app.post('/user/signin', async (req, res) => {
         console.log(error.message)
     }
 })
-
+//
 //Get orders
 app.post('/get/orders', (req, res) => {
     try {
@@ -954,7 +979,10 @@ app.post('/cart/info', async (req, res) => {
                 const validUser = jwt.decode(token)
 
                 const selectSQL = 'SELECT userid FROM rsn_user WHERE email = $1'
+                console.log('Email:', validUser.email)
                 const query = await pool.query(selectSQL, [validUser.email])
+                console.log('Query result:', query)
+                console.log('query.rows', query.rows)
                 const userID = query.rows[0].userid
 
                 const selectCartSQL =
@@ -1032,65 +1060,81 @@ app.delete('/cart/remove', async (req, res) => {
     }
 })
 
-const generateCode = () => {
-    const chars = [
-        'A',
-        'B',
-        'C',
-        'D',
-        'E',
-        'F',
-        'G',
-        'H',
-        'I',
-        'J',
-        'K',
-        'L',
-        'M',
-        'N',
-        'O',
-        'P',
-        'Q',
-        'R',
-        'S',
-        'T',
-        'U',
-        'V',
-        'W',
-        'X',
-        'Y',
-        'Z',
-        '0',
-        '1',
-        '2',
-        '3',
-        '4',
-        '5',
-        '6',
-        '7',
-        '8',
-        '9',
-    ]
+// const generateCode = () => {
+//     const chars = [
+//         'A',
+//         'B',
+//         'C',
+//         'D',
+//         'E',
+//         'F',
+//         'G',
+//         'H',
+//         'I',
+//         'J',
+//         'K',
+//         'L',
+//         'M',
+//         'N',
+//         'O',
+//         'P',
+//         'Q',
+//         'R',
+//         'S',
+//         'T',
+//         'U',
+//         'V',
+//         'W',
+//         'X',
+//         'Y',
+//         'Z',
+//         '0',
+//         '1',
+//         '2',
+//         '3',
+//         '4',
+//         '5',
+//         '6',
+//         '7',
+//         '8',
+//         '9',
+//     ]
 
-    function generateString() {
-        let result = ''
-        for (let i = 0; i < 5; i++) {
-            result += chars[Math.floor(Math.random() * 36)]
-        }
-        return result
-    }
+//     function generateString() {
+//         let result = ''
+//         for (let i = 0; i < 5; i++) {
+//             result += chars[Math.floor(Math.random() * 36)]
+//         }
+//         return result
+//     }
 
-    let string = ''
-    for (let i = 0; i < 3; i++) {
-        if (string === '') {
-            string += generateString()
-        } else {
-            string += `-${generateString()}`
-        }
-    }
+//     let string = ''
+//     for (let i = 0; i < 3; i++) {
+//         if (string === '') {
+//             string += generateString()
+//         } else {
+//             string += `-${generateString()}`
+//         }
+//     }
 
-    return string
-}
+//     return string
+// }
+
+// Schedule a daily task to send birthday discount emails
+// cron.schedule("0 0 * * *", async () => {
+//     console.log("Sending birthday discount emails...");
+//     await sendBirthdayDiscount();
+//     console.log("Birthday discount emails sent.");
+// });
+
+const dateTimeString = '2023-05-08T10:20:00.000+07:00';
+const scheduledDate = new Date(dateTimeString); 
+
+const job = schedule.scheduleJob(scheduledDate, async () => {
+    console.log("Sending birthday discount emails...");
+    await sendBirthdayDiscount();
+    console.log("Birthday discount emails sent.");
+});
 
 app.post('/pay', (req, res) => {
     try {
@@ -1289,6 +1333,8 @@ app.post('/sso', async (req, res) => {
 
 const PORT = process.env.PORT || 5000
 
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`Server started on PORT ${PORT}`)
 })
+
+module.exports = { app, server }

@@ -18,6 +18,7 @@ function SignUp(prop) {
     email: '',
     age: 0,
     password: '',
+    birthday: '', // Add birthday to the form state
   });
 
   const handleChange = e => {
@@ -52,6 +53,7 @@ function SignUp(prop) {
         email: form.email,
         age: form.age,
         password: form.password,
+        birthday: form.birthday, // Add birthday to the request body
       };
 
       const url = window.location.href;
@@ -171,6 +173,20 @@ function SignUp(prop) {
               ></input>
               <label className={`input ${input}`} id="age">
                 Your age is invalid
+              </label>
+            </div>
+            <div className="section">
+              <input
+                className="opacity"
+                type="date"
+                name="birthday" // Change this line
+                value={form.birthday} // Change this line
+                onChange={handleChange}
+                placeholder="Your Birthdate"
+                required
+              ></input>
+              <label className={`input ${input}`} id="birthday"> // Change this line
+                Please enter a valid birthdate
               </label>
             </div>
             <button type="submit">Submit</button>
