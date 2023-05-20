@@ -1,12 +1,15 @@
 const nodemailer = require('nodemailer')
 const { google } = require('googleapis')
-
 const config = require('../config/google')
 const OAuth2 = google.auth.OAuth2
 
 const client = new OAuth2(config.clientGoogleId, config.clientGoogleSecret)
 
 client.setCredentials({ refresh_token: config.refreshToken })
+require('dotenv').config({ path: '../.env' })
+
+const url_root = process.env.URL
+const hrefURL = `${url_root}/user/reset-password/`
 
 sendMail = (email, token) => {
     const accessToken = client.getAccessToken()
@@ -27,11 +30,11 @@ sendMail = (email, token) => {
         from: `🦏RISEN <${config.user}}>`,
         to: email,
         subject: 'RESET PASSWORD',
-        text: 'Hello world',
+        text: 'Dear Client',
         html:
-            '<p>You requested for reset password, kindly use this <a href="http://localhost:5000/user/reset-password/' +
+            `<p>You requested for reset password, kindly use this <a href=${hrefURL}` +
             token +
-            '">link</a> to reset your password</p>',
+            `>link</a> to reset your password</p>`,
 
         textEncoding: 'base64',
         headers: [

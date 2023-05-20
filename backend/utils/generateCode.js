@@ -1,4 +1,3 @@
-
 const generateCode = () => {
     const chars = [
         'A',

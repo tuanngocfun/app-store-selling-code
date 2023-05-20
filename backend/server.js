@@ -8,15 +8,15 @@ const app = express()
 const fs = require('fs')
 const { unlink } = require('fs/promises')
 const multiparty = require('multiparty')
-const cron = require("node-cron");
-const schedule = require('node-schedule');
+const cron = require('node-cron')
+const schedule = require('node-schedule')
 
 const pool = require('./database/connection')
 const { verify } = require('crypto')
 const { get } = require('http')
 
 // Import the sendBirthdayDiscount function
-const sendBirthdayDiscount = require("./utils/sendBirthdayDiscount"); 
+const sendBirthdayDiscount = require('./utils/sendBirthdayDiscount')
 const generateCode = require('./utils/generateCode')
 
 //Middleware
@@ -644,10 +644,25 @@ app.delete('/api', async (req, res) => {
 //Create a USER
 app.post('/user/signup', async (req, res) => {
     try {
-        const { firstname, middlename, lastname, email, age, password, birthday } =
-            req.body
-            console.log("Received values:", firstname, middlename, lastname, email, age, password, birthday);
-
+        const {
+            firstname,
+            middlename,
+            lastname,
+            email,
+            age,
+            password,
+            birthday,
+        } = req.body
+        console.log(
+            'Received values:',
+            firstname,
+            middlename,
+            lastname,
+            email,
+            age,
+            password,
+            birthday
+        )
 
         const check = await pool.query(
             'SELECT EXISTS(SELECT 1 FROM rsn_user WHERE email = $1)',
@@ -660,7 +675,7 @@ app.post('/user/signup', async (req, res) => {
             res.json({ error: true })
         } else {
             const hashPwd = await bcrypt.hash(password, salt)
-            console.log("hashPwd: ", hashPwd)
+            console.log('hashPwd: ', hashPwd)
             const newAdmin = await pool.query(
                 'INSERT INTO rsn_user (firstname, middlename, lastname, email, age, password, role_id) VALUES($1, $2, $3, $4, $5, $6, 2) RETURNING *',
                 [firstname, middlename, lastname, email, age, hashPwd]
@@ -670,8 +685,8 @@ app.post('/user/signup', async (req, res) => {
             const newUserBirthday = await pool.query(
                 'INSERT INTO rsn_user_birth (user_id, birthday) VALUES ($1, $2)',
                 [newAdmin.rows[0].userid, new Date(birthday)]
-            );
-            
+            )
+
             res.json({ error: false })
             console.log('ok')
         }
@@ -1127,14 +1142,14 @@ app.delete('/cart/remove', async (req, res) => {
 //     console.log("Birthday discount emails sent.");
 // });
 
-const dateTimeString = '2023-05-08T10:20:00.000+07:00';
-const scheduledDate = new Date(dateTimeString); 
+const dateTimeString = '2023-05-08T10:20:00.000+07:00'
+const scheduledDate = new Date(dateTimeString)
 
 const job = schedule.scheduleJob(scheduledDate, async () => {
-    console.log("Sending birthday discount emails...");
-    await sendBirthdayDiscount();
-    console.log("Birthday discount emails sent.");
-});
+    console.log('Sending birthday discount emails...')
+    await sendBirthdayDiscount()
+    console.log('Birthday discount emails sent.')
+})
 
 app.post('/pay', (req, res) => {
     try {
