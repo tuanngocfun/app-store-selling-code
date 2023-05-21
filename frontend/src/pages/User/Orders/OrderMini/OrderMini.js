@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import './orderMini.scss';
+import { useTranslation } from 'react-i18next';
+
 function OrderMini(props) {
+  const { t } = useTranslation();
   const [items, setItems] = useState([]);
 
   useEffect(() => {
@@ -35,8 +38,8 @@ function OrderMini(props) {
                   <div className="order-details">
                     <label className="title">{product.title}</label>
                     <div className="order-specs">
-                      <label className="system">System: PC</label>
-                      <label className="system">Platform: Steam</label>
+                      <label className="system">{t('system-pc')}</label>
+                      <label className="system">{t('platform-steam')}</label>
                     </div>
                   </div>
                 </div>

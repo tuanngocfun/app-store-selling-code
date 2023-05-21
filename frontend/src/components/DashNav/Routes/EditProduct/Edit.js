@@ -3,12 +3,14 @@ import { useState, useEffect } from 'react';
 import './edit.scss';
 import EditItem from './Edit-Item/EditItem';
 import EditForm from './Edit-Form-Page/EditForm';
+import { useTranslation } from 'react-i18next';
 
 function Edit() {
   const [productDetails, setProductDetails] = useState([]);
   const [search, setSearch] = useState([]);
   const [edit, setEdit] = useState(false);
   const [data, setData] = useState('');
+  const { t } = useTranslation();
 
   useEffect(() => {
     const getDetails = async () => {
@@ -31,7 +33,7 @@ function Edit() {
         type="search"
         className="search-input"
         onChange={e => setSearch(e.target.value)}
-        placeholder="Search for a Product.."
+        placeholder={t('edit-search-placeholder')}
       ></input>
       <div className="edit-product-container">
         {productDetails &&

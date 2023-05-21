@@ -63,8 +63,8 @@
 }
 
 .login-container .top-container .cancel {
-  width: 30px;
-  height: 30px;
+  width: 25px;
+  height: 25px;
   color: #ffffff;
   cursor: pointer;
   -webkit-transition: 0.2s;
@@ -75,8 +75,6 @@
   -webkit-transition: 0.5s;
   transition: 0.5s;
   color: #01d47a;
-  -webkit-transform: rotate(360deg);
-  transform: rotate(360deg);
 }
 
 .login-container-inner {

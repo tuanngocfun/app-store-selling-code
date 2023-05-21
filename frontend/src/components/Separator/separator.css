@@ -10,6 +10,10 @@
   height: 80px;
 }
 
+.separator.medium {
+  height: 40px;
+}
+
 .separator.tight {
   height: 20px;
 }

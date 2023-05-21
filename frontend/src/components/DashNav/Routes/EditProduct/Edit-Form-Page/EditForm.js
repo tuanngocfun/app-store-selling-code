@@ -6,7 +6,9 @@ import Add from '../../AddProduct/Add';
 import Separator from '../../../../Separator/Separator';
 import Headings from '../../../../ProductList/ProductPages/Headings/Headings';
 import { MdOutlineArrowBack } from 'react-icons/md';
+import { useTranslation } from 'react-i18next';
 function EditForm() {
+  const { t } = useTranslation();
   const id = window.localStorage.getItem('editID');
   const [editData, setEditData] = useState([]);
 
@@ -40,7 +42,7 @@ function EditForm() {
           className="back"
           onClick={handleBack}
         ></MdOutlineArrowBack>
-        <Headings text="Product Info"></Headings>
+        <Headings text={t('product-info')}></Headings>
       </div>
 
       <Separator status="3"></Separator>
@@ -53,7 +55,7 @@ function EditForm() {
         <div className="product-right-container">
           <div className="product-info-level-one">
             <label>
-              Product ID: <span>#{editData.productid}</span>
+              {t('product-id')}: <span>#{editData.productid}</span>
             </label>
             <h1>{editData.title}</h1>
           </div>
@@ -61,39 +63,39 @@ function EditForm() {
 
           <div className="product-info-level-two">
             <div className="cell">
-              <label>Genre:</label>
+              <label>{t('genre')}:</label>
               <span>{editData.genre}</span>
             </div>
             <div className="cell">
-              <label>Developer:</label>
+              <label>{t('developer')}:</label>
               <span>{editData.developer}</span>
             </div>
             <div className="cell">
-              <label>Publisher:</label>
+              <label>{t('publisher')}:</label>
               <span>{editData.publisher}</span>
             </div>
             <div className="cell">
-              <label>Release date:</label>
+              <label>{t('release-date')}:</label>
               <span>{editData.date}</span>
             </div>
             <div className="cell">
-              <label>Price:</label>
+              <label>{t('price')}:</label>
               <span>${editData.price}</span>
             </div>
             <div className="cell">
-              <label>Created at:</label>
+              <label>{t('created-at')}:</label>
               <span>{editData.created_at}</span>
             </div>
           </div>
 
           <div className="product-container-level-three">
-            <button className="button view">View details</button>
-            <button className="button delete">Delete product</button>
+            <button className="button view">{t('view-details')}</button>
+            <button className="button delete">{t('delete-product')}</button>
           </div>
         </div>
       </div>
       <Separator></Separator>
-      <Headings text="Edit Product"></Headings>
+      <Headings text={t('edit-product')}></Headings>
       <Separator status="3"></Separator>
       <Add
         id={editData.productid}

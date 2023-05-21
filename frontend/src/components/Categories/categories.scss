@@ -19,10 +19,10 @@ $breakpoint-pc: 1600px;
     color: #ffffff;
     border-radius: 0 0 0.8rem 0.8rem;
     overflow: hidden;
-
+    transition: 0.4s;
     &:hover {
       .character-image {
-        scale: 1.1;
+        transform: scale(1.1);
         transition: 0.4s;
       }
     }
@@ -77,13 +77,13 @@ $breakpoint-pc: 1600px;
         transition: 0.4s;
       }
 
-      #chief {
-        transform: translateX(12%);
+      &.chief {
+        margin-right: -40px;
         height: 88%;
       }
 
-      #geralt {
-        transform: translateX(12%);
+      &.geralt {
+        margin-right: -40px;
       }
     }
   }

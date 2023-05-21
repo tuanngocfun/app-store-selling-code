@@ -7,8 +7,10 @@ import { MdUploadFile } from 'react-icons/md';
 
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { useTranslation } from 'react-i18next';
 
 function Add(props) {
+  const { t } = useTranslation();
   const [data, setData] = useState({
     title: '',
     genre: '',
@@ -119,7 +121,7 @@ function Add(props) {
       <form className="form-container" onSubmit={onSubmitForm}>
         <div className="form-container-level">
           <div className="field-container">
-            <label>Product Title</label>
+            <label>{t('product-title')}</label>
             <input
               type="text"
               name="title"
@@ -129,7 +131,7 @@ function Add(props) {
             ></input>
           </div>
           <div className="field-container">
-            <label>Product Genre</label>
+            <label>{t('product-genre')}</label>
             <select
               id="genre"
               name="genre"
@@ -137,19 +139,19 @@ function Add(props) {
               onChange={handleChange}
             >
               <option className="default" value={props.genre} disabled></option>
-              <option value="Action">Action</option>
-              <option value="Adventure">Adventure</option>
-              <option value="Single-player">Single-Player</option>
-              <option value="Survival">Survival</option>
-              <option value="First Person Shooter">FPS</option>
-              <option value="Role-play">RPG</option>
-              <option value="Fighting">Fighting</option>
-              <option value="Sports">Sports</option>
-              <option value="Arcade">Arcade</option>
+              <option value="Action">{t('action')}</option>
+              <option value="Adventure">{t('adventure')}</option>
+              <option value="Single-player">{t('singleplayer')}</option>
+              <option value="Survival">{t('survival')}</option>
+              <option value="First Person Shooter">{t('fps')}</option>
+              <option value="Role-play">{t('rpg')}</option>
+              <option value="Fighting">{t('fighting')}</option>
+              <option value="Sports">{t('sports')}</option>
+              <option value="Arcade">{t('arcade')}</option>
             </select>
           </div>
           <div className="field-container">
-            <label>Price</label>
+            <label>{t('price')}</label>
             <input
               type="number"
               name="price"
@@ -162,7 +164,7 @@ function Add(props) {
 
         <div className="form-container-level">
           <div className="field-container">
-            <label>Developer</label>
+            <label>{t('developer')}</label>
             <input
               type="text"
               name="developer"
@@ -172,7 +174,7 @@ function Add(props) {
             ></input>
           </div>
           <div className="field-container">
-            <label>Publisher</label>
+            <label>{t('publisher')}</label>
             <input
               type="text"
               name="publisher"
@@ -182,7 +184,7 @@ function Add(props) {
             ></input>
           </div>
           <div className="field-container">
-            <label>Release Date</label>
+            <label>{t('release-date')}</label>
             <input
               type="date"
               name="date"
@@ -195,7 +197,7 @@ function Add(props) {
 
         <div className="form-container-level">
           <div className="field-container three">
-            <label>Product Descriptions</label>
+            <label>{t('product-desc')}</label>
 
             <CKEditor
               editor={ClassicEditor}
@@ -208,7 +210,7 @@ function Add(props) {
 
         <div className="form-container-level">
           <div className="field-container four">
-            <label>Product Images</label>
+            <label>{t('product-img')}</label>
 
             <div className="image-container">
               <div
@@ -229,7 +231,7 @@ function Add(props) {
                 {data.fileCover1.name ? (
                   <label>{data.fileCover1.name}</label>
                 ) : (
-                  <label>Upload Image</label>
+                  <label>{t('upload-img')}</label>
                 )}
               </div>
               <div className="image-showcase">
@@ -249,7 +251,7 @@ function Add(props) {
                   {data.fileCover2.name ? (
                     <label>{data.fileCover2.name}</label>
                   ) : (
-                    <label>Upload Image</label>
+                    <label>{t('upload-img')}</label>
                   )}
                 </div>
                 <div
@@ -268,7 +270,7 @@ function Add(props) {
                   {data.fileBanner.name ? (
                     <label>{data.fileBanner.name}</label>
                   ) : (
-                    <label>Upload Image</label>
+                    <label>{t('upload-img')}</label>
                   )}
                 </div>
                 <div
@@ -287,7 +289,7 @@ function Add(props) {
                   {data.fileImg1.name ? (
                     <label>{data.fileImg1.name}</label>
                   ) : (
-                    <label>Upload Image</label>
+                    <label>{t('upload-img')}</label>
                   )}
                 </div>
                 <div
@@ -306,7 +308,7 @@ function Add(props) {
                   {data.fileImg2.name ? (
                     <label>{data.fileImg2.name}</label>
                   ) : (
-                    <label>Upload Image</label>
+                    <label>{t('upload-img')}</label>
                   )}
                 </div>
                 <div
@@ -325,7 +327,7 @@ function Add(props) {
                   {data.fileImg3.name ? (
                     <label>{data.fileImg3.name}</label>
                   ) : (
-                    <label>Upload Image</label>
+                    <label>{t('upload-img')}</label>
                   )}
                 </div>
                 <div
@@ -344,7 +346,7 @@ function Add(props) {
                   {data.fileImg4.name ? (
                     <label>{data.fileImg4.name}</label>
                   ) : (
-                    <label>Upload Image</label>
+                    <label>{t('upload-img')}</label>
                   )}
                 </div>
               </div>
@@ -353,12 +355,9 @@ function Add(props) {
         </div>
 
         <div className="bottom-container">
-          <label>
-            *Product details will be submitted into the database. Please check
-            carefully before submitting.
-          </label>
+          <label>{t('check-carefully')}</label>
           <button type="submit" className="submit-button">
-            Submit
+            {t('submit')}
           </button>
         </div>
       </form>

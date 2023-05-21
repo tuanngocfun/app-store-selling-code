@@ -3,6 +3,8 @@ import { createContext, useState, useEffect } from 'react';
 export const CartContext = createContext({});
 
 export const CartProvider = ({ children }) => {
+  const [search, setSearch] = useState([]);
+  const [genre, setGenre] = useState([]);
   const [cart, setCart] = useState([]);
   const [isClicked, setIsClicked] = useState('dashboard');
   const [deleted, setDeleted] = useState(false);
@@ -14,6 +16,12 @@ export const CartProvider = ({ children }) => {
   const [libraryNumb, setLibraryNumb] = useState(0);
   const [payment, setPayment] = useState([]);
   const token = localStorage.getItem('accessUserToken');
+
+  // useEffect(() =>{
+  //     setCart([])
+  //     setOrders([])
+  //     setTotal(0.00)
+  // })
 
   useEffect(() => {
     const cartInfo = async () => {
@@ -65,6 +73,10 @@ export const CartProvider = ({ children }) => {
         setLibrary,
         libraryNumb,
         setLibraryNumb,
+        search,
+        setSearch,
+        genre,
+        setGenre,
       }}
     >
       {children}

@@ -12,6 +12,8 @@ import visa from '../../../images/visa-mastercard.png';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../../Context/CartContext';
 
+import { useTranslation } from 'react-i18next';
+
 function Payment() {
   const {
     payment,
@@ -28,6 +30,7 @@ function Payment() {
   const [date, setDate] = useState('');
   const [cvc, setCVC] = useState('');
   const [status, setStatus] = useState('');
+  const { t } = useTranslation();
   const handleCardNumb = e => {
     const input = e.target.value;
     const cardNumber = [...input]
@@ -92,19 +95,19 @@ function Payment() {
             <span className="number">
               <BsCheckLg className="icon"></BsCheckLg>
             </span>
-            <span className="text">Shopping cart</span>
+            <span className="text">{t('shopping-cart')}</span>
             <div className="spacer">
               <div className="inner"></div>
             </div>
           </Link>
           <div className="step two">
             <span className="number">2</span>
-            <span className="text">Payment</span>
+            <span className="text">{t('payment')}</span>
             <span className="spacer"></span>
           </div>
           <div className="step three">
             <span className="number">3</span>
-            <span className="text">Game activation</span>
+            <span className="text">{t('game-activation')}</span>
           </div>
         </div>
         <Separator></Separator>
@@ -112,16 +115,16 @@ function Payment() {
         <div className="content-container">
           <div className="left-container">
             <div className="credit-card">
-              <Headings text="Credit card"></Headings>
+              <Headings text={t('credit-card')}></Headings>
               <div className="credit-form">
                 <div className="credit-level one">
                   <div className="visa">
                     <img src={visa} alt="visa"></img>
                   </div>
-                  <label className="title">Credit/debit card</label>
+                  <label className="title">{t('credit/debit-card')}</label>
                 </div>
                 <div className="credit-level two">
-                  <label>Card number</label>
+                  <label>{t('card-number')}</label>
                   <input
                     type="text"
                     onInput={handleCardNumb}
@@ -130,17 +133,17 @@ function Payment() {
                   />
                 </div>
                 <div className="credit-level three">
-                  <label>Cardholder name</label>
+                  <label>{t('cardholder-name')}</label>
                   <input
                     type="text"
                     value={name}
                     onInput={handleName}
-                    placeholder="J. Doe"
+                    placeholder={t('cardholder-name-placeholder')}
                   />
                 </div>
                 <div className="credit-level four">
                   <div className="expiration">
-                    <label>Expiry date</label>
+                    <label>{t('expiry-date')}</label>
                     <input
                       type="text"
                       placeholder="MM / YY"
@@ -149,7 +152,7 @@ function Payment() {
                     />
                   </div>
                   <div className="security">
-                    <label>Security number</label>
+                    <label>{t('security-number')}</label>
                     <input
                       type="text"
                       placeholder="CVC"
@@ -161,12 +164,12 @@ function Payment() {
               </div>
             </div>
             {status === 'invalid card' && (
-              <label className="error">Credit card is invalid*</label>
+              <label className="error">{t('invalid-card')}</label>
             )}
           </div>
           <div className="right-container">
             <div className="summary-final">
-              <Headings text="Summary"></Headings>
+              <Headings text={t('summary')}></Headings>
               <div className="order-container">
                 {payment.map((product, index) => {
                   return (
@@ -188,32 +191,32 @@ function Payment() {
                   <GrSecure className="lock"></GrSecure>
                   <div className="divisor"></div>
                   <div className="secure">
-                    <label className="header">Secure payment</label>
-                    <label className="sub-header">256-bit SSL Secured</label>
+                    <label className="header">{t('secure-payment')}</label>
+                    <label className="sub-header">{t('ssl-secured')}</label>
                   </div>
                 </div>
               </div>
 
               <div className="pay-container">
                 <div className="total-container">
-                  <label className="text">Total</label>
+                  <label className="text">{t('total')}</label>
                   <label className="price">${total}</label>
                 </div>
                 <div className="pay-button" onClick={handlePay}>
-                  Pay
+                  {t('pay')}
                 </div>
               </div>
               <div className="policy">
                 <p>
-                  By clicking "Pay" I acknowledge having read and accepted the
+                  {t('by-clicking-pay1')}
                   <Link to="/termsOfUse" className="link">
                     {' '}
-                    terms and conditions
+                    {t('term-and-cond')}
                   </Link>
-                  , and the{' '}
+                  ,{t('by-clicking-pay2')}{' '}
                   <Link to="/privacyPolicy" className="link">
                     {' '}
-                    privacy policy
+                    {t('privacy')}
                   </Link>
                   .
                 </p>

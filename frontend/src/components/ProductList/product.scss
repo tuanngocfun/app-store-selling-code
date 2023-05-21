@@ -1,10 +1,10 @@
 .item-container {
   display: flex;
   flex-direction: column;
-  max-height: 285px;
-  width: 385px;
+  height: 285px;
+  width: calc(100% / 3 - 22px);
   position: relative;
-  justify-content: space-between;
+  // justify-content: space-between;
   row-gap: 15px;
   .product-link {
     border-radius: 0.8rem;
@@ -37,10 +37,15 @@
       font-size: 1.2rem;
     }
   }
+}
 
-  $breakpoint-pc: 1600px;
+@media (min-width: 1600px) {
+  .item-container {
+    width: 510px;
+    height: 360px;
 
-  @media (min-width: $breakpoint-pc) {
-    max-width: 510px;
+    .product-link {
+      height: 360px;
+    }
   }
 }

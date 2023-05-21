@@ -8,7 +8,9 @@ import Wishlist from '../Wishlist/Wishlist';
 import { CartContext } from '../../../Context/CartContext';
 import Library from '../UserDash/Library/Library';
 import Orders from '../Orders/Orders';
+import { useTranslation } from 'react-i18next';
 function UserNav(props) {
+  const { t } = useTranslation();
   const { isClicked, setIsClicked } = useContext(CartContext);
   return (
     <div className="dashboard-container">
@@ -22,7 +24,7 @@ function UserNav(props) {
           >
             {' '}
             <MdOutlineSpaceDashboard className="icon"></MdOutlineSpaceDashboard>
-            Dashboard
+            {t('dashnav-dashboard')}
           </div>
         ) : (
           <div
@@ -32,7 +34,7 @@ function UserNav(props) {
             }}
           >
             <MdOutlineSpaceDashboard className="icon"></MdOutlineSpaceDashboard>
-            Dashboard
+            {t('dashnav-dashboard')}
           </div>
         )}
         {isClicked === 'orders' ? (
@@ -42,7 +44,7 @@ function UserNav(props) {
               setIsClicked('orders');
             }}
           >
-            My orders
+            {t('my-orders')}
           </div>
         ) : (
           <div
@@ -51,7 +53,7 @@ function UserNav(props) {
               setIsClicked('orders');
             }}
           >
-            My orders
+            {t('my-orders')}
           </div>
         )}
 
@@ -62,7 +64,7 @@ function UserNav(props) {
               setIsClicked('wishlist');
             }}
           >
-            Wishlist
+            {t('userdash-wishlist')}
           </div>
         ) : (
           <div
@@ -71,7 +73,7 @@ function UserNav(props) {
               setIsClicked('wishlist');
             }}
           >
-            Wishlist
+            {t('userdash-wishlist')}
           </div>
         )}
 
@@ -82,7 +84,7 @@ function UserNav(props) {
               setIsClicked('library');
             }}
           >
-            Library
+            {t('userdash-library')}
           </div>
         ) : (
           <div
@@ -91,7 +93,7 @@ function UserNav(props) {
               setIsClicked('library');
             }}
           >
-            Library
+            {t('userdash-library')}
           </div>
         )}
 
@@ -103,7 +105,8 @@ function UserNav(props) {
               setIsClicked('settings');
             }}
           >
-            <RxGear className="icon settings"></RxGear>Settings
+            <RxGear className="icon settings"></RxGear>
+            {t('dashnav-settings')}
           </div>
         ) : (
           <div
@@ -113,7 +116,8 @@ function UserNav(props) {
               setIsClicked('settings');
             }}
           >
-            <RxGear className="icon settings"></RxGear>Settings
+            <RxGear className="icon settings"></RxGear>
+            {t('dashnav-settings')}
           </div>
         )}
       </div>

@@ -1,6 +1,7 @@
 import './categories.scss';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import cal from '../../images/characters/cal-cropped.png';
 import rocket from '../../images/characters/rocket-cropped.png';
@@ -23,11 +24,12 @@ import fps from '../../images/covers/battlefield-v-fps.jpg';
 import adventure from '../../images/covers/uncharted-adv3.jpg';
 
 function Categories() {
+  const { t } = useTranslation();
   return (
     <div className="categories-inner-container">
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Action</h1>
+          <h1>{t('action')}</h1>
           <img
             src={action}
             className="categories-cover"
@@ -46,7 +48,7 @@ function Categories() {
       </Link>
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Single-player</h1>
+          <h1>{t('singleplayer')}</h1>
           <img
             src={single}
             className="categories-cover"
@@ -65,7 +67,7 @@ function Categories() {
       </Link>
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Adventure</h1>
+          <h1>{t('adventure')}</h1>
           <img
             src={adventure}
             className="categories-cover"
@@ -84,7 +86,7 @@ function Categories() {
       </Link>
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Survival</h1>
+          <h1>{t('survival')}</h1>
           <img
             src={survival}
             className="categories-cover"
@@ -103,7 +105,7 @@ function Categories() {
       </Link>
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>First person shooter</h1>
+          <h1>{t('fps')}</h1>
           <img
             src={fps}
             className="categories-cover"
@@ -114,8 +116,7 @@ function Categories() {
         <div className="characters">
           <img
             src={chief}
-            id="chief"
-            className="character-image"
+            className="character-image chief"
             alt=""
             loading="lazy"
           ></img>
@@ -123,7 +124,7 @@ function Categories() {
       </Link>
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Fighting</h1>
+          <h1>{t('fighting')}</h1>
           <img
             src={fighting}
             className="categories-cover"
@@ -142,7 +143,7 @@ function Categories() {
       </Link>
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Role-playing</h1>
+          <h1>{t('rpg')}</h1>
           <img
             src={rpg}
             className="categories-cover"
@@ -153,7 +154,7 @@ function Categories() {
         <div className="characters">
           <img
             src={geralt}
-            className="character-image"
+            className="character-image geralt"
             id="geralt"
             alt=""
             loading="lazy"
@@ -163,7 +164,7 @@ function Categories() {
 
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Sports</h1>
+          <h1>{t('sport')}</h1>
           <img
             src={sport}
             className="categories-cover"
@@ -183,7 +184,7 @@ function Categories() {
 
       <Link className="categories-item-container">
         <div className="categories-item-content">
-          <h1>Arcade</h1>
+          <h1>{t('arcade')}</h1>
           <img
             src={arcade}
             className="categories-cover"

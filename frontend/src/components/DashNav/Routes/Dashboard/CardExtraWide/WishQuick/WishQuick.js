@@ -3,13 +3,15 @@ import './wishQuick.scss';
 import { TbComet } from 'react-icons/tb';
 import { CartContext } from '../../../../../../Context/CartContext';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function WishQuick() {
+  const { t } = useTranslation();
   const { wishDetails } = useContext(CartContext);
   return (
     <div className="latest-wish-container">
       <TbComet className="icon starstrike"></TbComet>
-      <label className="header">Latest games wishlisted</label>
+      <label className="header">{t('latest-wishlist')}</label>
       <div className="latest-container">
         <div className="space"></div>
         <div className="latest-inner-container">

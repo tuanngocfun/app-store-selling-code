@@ -10,8 +10,10 @@ import { BsTwitch } from 'react-icons/bs';
 import { BsTwitter } from 'react-icons/bs';
 import { FaGlobe } from 'react-icons/fa';
 import Loading from '../Loading/Loading';
+import { useTranslation } from 'react-i18next';
 
 function Footer() {
+  const { t } = useTranslation();
   return (
     <div className="footer-container">
       <div className="footer-child-container">
@@ -22,13 +24,14 @@ function Footer() {
           <div className="footer-top-right">
             <div className="footer-top-upper">
               <h1>
-                GET THE BEST GAMING EXPERIENCE AT <span>RISEN.</span> NOW!
+                {t('footertopupper1')} <span>RISEN.</span>{' '}
+                {t('footertopupper2')}
               </h1>
               <div className="links-container">
-                <Link to="/terms-of-use">Terms of Use</Link>
-                <Link>Privacy Policy</Link>
-                <Link>Contact Us</Link>
-                <Link>FAQ</Link>
+                <Link to="/terms-of-use">{t('term')}</Link>
+                <Link to="/privacy-policy">{t('privacy')}</Link>
+                <Link to="/branding">{t('branding')}</Link>
+                <Link to="/faq">{t('faq')}</Link>
               </div>
             </div>
             <div className="footer-top-lower">
@@ -66,9 +69,9 @@ function Footer() {
             <h1>Copyright © 2023 Risen Gaming - All rights reserved</h1>
             <div className="region-container">
               <FaGlobe className="globe"></FaGlobe>
-              <h1>English</h1>
+              <h1>{t('lang1')}</h1>
               <div className="small-space"></div>
-              <h1>ENG</h1>
+              <h1>{t('lang2')}</h1>
             </div>
           </div>
         </div>

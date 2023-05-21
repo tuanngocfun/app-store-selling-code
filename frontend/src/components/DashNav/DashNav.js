@@ -5,13 +5,16 @@ import Dashboard from './Routes/Dashboard/Dashboard';
 import { MdOutlineSpaceDashboard } from 'react-icons/md';
 import { AiFillCaretRight } from 'react-icons/ai';
 import { RxGear } from 'react-icons/rx';
+import { useTranslation } from 'react-i18next';
 
 import Add from './Routes/AddProduct/Add';
 import Separator from '../Separator/Separator';
 import Edit from './Routes/EditProduct/Edit';
 import EditForm from './Routes/EditProduct/Edit-Form-Page/EditForm';
 import AdminSettings from './Routes/Settings/AdminSettings';
+
 function DashNav(props) {
+  const { t } = useTranslation();
   const [isClicked, setIsClicked] = useState('dashboard');
   return (
     <div className="dashboard-container">
@@ -25,7 +28,7 @@ function DashNav(props) {
           >
             {' '}
             <MdOutlineSpaceDashboard className="icon"></MdOutlineSpaceDashboard>
-            Dashboard
+            {t('dashnav-dashboard')}
           </div>
         ) : (
           <div
@@ -35,7 +38,7 @@ function DashNav(props) {
             }}
           >
             <MdOutlineSpaceDashboard className="icon"></MdOutlineSpaceDashboard>
-            Dashboard
+            {t('dashnav-dashboard')}
           </div>
         )}
         {isClicked === 'add' ? (
@@ -45,7 +48,7 @@ function DashNav(props) {
               setIsClicked('add');
             }}
           >
-            Add Products
+            {t('dashnav-addproducts')}
           </div>
         ) : (
           <div
@@ -54,7 +57,7 @@ function DashNav(props) {
               setIsClicked('add');
             }}
           >
-            Add Products
+            {t('dashnav-addproducts')}
           </div>
         )}
 
@@ -65,7 +68,7 @@ function DashNav(props) {
               setIsClicked('edit');
             }}
           >
-            Edit Products
+            {t('dashnav-editproducts')}
           </div>
         ) : (
           <div
@@ -74,7 +77,7 @@ function DashNav(props) {
               setIsClicked('edit');
             }}
           >
-            Edit Products
+            {t('dashnav-editproducts')}
           </div>
         )}
 
@@ -86,7 +89,8 @@ function DashNav(props) {
               setIsClicked('settings');
             }}
           >
-            <RxGear className="icon settings"></RxGear>Settings
+            <RxGear className="icon settings"></RxGear>
+            {t('dashnav-settings')}
           </div>
         ) : (
           <div
@@ -96,7 +100,8 @@ function DashNav(props) {
               setIsClicked('settings');
             }}
           >
-            <RxGear className="icon settings"></RxGear>Settings
+            <RxGear className="icon settings"></RxGear>
+            {t('dashnav-settings')}
           </div>
         )}
       </div>

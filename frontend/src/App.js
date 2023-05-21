@@ -16,22 +16,42 @@ import Cart from './pages/Cart/Cart';
 import Payment from './pages/Cart/Payment/Payment';
 import OrderPage from './pages/User/Orders/OrderPage/OrderPage';
 import Activation from './pages/Cart/Activation/Activation';
+import Search from './pages/Search/Search';
+import PrivacyPolicy from './pages/PrivacyPolicy/PrivacyPolicy';
+import Branding from './pages/Branding/Branding';
+import FAQ from './pages/FAQ/FAQ';
+import ForgetPassword from './components/ForgetPassword/ForgetPassword';
 
 function App() {
   const isAuthenticated = window.localStorage.getItem('accessToken');
   const userAuth = window.localStorage.getItem('userAuthenticated');
+
+  // let fetchInterceptors = async (url, config = {}) => {
+
+  // }
+
+  //   console.log(jwt_decode(localStorage.getItem("accessUserToken")))
   return (
     <div className="App">
       <Navbar></Navbar>
       <Routes>
         <Route path="/" element={<Home></Home>}></Route>
         <Route path="/terms-of-use" element={<TermsOfUse></TermsOfUse>}></Route>
+        <Route
+          path="/privacy-policy"
+          element={<PrivacyPolicy></PrivacyPolicy>}
+        ></Route>
+        <Route path="/branding" element={<Branding></Branding>}></Route>
+        <Route path="/faq" element={<FAQ></FAQ>}></Route>
+
+        <Route path="/search" element={<Search></Search>}></Route>
         <Route path="/cart" element={<Cart></Cart>}></Route>
         <Route path="/cart/payment" element={<Payment></Payment>}></Route>
         <Route
           path="/cart/activate"
           element={<Activation></Activation>}
         ></Route>
+
         <Route
           path="/user/signup"
           element={<SignUp title="user"></SignUp>}
@@ -41,11 +61,16 @@ function App() {
           element={<Login title="user"></Login>}
         ></Route>
         <Route
+          path="/user/forget-password"
+          element={<ForgetPassword title="user"></ForgetPassword>}
+        ></Route>
+        <Route
           path="/user"
           element={
             !userAuth ? <Navigate to="/user/signin" replace /> : <User></User>
           }
         ></Route>
+
         <Route
           path="/admin/signin"
           element={<AdminSignin title="admin"></AdminSignin>}

@@ -7,9 +7,15 @@ import { TiUser } from 'react-icons/ti';
 import Separator from '../../components/Separator/Separator';
 import UserNav from './UserNav/UserNav';
 import { CartContext } from '../../Context/CartContext';
+import axios from 'axios';
+import { useTranslation } from 'react-i18next';
 function User() {
+  const { t } = useTranslation();
   const { setWishDetails, setLibrary, setLibraryNumb } =
     useContext(CartContext);
+  const [status, setStatus] = useState('');
+  const [user, setUser] = useState([]);
+  const [wishNumb, setWishNumb] = useState(0);
   useEffect(() => {
     const url = window.location.href;
     const getUser = async () => {
@@ -24,6 +30,8 @@ function User() {
         })
           .then(res => res.json())
           .then(data => {
+            // setStatus(data)
+            // window.localStorage.setItem("status", data)
             setUser(data[0]);
             setWishNumb(data[1].count);
             setWishDetails(data[2]);
@@ -34,9 +42,33 @@ function User() {
         console.log(error);
       }
     };
-
     getUser();
   }, []);
+
+  // useEffect(() => {
+  //   const status = localStorage.getItem("status")
+  //   if(status === 'invalid'){
+  //     // console.log(status)
+  //     const refresh = async () =>{
+  //       try {
+  //         const token = localStorage.getItem('refreshUserToken')
+  //         const response = await fetch('/refresh', {
+  //           method: 'POST',
+  //           headers: {"Content-type": "application/json", "Authorization" : "Bearer " + token},
+  //         })
+  //         .then((res) => res.json())
+  //         .then((data) => {
+  //           window.localStorage.setItem("accessUserToken", data.accessUserToken)
+  //           window.localStorage.setItem("refreshUserToken", data.refreshUserToken)
+  //         })
+  //       } catch (error) {
+  //           console.log(error)
+  //       }
+  //     }
+
+  //     refresh()
+  //   }
+  // }, [status, user.email, user.userid])
 
   // useEffect(() => {
   //   const getLibrary = async () => {
@@ -58,9 +90,6 @@ function User() {
 
   //   getLibrary()
   // }, [])
-
-  const [user, setUser] = useState([]);
-  const [wishNumb, setWishNumb] = useState(0);
 
   const dayCovertion = date => {
     const getDate = new Date(date);
@@ -86,7 +115,7 @@ function User() {
               {user.lastname}#{user.userid}
             </label>
             <label className="date">
-              Member since: {dayCovertion(user.registered_at)}
+              {t('member-since')}: {dayCovertion(user.registered_at)}
             </label>
           </div>
         </div>

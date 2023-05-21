@@ -2,9 +2,11 @@ import './adminSettings.scss';
 import React, { useState } from 'react';
 import { CgProfile } from 'react-icons/cg';
 import { RiLockPasswordLine } from 'react-icons/ri';
+import { useTranslation } from 'react-i18next';
 
 import View from './ViewProfile/View';
 function AdminSettings(props) {
+  const { t } = useTranslation();
   const [isActive, setActive] = useState('info');
 
   return (
@@ -19,10 +21,8 @@ function AdminSettings(props) {
           >
             <CgProfile className="icon"></CgProfile>
             <div className="content">
-              <h5 className="header">View your profile</h5>
-              <span className="text">
-                Name, age, email, and other information.
-              </span>
+              <h5 className="header">{t('view-profile')}</h5>
+              <span className="text">{t('view-profile-placeholder')}</span>
             </div>
           </div>
         ) : (
@@ -34,10 +34,8 @@ function AdminSettings(props) {
           >
             <CgProfile className="icon"></CgProfile>
             <div className="content">
-              <h5 className="header">View your profile</h5>
-              <span className="text">
-                Name, age, email, and other information.
-              </span>
+              <h5 className="header">{t('view-profile')}</h5>
+              <span className="text">{t('view-profile-placeholder')}</span>
             </div>
           </div>
         )}
@@ -51,10 +49,8 @@ function AdminSettings(props) {
           >
             <CgProfile className="icon"></CgProfile>
             <div className="content">
-              <h5 className="header">Customize your profile</h5>
-              <span className="text">
-                Make changes in your profile information.
-              </span>
+              <h5 className="header">{t('customize-profile')}</h5>
+              <span className="text">{t('customize-profile-placeholder')}</span>
             </div>
           </div>
         ) : (
@@ -66,10 +62,8 @@ function AdminSettings(props) {
           >
             <CgProfile className="icon"></CgProfile>
             <div className="content">
-              <h5 className="header">Customize your profile</h5>
-              <span className="text">
-                Make changes in your profile information.
-              </span>
+              <h5 className="header">{t('customize-profile')}</h5>
+              <span className="text">{t('customize-profile-placeholder')}</span>
             </div>
           </div>
         )}
@@ -83,8 +77,8 @@ function AdminSettings(props) {
           >
             <RiLockPasswordLine className="icon"></RiLockPasswordLine>
             <div className="content">
-              <h5 className="header">Email and password</h5>
-              <span className="text">Change your email or password.</span>
+              <h5 className="header">{t('change-mail-pass')}</h5>
+              <span className="text">{t('change-mail-pass-placeholder')}</span>
             </div>
           </div>
         ) : (
@@ -96,8 +90,8 @@ function AdminSettings(props) {
           >
             <RiLockPasswordLine className="icon"></RiLockPasswordLine>
             <div className="content">
-              <h5 className="header">Email and password</h5>
-              <span className="text">Change your email or password.</span>
+              <h5 className="header">{t('change-mail-pass')}</h5>
+              <span className="text">{t('change-mail-pass-placeholder')}</span>
             </div>
           </div>
         )}

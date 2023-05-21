@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, redirect, useNavigate } from 'react-router-dom';
 import './cart.scss';
 import Separator from '../../components/Separator/Separator';
 import Headings from '../../components/ProductList/ProductPages/Headings/Headings';
@@ -9,9 +9,13 @@ import CartItem from './CartItem/CartItem';
 import { CartContext } from '../../Context/CartContext';
 import GreenButton from '../../components/Button/GreenButton/GreenButton';
 
+import { useTranslation } from 'react-i18next';
+
 function Cart(props) {
   const [inventory, setInventory] = useState([]);
   const { quantity, total, setPayment } = useContext(CartContext);
+
+  const { t } = useTranslation();
 
   // useEffect(() => {
   //     const token = localStorage.getItem('accessUserToken')
@@ -66,8 +70,8 @@ function Cart(props) {
     inventInfo();
   }, []);
 
-  const handleMakePayment = () => {
-    inventInfo();
+  const handleMakePayment = async () => {
+    await inventInfo();
   };
 
   return (
@@ -78,35 +82,32 @@ function Cart(props) {
         <div className="step-container">
           <div className="step one">
             <span className="number">1</span>
-            <span className="text">Shopping cart</span>
+            <span className="text">{t('shopping-cart')}</span>
             <span className="spacer"></span>
           </div>
           <div className="step two">
             <span className="number">2</span>
-            <span className="text">Payment</span>
+            <span className="text">{t('payment')}</span>
             <span className="spacer"></span>
           </div>
           <div className="step three">
             <span className="number">3</span>
-            <span className="text">Game activation</span>
+            <span className="text">{t('game-activation')}</span>
           </div>
         </div>
         <Separator></Separator>
         <div className="content-container">
           <div className="left-container">
             <div className="left-container-level">
-              <Headings text="Cart"></Headings>
+              <Headings text={t('cart')}></Headings>
               <div className="cart-item-container">
                 {inventory.length === 0 || quantity === 0 ? (
                   <div className="empty-container">
                     <BsCartFill className="icon"></BsCartFill>
-                    <h1>Your cart is empty</h1>
-                    <p>
-                      You didn't add any item in your cart yet. Browse the
-                      website to find amazing deals!
-                    </p>
+                    <h1>{t('cart-is-empty1')}</h1>
+                    <p>{t('cart-is-empty2')}</p>
                     <Link to="/" className="button">
-                      Browse games
+                      {t('browse-games')}
                     </Link>
                   </div>
                 ) : (
@@ -129,35 +130,35 @@ function Cart(props) {
             </div>
             <Separator></Separator>
             <div className="left-container-level">
-              <Headings text="Recommended"></Headings>
+              <Headings text={t('recommended')}></Headings>
               <div className="wishlist-item"></div>
             </div>
           </div>
           <div className="right-container">
-            <Headings text="Summary"></Headings>
+            <Headings text={t('summary')}></Headings>
             <div className="summary-container">
               <div className="price-info-container">
                 <div className="price-level">
-                  <label className="text">Official price</label>
+                  <label className="text">{t('official-price')}</label>
                   <label className="price">${total}</label>
                 </div>
                 <div className="price-level">
-                  <label className="text">Discount</label>
+                  <label className="text">{t('discount')}</label>
                   <label className="price">$0</label>
                 </div>
                 <div className="price-level official">
-                  <label className="text">Subtotal</label>
+                  <label className="text">{t('subtotal')}</label>
                   <label className="price">${total}</label>
                 </div>
               </div>
               {inventory?.length === 0 ? (
                 <GreenButton
-                  title="Go To Payment"
+                  title={t('go-to-payment')}
                   link="payment-none"
                 ></GreenButton>
               ) : (
                 <GreenButton
-                  title="Go To Payment"
+                  title={t('go-to-payment')}
                   link="payment"
                   event={handleMakePayment}
                 ></GreenButton>
@@ -165,12 +166,12 @@ function Cart(props) {
 
               <div className="divider">
                 <div className="spacer"></div>
-                <label>or</label>
+                <label>{t('or')}</label>
                 <div className="spacer"></div>
               </div>
               <Link to="/" className="back">
-                <BsArrowLeftCircle className="icon"></BsArrowLeftCircle>Continue
-                shopping
+                <BsArrowLeftCircle className="icon"></BsArrowLeftCircle>
+                {t('continue-shopping')}
               </Link>
             </div>
           </div>

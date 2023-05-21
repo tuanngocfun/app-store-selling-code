@@ -6,6 +6,7 @@ import Separator from '../../components/Separator/Separator';
 import Dashboard from '../../components/DashNav/Routes/Dashboard/Dashboard';
 import DashNav from '../../components/DashNav/DashNav';
 import logoMascot from '../../images/logo/mascot-green.png';
+import { useTranslation } from 'react-i18next';
 function Admin() {
   const handleClick = async () => {
     window.localStorage.removeItem('accessToken');
@@ -39,6 +40,7 @@ function Admin() {
 
   const [admin, setAdmin] = useState([]);
 
+  const { t } = useTranslation();
   return (
     <div className="admin-container">
       {/* <Separator status ='2'></Separator> */}
@@ -51,7 +53,7 @@ function Admin() {
         </div>
         {/* <Separator></Separator> */}
         <h1>
-          Welcome Back,{' '}
+          {t('admin-welcomeback')}
           <span>
             {admin.firstname} {admin.lastname}
           </span>
@@ -66,7 +68,7 @@ function Admin() {
           email={admin.email}
         ></DashNav>
       </div>
-      <button onClick={handleClick}>Sign Out</button>
+      <button onClick={handleClick}>{t('signout')}</button>
       <Separator></Separator>
     </div>
   );

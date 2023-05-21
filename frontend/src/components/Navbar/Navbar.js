@@ -1,10 +1,11 @@
 import './navbar.scss';
 
 import logoWord from '../../images/logo/logo-word.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useState, createContext, useEffect, useRef, useContext } from 'react';
 
 import { MdAccountCircle } from 'react-icons/md';
+import { IoIosClose } from 'react-icons/io';
 import { BiSearch } from 'react-icons/bi';
 import { BsFillCartFill } from 'react-icons/bs';
 import { FaGlobe } from 'react-icons/fa';
@@ -13,15 +14,18 @@ import Login from '../Login/Login';
 import Cart from '../../pages/Cart/Cart';
 
 import { CartContext } from '../../Context/CartContext';
+import { useTranslation } from 'react-i18next';
 
 function Navbar() {
-  const { quantity, setIsClicked } = useContext(CartContext);
+  const { t } = useTranslation();
+  const { quantity, setIsClicked, setSearch } = useContext(CartContext);
   const [navbar, setNavbar] = useState(false);
   const [isSelected, setIsSelected] = useState(false);
   const [isActive, setIsActive] = useState(false);
   const [state, setState] = useState(undefined);
   const [signedIn, setSignedIn] = useState(undefined);
-
+  const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
   // useEffect(() => {
   //     ref.current = localStorage.getItem('cartNumb')
   //     setQuantity(ref.current)
@@ -64,6 +68,10 @@ function Navbar() {
     }
   }, [signedIn]);
 
+  const handleClick = () => {
+    navigate('/search');
+  };
+
   return (
     <div className="pseudo-nav-container">
       {/* <Login clicked = {isClicked} updateState={updateState}></Login> */}
@@ -98,7 +106,10 @@ function Navbar() {
 
         <div className="right-nav">
           {/* <Link to = '/'> */}
-          <BiSearch className="icon"></BiSearch>
+          <div className="search-bar">
+            <BiSearch className="icon" onClick={handleClick}></BiSearch>
+          </div>
+
           {/* </Link> */}
 
           {signedIn ? (
@@ -142,7 +153,7 @@ function Navbar() {
                     setIsClicked('dashboard');
                   }}
                 >
-                  Dashboard
+                  {t('dashnav-dashboard')}
                 </Link>
                 <Link
                   to="/user"
@@ -152,7 +163,7 @@ function Navbar() {
                     setIsClicked('orders');
                   }}
                 >
-                  My orders
+                  {t('my-orders')}
                 </Link>
                 <Link
                   to="/user"
@@ -162,14 +173,14 @@ function Navbar() {
                     setIsClicked('wishlist');
                   }}
                 >
-                  Wishlist
+                  {t('userdash-wishlist')}
                 </Link>
                 <Link
                   to="/activate-code"
                   className="dropdown-button"
                   onClick={() => setIsSelected(!isSelected)}
                 >
-                  Activate code
+                  {t('userdash-activatecode')}
                 </Link>
                 <Link
                   to="/user"
@@ -179,11 +190,11 @@ function Navbar() {
                     setIsClicked('settings');
                   }}
                 >
-                  Settings
+                  {t('dashnav-settings')}
                 </Link>
                 <div className="space"></div>
                 <button onClick={handleSignOut} className="signout-button">
-                  Sign out
+                  {t('signout')}
                 </button>
               </div>
             </div>

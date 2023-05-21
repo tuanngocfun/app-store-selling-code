@@ -2,6 +2,7 @@ import './productpage.scss';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import parse from 'html-react-parser';
+import { useTranslation } from 'react-i18next';
 
 import noIMG from '../../../images/img-placeholder.png';
 
@@ -22,8 +23,10 @@ import Login from '../../Login/Login';
 import ProductList from '../ProductList';
 import Gallery from './Gallery/Gallery';
 import { CartContext } from '../../../Context/CartContext';
+import Cart from '../../../pages/Cart/Cart';
 
 function ProductPage() {
+  const { t } = useTranslation();
   const params = useParams();
   const filteredID = params.id.substring(0, params.id.indexOf('-'));
   const [productDetails, setProductDetails] = useState([]);
@@ -123,27 +126,31 @@ function ProductPage() {
   };
 
   const handleBuy = async () => {
-    setQuantity(quantity + 1);
-    setTotal(total + parseFloat(parseFloat(productDetails.price).toFixed(2)));
     const token = window.localStorage.getItem('accessUserToken');
-    const body = {
-      productid: productDetails.productid,
-      title: productDetails.title,
-      price: productDetails.price,
-      thumb: productDetails.filecover1,
-      total: total + parseFloat(parseFloat(productDetails.price).toFixed(2)),
-      quantity: quantity + 1,
-    };
-    const response = await fetch('/cart', {
-      method: 'POST',
-      headers: {
-        'Content-type': 'application/json',
-        Authorization: 'Bearer ' + token,
-      },
-      body: JSON.stringify(body),
-    })
-      .then(res => res.json())
-      .then(() => navigate('/cart'));
+    if (!token) {
+      navigate('/user');
+    } else {
+      setQuantity(quantity + 1);
+      setTotal(total + parseFloat(parseFloat(productDetails.price).toFixed(2)));
+      const body = {
+        productid: productDetails.productid,
+        title: productDetails.title,
+        price: productDetails.price,
+        thumb: productDetails.filecover1,
+        total: total + parseFloat(parseFloat(productDetails.price).toFixed(2)),
+        quantity: quantity + 1,
+      };
+      const response = await fetch('/cart', {
+        method: 'POST',
+        headers: {
+          'Content-type': 'application/json',
+          Authorization: 'Bearer ' + token,
+        },
+        body: JSON.stringify(body),
+      })
+        .then(res => res.json())
+        .then(() => navigate('/cart'));
+    }
   };
 
   const handleAdd = async () => {
@@ -243,15 +250,15 @@ function ProductPage() {
                 <label>Steam</label>
                 <div className="vertical"></div>
                 <BsCheckCircle className="check-icon"></BsCheckCircle>
-                <label>In stock</label>
+                <label>{t('in-stock')}</label>
                 <div className="vertical"></div>
                 <BsCheckCircle className="check-icon"></BsCheckCircle>
-                <label>Digital download</label>
+                <label>{t('digital-download')}</label>
               </div>
             </div>
             <label className="wishlist-tracker">
               <AiFillHeart className="icon"></AiFillHeart>
-              {number} users have wishlisted this game.
+              {number} {t('wishlisted-users')}
             </label>
 
             {productDetails.price === undefined ? (
@@ -264,48 +271,48 @@ function ProductPage() {
                 <BsFillCartFill className="cart-icon"></BsFillCartFill>
               </div>
               <div className="buy-button" onClick={handleBuy}>
-                Buy now
+                {t('buy-now')}
               </div>
             </div>
           </div>
         </div>
         <Separator></Separator>
-        <Headings text="About the game"></Headings>
+        <Headings text={t('about-game')}></Headings>
         <Separator status="3"></Separator>
         <div className="about-container">
           <div className="about-left-container">
             {parse(`${productDetails.descriptions}`)}
-            <div className="read-more">Read more</div>
+            <div className="read-more">{t('read-more')}</div>
           </div>
 
           <div className="about-right-container">
             <div className="row one">
-              <div className="cell-left">Installation:</div>
-              <div className="cell-right">How to activate your game code</div>
+              <div className="cell-left">{t('install')}:</div>
+              <div className="cell-right">{t('howto-activate')}</div>
             </div>
             <div className="row two">
-              <div className="cell-left">Developer:</div>
+              <div className="cell-left">{t('developer')}:</div>
               <div className="cell-right">{productDetails.developer}</div>
             </div>
             <div className="row three">
-              <div className="cell-left">Publisher:</div>
+              <div className="cell-left">{t('publisher')}:</div>
               <div className="cell-right">{productDetails.publisher}</div>
             </div>
             <div className="row four">
-              <div className="cell-left">Release date:</div>
+              <div className="cell-left">{t('release-date')}:</div>
               <div className="cell-right">
                 {dayCovertion(productDetails.date)}
               </div>
             </div>
             <div className="row five">
-              <div className="cell-left">Genre:</div>
+              <div className="cell-left">{t('genre')}:</div>
               <div className="cell-right">{productDetails.genre}</div>
             </div>
           </div>
         </div>
 
         <Separator></Separator>
-        <Headings text="Visuals"></Headings>
+        <Headings text={t('visuals')}></Headings>
         <Separator status="3"></Separator>
 
         <div className="visual-container" onClick={handleToggle}>
@@ -352,23 +359,24 @@ function ProductPage() {
         </div>
 
         <Separator></Separator>
-        <Headings text="Descriptions"></Headings>
+        <Headings text={t('product-desc')}></Headings>
         <Separator status="3"></Separator>
         <div className="descriptions-container">
           {parse(`${productDetails.descriptions}`)}
         </div>
         <Separator></Separator>
-        <Headings text="Configurations"></Headings>
+        <Headings text={t('config')}></Headings>
         <Separator status="3"></Separator>
         <div className="config-container">
           <div className="config-left">
             <label>
-              minimum<span>*</span>
+              {t('config-minimum')}
+              <span>*</span>
             </label>
             <div className="specs">
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">OS:</label>
+                  <label className="main-text">{t('config-1')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">Windows 7 SP1 64 Bit</label>
@@ -376,17 +384,17 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Processor:</label>
+                  <label className="main-text">{t('config-2')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">
-                    Intel Core i3-530 or AMD FX-6350
+                    Intel Core i3-530 {t('or')} AMD FX-6350
                   </label>
                 </div>
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Memory:</label>
+                  <label className="main-text">{t('config-3')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">4 GB RAM</label>
@@ -394,7 +402,7 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Graphics:</label>
+                  <label className="main-text">{t('config-4')}:</label>
                 </div>
                 <div className="cell">
                   <p className="sub-text">
@@ -405,7 +413,7 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">DirectX:</label>
+                  <label className="main-text">{t('config-5')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">Version 9.0</label>
@@ -413,53 +421,47 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Network:</label>
+                  <label className="main-text">{t('config-6')}:</label>
                 </div>
                 <div className="cell">
-                  <label className="sub-text">
-                    Broadband Internet connection
-                  </label>
+                  <label className="sub-text">{t('config-spec-min-1')}</label>
                 </div>
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Storage:</label>
+                  <label className="main-text">{t('config-7')}:</label>
                 </div>
                 <div className="cell">
-                  <label className="sub-text">10 GB available space</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="cell">
-                  <label className="main-text">Sound Card:</label>
-                </div>
-                <div className="cell">
-                  <label className="sub-text">
-                    Direct X 9.0c- compatible sound card
-                  </label>
+                  <label className="sub-text">{t('config-spec-min-2')}</label>
                 </div>
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Additional Notes:</label>
+                  <label className="main-text">{t('config-8')}:</label>
                 </div>
                 <div className="cell">
-                  <p className="sub-text">
-                    Controller support: 3-button mouse, keyboard and speakers.
-                    Special multiplayer requirements: Internet Connection
-                  </p>
+                  <label className="sub-text">{t('config-spec-min-3')}</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="cell">
+                  <label className="main-text">{t('config-9')}:</label>
+                </div>
+                <div className="cell">
+                  <p className="sub-text">{t('config-spec-min-4')}</p>
                 </div>
               </div>
             </div>
           </div>
           <div className="config-right">
             <label>
-              recommended<span>*</span>
+              {t('config-recommended')}
+              <span>*</span>
             </label>
             <div className="specs">
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">OS:</label>
+                  <label className="main-text">{t('config-1')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">Windows 10 Home 64 Bit</label>
@@ -467,7 +469,7 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Processor:</label>
+                  <label className="main-text">{t('config-2')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">
@@ -477,7 +479,7 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Memory:</label>
+                  <label className="main-text">{t('config-3')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">8 GB RAM</label>
@@ -485,7 +487,7 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Graphics:</label>
+                  <label className="main-text">{t('config-4')}:</label>
                 </div>
                 <div className="cell">
                   <p className="sub-text">
@@ -495,7 +497,7 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">DirectX:</label>
+                  <label className="main-text">{t('config-5')}:</label>
                 </div>
                 <div className="cell">
                   <label className="sub-text">Version 9.0</label>
@@ -503,48 +505,41 @@ function ProductPage() {
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Network:</label>
+                  <label className="main-text">{t('config-6')}:</label>
                 </div>
                 <div className="cell">
-                  <label className="sub-text">
-                    Broadband Internet connection
-                  </label>
+                  <label className="sub-text">{t('config-spec-min-1')}</label>
                 </div>
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Storage:</label>
+                  <label className="main-text">{t('config-7')}:</label>
                 </div>
                 <div className="cell">
-                  <label className="sub-text">50 GB available space</label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="cell">
-                  <label className="main-text">Sound Card:</label>
-                </div>
-                <div className="cell">
-                  <label className="sub-text">
-                    Direct X 9.0c- compatible sound card
-                  </label>
+                  <label className="sub-text">{t('config-spec-rec')}</label>
                 </div>
               </div>
               <div className="row">
                 <div className="cell">
-                  <label className="main-text">Additional Notes:</label>
+                  <label className="main-text">{t('config-8')}:</label>
                 </div>
                 <div className="cell">
-                  <p className="sub-text">
-                    Controller support: 3-button mouse, keyboard and speakers.
-                    Special multiplayer requirements: Internet Connection
-                  </p>
+                  <label className="sub-text">{t('config-spec-min-3')}</label>
+                </div>
+              </div>
+              <div className="row">
+                <div className="cell">
+                  <label className="main-text">{t('config-9')}:</label>
+                </div>
+                <div className="cell">
+                  <p className="sub-text">{t('config-spec-min-4')}</p>
                 </div>
               </div>
             </div>
           </div>
         </div>
         <Separator></Separator>
-        <Headings text="Other products"></Headings>
+        <Headings text={t('other-products')}></Headings>
         <Separator status="3"></Separator>
         <div className="other-container">
           <ProductList></ProductList>
@@ -555,16 +550,12 @@ function ProductPage() {
           <div className="activation-left">
             <BiBarcode className="barcode"></BiBarcode>
             <div className="text-container">
-              <label className="heads-up">
-                Do not know how to activate your game?
-              </label>
-              <label className="sub-heads-up">
-                Click the button to read the instructions !
-              </label>
+              <label className="heads-up">{t('dont-know-how')}</label>
+              <label className="sub-heads-up">{t('click-the-button')}</label>
             </div>
           </div>
           <div className="activation-right">
-            <div className="activate-button">Learn how!</div>
+            <div className="activate-button">{t('learn-how')}</div>
           </div>
         </div>
       </div>

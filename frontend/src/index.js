@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Loading from './components/Loading/Loading';
 import ScrollToTop from './components/ScrollToTop';
 import { CartProvider } from './Context/CartContext';
+import './i18n';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <Loading status="true"></Loading>
       <ScrollToTop></ScrollToTop>
-      <App />
+      <React.Suspense fallback="loading">
+        <App />
+      </React.Suspense>
     </BrowserRouter>
   </CartProvider>
 );

@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import './cartItem.scss';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { CartContext } from '../../../Context/CartContext';
+
+import { useTranslation } from 'react-i18next';
+
 function CartItem(props) {
   const {
     cart,
@@ -19,6 +22,8 @@ function CartItem(props) {
   const titleUrl = props.title;
   const newTitleUrl = titleUrl.replace(/\s/g, '-').toLowerCase();
   const itemUrl = `${props.proid}-buy-${newTitleUrl}`;
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     const token = localStorage.getItem('accessUserToken');
@@ -83,7 +88,7 @@ function CartItem(props) {
               onClick={handleDelete}
             ></FaRegTrashAlt>
             <div className="spacer"></div>
-            <div className="wishlist">Move to wishlist</div>
+            <div className="wishlist">{t('move-to-wishlist')}</div>
           </div>
         </div>
       </div>

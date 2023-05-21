@@ -3,8 +3,10 @@ import './orders.scss';
 import { CartContext } from '../../../Context/CartContext';
 import OrderMini from './OrderMini/OrderMini';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Orders(props) {
+  const { t } = useTranslation();
   const { orders, setOrders } = useContext(CartContext);
   useEffect(() => {
     const token = window.localStorage.getItem('accessUserToken');
@@ -46,10 +48,10 @@ function Orders(props) {
               key={order.orderid}
             >
               <div className="order-item-inner" value={order.orderid}>
-                <div className="status">Completed</div>
+                <div className="status">{t('completed')}</div>
                 {<OrderMini id={order.orderid}></OrderMini>}
                 <div className="order-info">
-                  <label className="total">Total</label>
+                  <label className="total">{t('total')}</label>
                   <label className="total-price">${order.totalprice}</label>
                 </div>
               </div>

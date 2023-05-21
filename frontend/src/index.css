@@ -1,7 +1,8 @@
 @font-face {
   font-family: 'SFProRoundedReg';
   src: local('SFPro'),
-    url('../public/fonts/SFProRounded-Regular.otf') format('opentype');
+    url('../../frontend/public/fonts/SFProRounded-Regular.otf')
+      format('opentype');
 }
 
 @font-face {

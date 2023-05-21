@@ -1,0 +1,122 @@
+.activate-container {
+  width: 100%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.activate-container .activate-top {
+  margin-left: 150px;
+  margin-right: 150px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.activate-container .activate-top .step-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 650px;
+  height: 50px;
+  font-family: 'SFProTextMedium';
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.activate-container .activate-top .step-container .step {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-column-gap: 10px;
+  column-gap: 10px;
+}
+
+.activate-container .activate-top .step-container .step .number {
+  width: 30px;
+  height: 30px;
+  padding: 10px;
+  border: 3px solid #01d47a;
+  border-radius: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.activate-container .activate-top .step-container .step .spacer {
+  height: 3px;
+  width: 100px;
+  background-color: #3d3d3d;
+  position: relative;
+}
+
+.activate-container .activate-top .step-container .step.one .number,
+.activate-container .activate-top .step-container .step.two .number {
+  background-color: #01d47a;
+}
+
+.activate-container .activate-top .step-container .step.one .number .icon,
+.activate-container .activate-top .step-container .step.two .number .icon {
+  color: white;
+  font-size: 12px;
+  -webkit-transform: scale(2.2);
+  transform: scale(2.2);
+}
+
+.activate-container .activate-top .step-container .step.one .text,
+.activate-container .activate-top .step-container .step.two .text {
+  color: #6d6d6d;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.activate-container .activate-top .step-container .step.one .spacer,
+.activate-container .activate-top .step-container .step.two .spacer {
+  background-color: #3d3d3d;
+  height: 3px;
+  width: 100px;
+}
+
+.activate-container .activate-top .step-container .step.one .spacer .inner,
+.activate-container .activate-top .step-container .step.two .spacer .inner {
+  background-color: #01d47a;
+  height: 3px;
+  width: 100px;
+}
+
+.activate-container .activate-top .step-container .step.one:hover .text,
+.activate-container .activate-top .step-container .step.two:hover .text {
+  color: white;
+  -webkit-transition: 0.2s;
+  transition: 0.2s;
+}
+
+.activate-container .activate-top .step-container .step.three .number {
+  color: white;
+  border: 3px solid #01d47a;
+}
+
+.activate-container .activate-top .step-container .step.three .text {
+  color: white;
+}
+/*# sourceMappingURL=activation.css.map */

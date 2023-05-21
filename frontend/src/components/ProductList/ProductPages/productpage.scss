@@ -488,3 +488,12 @@
     }
   }
 }
+
+@media (min-width: 1600px) {
+  .product-outer-container {
+    .product-main-container {
+      margin-left: 320px;
+      margin-right: 320px;
+    }
+  }
+}

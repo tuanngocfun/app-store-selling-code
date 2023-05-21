@@ -2,8 +2,10 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './editItem.scss';
+import { useTranslation } from 'react-i18next';
 function EditItem(props) {
   // const [edit, setEdit] = useState(false)
+  const { t } = useTranslation();
   const [isDeleted, setIsDeleted] = useState(false);
   const handleDelete = async () => {
     const token = window.localStorage.getItem('accessToken');
@@ -40,8 +42,12 @@ function EditItem(props) {
         </div>
         <div className="info-container">
           <label className="title">{props.title}</label>
-          <label className="id">Product ID: {props.id}</label>
-          <label className="price">Price: {`$${props.price}`}</label>
+          <label className="id">
+            {t('product-id')}: {props.id}
+          </label>
+          <label className="price">
+            {t('price')}: {`$${props.price}`}
+          </label>
         </div>
       </div>
 
@@ -51,10 +57,10 @@ function EditItem(props) {
           className="edit-button"
           onClick={handleEdit}
         >
-          Edit
+          {t('edit')}
         </Link>
         <button className="delete-button" onClick={handleDelete}>
-          Delete
+          {t('delete')}
         </button>
       </div>
     </div>

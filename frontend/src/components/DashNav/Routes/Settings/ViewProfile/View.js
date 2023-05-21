@@ -1,9 +1,11 @@
 import React from 'react';
 import './view.scss';
+import { useTranslation } from 'react-i18next';
 function View(props) {
+  const { t } = useTranslation();
   return (
     <div className="view-container">
-      <h1 className="headline">Admin profile</h1>
+      <h1 className="headline">{t('admin-profile')}</h1>
       <div className="table">
         <div className="row">
           <div className="cell left">
@@ -15,7 +17,7 @@ function View(props) {
         </div>
         <div className="row">
           <div className="cell left">
-            <label>First name </label>
+            <label>{t('first-name')} </label>
           </div>
           <div className="cell">
             <label>{props.fname}</label>
@@ -23,7 +25,7 @@ function View(props) {
         </div>
         <div className="row">
           <div className="cell left">
-            <label>Middle name </label>
+            <label>{t('middle-name-adminview')} </label>
           </div>
           <div className="cell">
             <label>{props.mname}</label>
@@ -31,7 +33,7 @@ function View(props) {
         </div>
         <div className="row">
           <div className="cell left">
-            <label>Last name </label>
+            <label>{t('last-name')} </label>
           </div>
           <div className="cell">
             <label>{props.lname}</label>
@@ -39,7 +41,7 @@ function View(props) {
         </div>
         <div className="row">
           <div className="cell left">
-            <label>Age </label>
+            <label>{t('age')} </label>
           </div>
           <div className="cell">
             <label>{props.age}</label>

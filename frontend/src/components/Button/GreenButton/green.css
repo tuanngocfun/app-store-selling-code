@@ -14,6 +14,15 @@
   transition: 0.4s;
 }
 
+.green-button.none {
+  pointer-events: none;
+  background-color: #007e47;
+}
+
+.green-button.none:hover {
+  background-color: #007e47;
+}
+
 .green-button:hover {
   background-color: #02f089;
   -webkit-transition: 0.4s;

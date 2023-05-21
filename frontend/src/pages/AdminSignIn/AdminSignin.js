@@ -4,12 +4,14 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaFacebookF } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
+import { useTranslation } from 'react-i18next';
 
 import poster from '../../images/controller-poster.png';
 import logoHorizontal from '../../images/logo/horizontal-green.png';
 // import Separator from '../../components/Separator/Separator'
 
 function AdminSignin(prop) {
+  const { t } = useTranslation();
   const [admin, setAdmin] = useState([
     {
       email: '',
@@ -62,7 +64,7 @@ function AdminSignin(prop) {
       <div className="login-container-outer">
         <div className="login-container-inner">
           <img src={logoHorizontal} alt=""></img>
-          <span className="header">Admin Sign In</span>
+          <span className="header">{t('admin-signin')}</span>
 
           <div className="sso-container">
             <Link to="/" className="social-method face">
@@ -75,16 +77,14 @@ function AdminSignin(prop) {
 
           <div className="login-separator">
             <div className="space"></div>
-            <span>or</span>
+            <span>{t('or')}</span>
             <div className="space"></div>
           </div>
 
           {isAuth == true || isAuth == undefined ? (
             <label className="alert inactive"></label>
           ) : (
-            <label className="alert">
-              Your email or password is invalid! Please try again!
-            </label>
+            <label className="alert">{t('admin-signin-invalid')}</label>
           )}
 
           <form className="form-container" onSubmit={onSubmitForm}>
@@ -105,15 +105,15 @@ function AdminSignin(prop) {
             ></input>
             <button className="submit-button" type="submit">
               {' '}
-              Submit{' '}
+              {t('submit')}{' '}
             </button>
           </form>
 
           <div className="forgot-container">
             <Link to={{ pathname: `/${prop.title}/signup` }}>
-              No account yet?
+              {t('noaccount')}
             </Link>
-            <Link to="">Lost password?</Link>
+            <Link to="">{t('forgetpassword')}</Link>
           </div>
         </div>
       </div>

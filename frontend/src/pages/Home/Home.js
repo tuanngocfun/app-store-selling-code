@@ -17,10 +17,12 @@ import Categories from '../../components/Categories/Categories';
 import { BsStarFill } from 'react-icons/bs';
 import { BsFillEnvelopeFill } from 'react-icons/bs';
 
+import { useTranslation } from 'react-i18next';
+
 function Home() {
-  const [products, setProducts] = useState([]);
   const [newProduct, setNewProduct] = useState([]);
   const [url, setURL] = useState('');
+  const { t } = useTranslation();
   useEffect(() => {
     const getProduct = async () => {
       try {
@@ -90,7 +92,7 @@ function Home() {
         </div>
 
         <div className="trend-container">
-          <Headline title="Trending"></Headline>
+          <Headline title={t('trending')}></Headline>
           <ProductList></ProductList>
         </div>
 
@@ -99,7 +101,7 @@ function Home() {
         <Separator status="0"></Separator>
 
         <div className="preorder-container">
-          <Headline title="User-choices"></Headline>
+          <Headline title={t('userchoice')}></Headline>
           <ProductList type="top-wish"></ProductList>
         </div>
         <Separator status="2"></Separator>
@@ -119,12 +121,9 @@ function Home() {
                 <BsStarFill></BsStarFill>
               </div>
               <p>
-                <span>RISEN GAMING</span> is a great way towards cheaper games,
-                while still supporting the developers. It was quick, I was able
-                to pay with Momo and got the code instantly after payment.{' '}
+                <span>RISEN GAMING</span> {t('levireview1')} <br></br>
                 <br></br>
-                <br></br>
-                Levi, GAM Esports Player and Risen Gaming partner.
+                {t('levireview2')}
               </p>
             </div>
           </div>
@@ -185,8 +184,8 @@ function Home() {
         <Separator></Separator>
 
         <div className="bestsellers-container">
-          <Headline title="Best Sellers"></Headline>
-          <ProductList></ProductList>
+          <Headline title={t('bestsellers')}></Headline>
+          <ProductList type="top-sellers"></ProductList>
         </div>
         <Separator></Separator>
 
@@ -196,32 +195,24 @@ function Home() {
             <div className="logo">
               <img src={LogoWord} alt="logoWord" loading="lazy"></img>
             </div>
-            <h1>
-              Follow us now on Social Media Platforms to hear from us first!
-            </h1>
-            <h2>
-              We are available on Facebook, Youtube, Discord, Instagram and
-              more.
-            </h2>
-            <GreenButton title="Follow Now"></GreenButton>
+            <h1>{t('bannercontainer1')}</h1>
+            <h2>{t('bannercontainer2')}</h2>
+            <GreenButton title={t('follow')}></GreenButton>
           </div>
         </div>
         <Separator></Separator>
 
         <div className="categories-outer-container">
-          <Headline title="Categories"></Headline>
+          <Headline title={t('categories')}></Headline>
           <Categories></Categories>
         </div>
         <Separator status="2"></Separator>
 
         <div className="news-container">
           <BsFillEnvelopeFill className="icon"></BsFillEnvelopeFill>
-          <h1>Don't miss any offers and promotion!</h1>
-          <h2>
-            And be the first to receive our private offers, newsletters and
-            deals of the week!
-          </h2>
-          <GreenButton title="Sign Up"></GreenButton>
+          <h1>{t('newscontainer1')}</h1>
+          <h2>{t('newscontainer2')}</h2>
+          <GreenButton title={t('signup')}></GreenButton>
         </div>
       </div>
     </div>
