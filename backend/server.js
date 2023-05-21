@@ -1136,11 +1136,11 @@ app.delete('/cart/remove', async (req, res) => {
 // }
 
 // Schedule a daily task to send birthday discount emails
-// cron.schedule("0 0 * * *", async () => {
-//     console.log("Sending birthday discount emails...");
-//     await sendBirthdayDiscount();
-//     console.log("Birthday discount emails sent.");
-// });
+cron.schedule("0 0 * * *", async () => {
+    console.log("Sending birthday discount emails...");
+    await sendBirthdayDiscount();
+    console.log("Birthday discount emails sent.");
+});
 
 const dateTimeString = '2023-05-08T10:20:00.000+07:00'
 const scheduledDate = new Date(dateTimeString)
