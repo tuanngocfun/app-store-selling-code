@@ -1,0 +1,19 @@
+.product-container {
+  position: relative;
+  min-height: -webkit-max-content;
+  min-height: -moz-max-content;
+  min-height: max-content;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  row-gap: 20px;
+  -webkit-column-gap: 32px;
+  column-gap: 32px;
+}
+/*# sourceMappingURL=productlist.css.map */

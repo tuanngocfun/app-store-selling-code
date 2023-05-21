@@ -1,0 +1,126 @@
+.pp-container {
+  height: auto;
+  border: 1px solid black;
+  font-size: 15px;
+}
+
+.pp-container .paragraph-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 120px 350px 60px 350px;
+  width: auto;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  list-style: none;
+  counter-reset: my-awesome-counter;
+  padding: 0;
+}
+
+.pp-container .paragraph-container .paragraph-policy,
+.pp-container .paragraph-container .paragraph-risen,
+.pp-container .paragraph-container .paragraph-notice,
+.pp-container .paragraph-container .paragraph-how {
+  margin-bottom: 20px;
+}
+
+.pp-container .paragraph-container .table-flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: row;
+  flex-direction: row;
+  -ms-flex-pack: distribute;
+  justify-content: space-around;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  height: 80px;
+  background-color: #323232;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  color: #a5a5a5;
+  font-family: 'SFProTextReg';
+}
+
+.pp-container .paragraph-container .table-grid {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 33% 33% 33%;
+  grid-template-columns: 33% 33% 33%;
+  -ms-grid-rows: auto auto auto auto auto auto auto auto;
+  grid-template-rows: auto auto auto auto auto auto auto auto;
+  border: 1px solid #323232;
+}
+
+.pp-container .paragraph-container .table-grid .table-grid-item {
+  font-family: SFProTextReg;
+  border: 1px solid #323232;
+  border-right: 0;
+  padding: 25px;
+  color: #999;
+  line-height: 25px;
+}
+
+.pp-container .paragraph-item {
+  margin-bottom: 60px;
+  font-family: SFProTextReg;
+}
+
+.pp-container .paragraph-item .p-header {
+  margin-bottom: 30px;
+}
+
+.pp-container .paragraph-item.paragraph-policy {
+  margin-bottom: 40px;
+}
+
+.pp-container .paragraph-item h1 {
+  font-family: 'DTPhuduMedium';
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.pp-container .paragraph-item h2 {
+  font-family: 'DTPhudu';
+  font-size: 2rem;
+  color: #01d47a;
+}
+
+.pp-container .paragraph-item h3 {
+  font-family: 'SFProTextBold';
+  font-size: 1.2rem;
+}
+
+.pp-container .paragraph-item p {
+  font-size: 15px !important;
+  color: #a5a5a5;
+  margin-top: 1rem;
+  line-height: 25px;
+}
+
+.pp-container .paragraph-item p ul {
+  list-style-type: none;
+}
+
+.pp-container .paragraph-item p ul li:before {
+  content: '- ';
+}
+
+.pp-container .p-list {
+  counter-increment: my-awesome-counter;
+}
+
+.pp-container .p-list li::before {
+  line-height: 25px;
+}
+/*# sourceMappingURL=privacyPolicy.css.map */

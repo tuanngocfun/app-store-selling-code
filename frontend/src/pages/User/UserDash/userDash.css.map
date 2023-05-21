@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "AAEA,AAAA,oBAAoB,CAAA;EAChB,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,OAAO,EAAE,IAAI;CAMhB;;AAVD,AAKI,oBALgB,CAKhB,MAAM,CAAA;EACF,KAAK,EAAE,IAAI;EACX,OAAO,EAAE,IAAI;EACb,UAAU,EAAE,IAAI;CACnB",
+    "sources": [
+        "userDash.scss",
+        "../../../_variables.scss"
+    ],
+    "names": [],
+    "file": "userDash.css"
+}
