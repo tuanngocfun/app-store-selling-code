@@ -1,0 +1,9 @@
+version: '3.9'
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: my-frontend-image:latest
+    ports:
+      - '3000:80'

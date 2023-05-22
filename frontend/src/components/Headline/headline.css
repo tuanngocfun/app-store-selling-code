@@ -1,0 +1,19 @@
+.headline-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  position: relative;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.headline-container .title {
+  font-size: 1.7rem;
+}
+/*# sourceMappingURL=headline.css.map */

@@ -1,0 +1,18 @@
+image: node:latest
+
+cache:
+  paths:
+    - node_modules/
+
+before_script:
+  - npm ci
+
+stages:
+  - test
+
+prettier_check:
+  stage: test
+  script:
+    - npx prettier --check 'frontend/'
+    - npx prettier --check 'backend/'
+  allow_failure: false
