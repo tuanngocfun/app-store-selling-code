@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../_variables.scss";
 
 .faq-container {
   height: auto;
@@ -28,19 +28,19 @@
       margin-bottom: 30px;
     }
     h1 {
-      font-family: 'DTPhudu';
+      font-family: "DTPhudu";
       font-size: 32px;
     }
     h2 {
-      font-family: 'DTPhudu';
+      font-family: "DTPhudu";
       font-size: 23px;
     }
     h3 {
-      font-family: 'DTPhudu';
+      font-family: "DTPhudu";
       font-size: 19px;
     }
     h4 {
-      font-family: 'DTPhudu';
+      font-family: "DTPhudu";
       font-size: 15px;
     }
     p {
@@ -51,7 +51,7 @@
       ul {
         list-style-type: none;
         li:before {
-          content: '- ';
+          content: "- ";
         }
       }
     }
@@ -71,3 +71,4 @@
 
   // }
 }
+

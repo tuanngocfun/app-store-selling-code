@@ -8,7 +8,7 @@ const client = new OAuth2(config.clientGoogleId, config.clientGoogleSecret)
 
 client.setCredentials({ refresh_token: config.refreshToken })
 
-const pool = require('../database/connection')
+const pool = require('../connection')
 const generateCode = require('./generateCode')
 
 const getUsersWithBirthdayToday = async () => {

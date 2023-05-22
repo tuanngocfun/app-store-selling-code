@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../_variables.scss";
 
 .tou-container {
   height: auto;
@@ -51,17 +51,17 @@
     // border: 1px solid green;
     // width: 100%;
     margin-bottom: 40px;
-    font-family: 'SFProTextReg';
+    font-family: "SFProTextReg";
     .p-header {
       margin-bottom: 20px;
     }
     h1 {
-      font-family: 'DTPhuduMedium';
+      font-family: "DTPhuduMedium";
       font-size: 2rem;
     }
 
     h3 {
-      font-family: 'SFProTextBold';
+      font-family: "SFProTextBold";
       font-size: 1.2rem;
     }
 
@@ -74,13 +74,13 @@
         list-style-type: none;
 
         li:before {
-          content: '- ';
+          content: "- ";
         }
 
-        li {
+        li{
           margin-top: 5px;
 
-          &:nth-child(1) {
+          &:nth-child(1){
             margin-top: 30px;
           }
         }
