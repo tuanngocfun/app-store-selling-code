@@ -15,8 +15,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .branding-container .brand-container .text-container {
@@ -27,17 +27,17 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   margin-top: 60px;
 }
 
 .branding-container .brand-container .text-container h1 {
   font-family: DTphudu;
-  color: #01d47a;
+  color: #01D47A;
   font-size: 5rem;
   margin-bottom: 10px;
 }
@@ -56,11 +56,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .branding-container .brand-container .logo-image-container .image-container {
@@ -68,15 +68,11 @@
   height: 250px;
 }
 
-.branding-container
-  .brand-container
-  .logo-image-container
-  .image-container
-  img {
+.branding-container .brand-container .logo-image-container .image-container img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
 
 .branding-container .logo-container {
@@ -111,22 +107,18 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 100%;
   height: auto;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  .our-logo-flexitem {
+.branding-container .logo-container .our-logo-container .our-logo-flex .our-logo-flexitem {
   width: 375px;
   height: 160px;
   border: 2px solid #373a3d;
@@ -135,116 +127,54 @@
   padding: 30px 0 40px;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  .our-logo-flexitem
-  img {
+.branding-container .logo-container .our-logo-container .our-logo-flex .our-logo-flexitem img {
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  .our-logo-flexitem
-  .svg,
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  .our-logo-flexitem
-  .png {
+.branding-container .logo-container .our-logo-container .our-logo-flex .our-logo-flexitem .svg,
+.branding-container .logo-container .our-logo-container .our-logo-flex .our-logo-flexitem .png {
   position: absolute;
-  color: #01d47a;
+  color: #01D47A;
   font-family: SFProTextReg;
   font-size: 15px;
   bottom: 5px;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  .our-logo-flexitem
-  .png {
+.branding-container .logo-container .our-logo-container .our-logo-flex .our-logo-flexitem .png {
   right: 10px;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  .our-logo-flexitem
-  .svg {
+.branding-container .logo-container .our-logo-container .our-logo-flex .our-logo-flexitem .svg {
   right: 50px;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(1),
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(3) {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png');
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(1),
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(3) {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png");
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(1)
-  .svg,
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(3)
-  .svg {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png') !important;
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(1) .svg,
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(3) .svg {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png") !important;
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(2) {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(2) {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(2)
-  img {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(2) img {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(2)
-  .png {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(2) .png {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .our-logo-container
-  .our-logo-flex
-  :nth-child(2)
-  .svg {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .our-logo-container .our-logo-flex :nth-child(2) .svg {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
 .branding-container .logo-container .alt-logo-container {
@@ -276,22 +206,18 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 100%;
   height: auto;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem {
   width: 375px;
   height: calc(160px * 1.5);
   border: 2px solid #373a3d;
@@ -302,272 +228,112 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt1,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt2,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt3 {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt1,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt2,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt3 {
   width: 90px;
   height: 90px;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt1
-  img,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt2
-  img,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt3
-  img {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt1 img,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt2 img,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt3 img {
   height: 100%;
   width: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt4,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt5,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt6 {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt4,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt5,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt6 {
   width: 80px;
   height: 120px;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt4
-  img,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt5
-  img,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .alt6
-  img {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt4 img,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt5 img,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .alt6 img {
   height: 100%;
   width: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .svg,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .png {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .svg,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .png {
   position: absolute;
-  color: #01d47a;
+  color: #01D47A;
   font-family: SFProTextReg;
   font-size: 15px;
   bottom: 5px;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .png {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .png {
   right: 10px;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  .alt-logo-flexitem
-  .svg {
+.branding-container .logo-container .alt-logo-container .alt-logo-flex .alt-logo-flexitem .svg {
   right: 50px;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(1),
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(3) {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(1),
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(3) {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(1)
-  .svg,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(3)
-  .svg {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png') !important;
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(1) .svg,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(3) .svg {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png") !important;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(2) {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(2) {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(2)
-  img {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(2) img {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(2)
-  .png {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(2) .png {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(2)
-  .svg {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(2) .svg {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(4),
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(6) {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(4),
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(6) {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(4)
-  .svg,
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(6)
-  .svg {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png') !important;
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(4) .svg,
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(6) .svg {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png") !important;
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(5) {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(5) {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(5)
-  img {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(5) img {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(5)
-  .png {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(5) .png {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
-.branding-container
-  .logo-container
-  .alt-logo-container
-  .alt-logo-flex
-  :nth-child(5)
-  .svg {
-  background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+.branding-container .logo-container .alt-logo-container .alt-logo-flex :nth-child(5) .svg {
+  background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
 }
 
 .branding-container .logo-container .spacing-container {
@@ -592,15 +358,15 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
   width: 100%;
   height: 240px;
   -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-column-gap: 30px;
-  column-gap: 30px;
+          column-gap: 30px;
 }
 
 .branding-container .logo-container .spacing-container .spacing-flex .spacing1 {
@@ -613,38 +379,24 @@
   height: 100%;
 }
 
-.branding-container
-  .logo-container
-  .spacing-container
-  .spacing-flex
-  .spacing-flexitem {
+.branding-container .logo-container .spacing-container .spacing-flex .spacing-flexitem {
   height: 100%;
   border-radius: 8px;
   position: relative;
 }
 
-.branding-container
-  .logo-container
-  .spacing-container
-  .spacing-flex
-  .spacing-flexitem
-  .spacing-img1 {
+.branding-container .logo-container .spacing-container .spacing-flex .spacing-flexitem .spacing-img1 {
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
 
-.branding-container
-  .logo-container
-  .spacing-container
-  .spacing-flex
-  .spacing-flexitem
-  .spacing-img2 {
+.branding-container .logo-container .spacing-container .spacing-flex .spacing-flexitem .spacing-img2 {
   width: 100%;
   height: 100%;
   -o-object-fit: contain;
-  object-fit: contain;
+     object-fit: contain;
 }
 
 .branding-container .logo-container .color-container {
@@ -669,22 +421,18 @@
   display: flex;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-  -ms-flex-direction: row;
-  flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row;
   -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+      flex-wrap: wrap;
   width: 100%;
   height: auto;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 
-.branding-container
-  .logo-container
-  .color-container
-  .color-flex
-  .color-flexitem {
+.branding-container .logo-container .color-container .color-flex .color-flexitem {
   width: 377.33px;
   height: 208px;
   border: 2px solid #373a3d;
@@ -694,32 +442,18 @@
   padding: 20px 20px 20px 20px;
 }
 
-.branding-container
-  .logo-container
-  .color-container
-  .color-flex
-  .color-flexitem
-  h2 {
+.branding-container .logo-container .color-container .color-flex .color-flexitem h2 {
   font-size: 32px;
-  font-family: 'DTphudu';
+  font-family: "DTphudu";
   margin-bottom: 80px;
 }
 
-.branding-container
-  .logo-container
-  .color-container
-  .color-flex
-  .color-flexitem
-  div {
+.branding-container .logo-container .color-container .color-flex .color-flexitem div {
   font-size: 20px;
-  font-family: 'SFProTextReg';
+  font-family: "SFProTextReg";
 }
 
-.branding-container
-  .logo-container
-  .color-container
-  .color-flex
-  .color-blurple {
+.branding-container .logo-container .color-container .color-flex .color-blurple {
   background-color: #5865f2;
 }
 
@@ -733,11 +467,7 @@
   background-color: #fee75c;
 }
 
-.branding-container
-  .logo-container
-  .color-container
-  .color-flex
-  .color-fuchsia {
+.branding-container .logo-container .color-container .color-flex .color-fuchsia {
   background-color: #eb459e;
 }
 
@@ -771,7 +501,7 @@
 }
 
 .branding-container .logo-container .more-container button {
-  background-color: #01d47a;
+  background-color: #01D47A;
   width: 150px;
   height: 51px;
   color: white;

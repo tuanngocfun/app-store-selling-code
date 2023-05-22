@@ -1,3 +1,4 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from "react";
 
-export const WishContext = createContext({});
+export const WishContext =createContext({})
+

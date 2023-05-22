@@ -7,11 +7,11 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   padding: 30px;
 }
 
@@ -26,10 +26,10 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-column-gap: 20px;
-  column-gap: 20px;
+          column-gap: 20px;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .cart-item .left .thumb {
@@ -43,7 +43,7 @@
   height: 100%;
   width: 100%;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
 }
 
 .cart-item .left .info {
@@ -52,8 +52,8 @@
   display: flex;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-  -ms-flex-direction: column;
-  flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
   row-gap: 10px;
 }
 
@@ -62,7 +62,7 @@
 }
 
 .cart-item .left .info span {
-  font-family: 'SFProDisplayReg';
+  font-family: "SFProDisplayReg";
   font-size: 0.9rem;
   color: #a5a5a5;
 }
@@ -72,10 +72,10 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-column-gap: 10px;
-  column-gap: 10px;
+          column-gap: 10px;
   margin-top: 15px;
 }
 
@@ -100,14 +100,14 @@
 }
 
 .cart-item .left .info .bottom .wishlist {
-  font-family: 'SFProDisplayReg';
+  font-family: "SFProDisplayReg";
   color: #a5a5a5;
   font-size: 0.9rem;
   cursor: pointer;
 }
 
 .cart-item .right span {
-  font-family: 'DTphuduMedium';
+  font-family: "DTphuduMedium";
   font-size: 1.4rem;
 }
 /*# sourceMappingURL=cartItem.css.map */

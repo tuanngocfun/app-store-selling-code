@@ -1,5 +1,5 @@
-import React from 'react';
-import './termsOfUse.scss';
+import React from "react";
+import "./termsOfUse.scss";
 
 function TermsOfUse() {
   return (
@@ -22,13 +22,12 @@ function TermsOfUse() {
           <h3 className="p-header">1. Who we are?</h3>
           <p>
             1.1 These are the terms and conditions (“Terms”) upon which Aliasing
-            DMCC, a private company incorporated under the laws of Vietnam under
-            company registration number DMCC179752 and having its registered
-            office at Office Unit 1204, Jumeirah Business Center 3, Cluster Y,
-            Jumeirah Lakes Towers, Dubai, UAE (“Risen Gaming”, “we”, “us”,
-            “our”) sell and supply access codes to digital content to you
-            through the website www.instant-gaming.com and through our mobile
-            applications (“Website”)..
+            DMCC, a private company incorporated under the laws of Vietnam under company registration number DMCC179752 and having its
+            registered office at Office Unit 1204, Jumeirah Business Center 3,
+            Cluster Y, Jumeirah Lakes Towers, Dubai, UAE (“Risen Gaming”,
+            “we”, “us”, “our”) sell and supply access codes to digital content
+            to you through the website www.instant-gaming.com and through our
+            mobile applications (“Website”)..
           </p>
           <br />
           <p>
