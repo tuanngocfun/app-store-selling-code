@@ -1,0 +1,10 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "wishlist.scss",
+        "../../../_variables.scss"
+    ],
+    "names": [],
+    "file": "wishlist.css"
+}

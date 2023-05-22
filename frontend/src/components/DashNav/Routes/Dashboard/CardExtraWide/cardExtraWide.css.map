@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,0BAA0B,CAAA;EACtB,MAAM,EAAE,WAAW;EACnB,KAAK,EAAE,KAAK;EACZ,gBAAgB,EAAE,OAAO;EACzB,aAAa,EAAE,IAAI;EACnB,OAAO,EAAE,IAAI;EACb,cAAc,EAAE,MAAM;EACtB,WAAW,EAAE,MAAM;CAGtB",
+    "sources": [
+        "cardExtraWide.scss"
+    ],
+    "names": [],
+    "file": "cardExtraWide.css"
+}
