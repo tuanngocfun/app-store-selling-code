@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../_variables.scss";
 
 .branding-container {
   height: auto;
@@ -14,7 +14,7 @@
     display: flex;
     align-items: center;
 
-    .text-container {
+    .text-container{
       height: 100%;
       width: 60%;
       display: flex;
@@ -35,14 +35,14 @@
       }
     }
 
-    .logo-image-container {
+    .logo-image-container{
       height: 100%;
       width: 40%;
       display: flex;
       align-items: center;
       justify-content: center;
 
-      .image-container {
+      .image-container{
         width: 250px;
         height: 250px;
 
@@ -52,7 +52,10 @@
           object-fit: cover;
         }
       }
+      
     }
+    
+
   }
   .logo-container {
     background-color: #272727;
@@ -110,21 +113,21 @@
         }
         :nth-child(1),
         :nth-child(3) {
-          background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png');
+          background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png");
           .svg {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png') !important;
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png") !important;
           }
         }
         :nth-child(2) {
-          background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+          background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           img {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
           .png {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
           .svg {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
         }
       }
@@ -171,7 +174,7 @@
           .alt3 {
             width: 90px;
             height: 90px;
-            img {
+            img{
               height: 100%;
               width: 100%;
               object-fit: contain;
@@ -183,7 +186,7 @@
             width: 80px;
             height: 120px;
 
-            img {
+            img{
               height: 100%;
               width: 100%;
               object-fit: contain;
@@ -206,41 +209,41 @@
         }
         :nth-child(1),
         :nth-child(3) {
-          background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png');
+          background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png");
           .svg {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png') !important;
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png") !important;
           }
         }
         :nth-child(2) {
-          background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+          background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           img {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
           .png {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
           .svg {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
         }
 
         :nth-child(4),
         :nth-child(6) {
-          background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png');
+          background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png");
           .svg {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png') !important;
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/62594f6abf11bb058da52ecb_bg.png") !important;
           }
         }
         :nth-child(5) {
-          background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+          background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           img {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
           .png {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
           .svg {
-            background: url('https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png');
+            background: url("https://assets-global.website-files.com/6257adef93867e50d84d30e2/625950f8da1880cda1a94346_bg-w.png");
           }
         }
       }
@@ -329,12 +332,12 @@
           padding: 20px 20px 20px 20px;
           h2 {
             font-size: 32px;
-            font-family: 'DTphudu';
+            font-family: "DTphudu";
             margin-bottom: 80px;
           }
           div {
             font-size: 20px;
-            font-family: 'SFProTextReg';
+            font-family: "SFProTextReg";
           }
         }
         .color-blurple {
@@ -387,3 +390,4 @@
     }
   }
 }
+

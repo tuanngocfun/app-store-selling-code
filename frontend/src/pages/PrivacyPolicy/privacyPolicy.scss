@@ -1,4 +1,4 @@
-@import '../../_variables.scss';
+@import "../../_variables.scss";
 
 .pp-container {
   height: auto;
@@ -34,7 +34,7 @@
       border-top-right-radius: 20px;
       border-top-left-radius: 20px;
       color: #a5a5a5;
-      font-family: 'SFProTextReg';
+      font-family: "SFProTextReg";
     }
 
     .table-grid {
@@ -61,22 +61,22 @@
       margin-bottom: 30px;
     }
 
-    &.paragraph-policy {
+    &.paragraph-policy{
       margin-bottom: 40px;
     }
 
     h1 {
-      font-family: 'DTPhuduMedium';
+      font-family: "DTPhuduMedium";
       font-size: 2rem;
       margin-bottom: 40px;
     }
     h2 {
-      font-family: 'DTPhudu';
+      font-family: "DTPhudu";
       font-size: 2rem;
       color: $clr-green;
     }
     h3 {
-      font-family: 'SFProTextBold';
+      font-family: "SFProTextBold";
       font-size: 1.2rem;
     }
     p {
@@ -88,7 +88,7 @@
       ul {
         list-style-type: none;
         li:before {
-          content: '- ';
+          content: "- ";
         }
       }
     }
@@ -97,8 +97,10 @@
   .p-list {
     counter-increment: my-awesome-counter;
 
-    li {
-      &::before {
+    li{
+      
+
+      &::before{
         line-height: 25px;
       }
     }

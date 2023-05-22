@@ -1,39 +1,45 @@
-import React from 'react';
-import './branding.scss';
-import mascotGreen from '../../images/logo/mascot-green.png';
-import mascotBlack from '../../images/logo/mascot-black.png';
-import mascotWhite from '../../images/logo/mascot-white.png';
-import horizontalGreen from '../../images/logo/horizontal-green.png';
-import horizontalWhite from '../../images/logo/horizontal-white.png';
-import horizontalBlack from '../../images/logo/horizontal-black.png';
-import verticalGreen from '../../images/logo/vertical-green.png';
-import verticalWhite from '../../images/logo/vertical-white.png';
-import verticalBlack from '../../images/logo/vertical-black.png';
-import horizontalSpacing from '../../images/logo/horizontal-spacing.png';
-import verticalSpacing from '../../images/logo/vertical-spacing.png';
+import React from "react";
+import "./branding.scss";
+import mascotGreen from "../../images/logo/mascot-green.png";
+import mascotBlack from "../../images/logo/mascot-black.png";
+import mascotWhite from "../../images/logo/mascot-white.png";
+import horizontalGreen from "../../images/logo/horizontal-green.png";
+import horizontalWhite from "../../images/logo/horizontal-white.png";
+import horizontalBlack from "../../images/logo/horizontal-black.png";
+import verticalGreen from "../../images/logo/vertical-green.png";
+import verticalWhite from "../../images/logo/vertical-white.png";
+import verticalBlack from "../../images/logo/vertical-black.png";
+import horizontalSpacing from "../../images/logo/horizontal-spacing.png";
+import verticalSpacing from "../../images/logo/vertical-spacing.png";
 import { useTranslation } from 'react-i18next';
 function Branding() {
-  const { t } = useTranslation();
-  const ourLogoSVG = '#';
-  const ourLogoPNG = '#';
+  const {t} = useTranslation();
+  const ourLogoSVG = "#";
+  const ourLogoPNG = "#";
   return (
     <div className="branding-container">
       <div className="brand-container">
         <div className="text-container">
-          <h1>{t('brand')}</h1>
-          <p>{t('brand-text')}</p>
+          <h1>{t("brand")}</h1>
+          <p>
+            {t("brand-text")}
+          </p>
         </div>
-
+        
         <div className="logo-image-container">
           <div className="image-container">
             <img src={mascotBlack} alt="mascot-green"></img>
           </div>
+          
         </div>
+        
       </div>
       <div className="logo-container">
         <div className="our-logo-container">
-          <h1>{t('brand-logo')}</h1>
-          <p>{t('brand-logo-text')}</p>
+          <h1>{t("brand-logo")}</h1>
+          <p>
+            {t("brand-logo-text")}
+          </p>
           <div className="our-logo-flex">
             <div className="our-logo-flexitem">
               <img src={horizontalWhite} alt="horizontal-green"></img>
@@ -66,8 +72,10 @@ function Branding() {
         </div>
 
         <div className="alt-logo-container">
-          <h1>{t('brand-logo-alternate')}</h1>
-          <p>{t('brand-logo-alternate-text')}</p>
+          <h1>{t("brand-logo-alternate")}</h1>
+          <p>
+            {t("brand-logo-alternate-text")}
+          </p>
           {/* <h2>Mark only</h2> */}
           <div className="alt-logo-flex">
             <div className="alt-logo-flexitem">
@@ -153,8 +161,10 @@ function Branding() {
         </div>
 
         <div className="spacing-container">
-          <h1>{t('brand-spacing')}</h1>
-          <p>{t('brand-spacing-text')}</p>
+          <h1>{t("brand-spacing")}</h1>
+          <p>
+            {t("brand-spacing-text")}
+          </p>
           <div className="spacing-flex">
             <div className="spacing-flexitem spacing1">
               <img
@@ -215,9 +225,9 @@ function Branding() {
         </div>
 
         <div className="more-container">
-          <h1>{t('looking-for-more1')}</h1>
-          <p>{t('looking-for-more2')}</p>
-          <button>{t('download')}</button>
+          <h1>{t("looking-for-more1")}</h1>
+          <p>{t("looking-for-more2")}</p>
+          <button>{t("download")}</button>
         </div>
       </div>
     </div>
