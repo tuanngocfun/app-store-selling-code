@@ -10,7 +10,7 @@ services:
             - DB_PORT=5432
         command: 'npm run start_dev'
         ports:
-            - '3000:5000'
+            - '3500:5000'
         depends_on:
             - database # Make sure the database service starts before the api-backend service
         # volumes:
