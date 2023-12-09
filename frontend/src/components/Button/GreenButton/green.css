@@ -1,0 +1,31 @@
+.green-button {
+  color: #ffffff;
+  background-color: #01d47a;
+  padding: 0.8rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  border-radius: 8px;
+  font-family: 'DTphuduMedium';
+  font-size: 1.1rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.green-button.none {
+  pointer-events: none;
+  background-color: #007e47;
+}
+
+.green-button.none:hover {
+  background-color: #007e47;
+}
+
+.green-button:hover {
+  background-color: #02f089;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+/*# sourceMappingURL=green.css.map */
