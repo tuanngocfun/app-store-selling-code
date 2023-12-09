@@ -6,4 +6,4 @@ services:
       dockerfile: Dockerfile
     image: my-frontend-image:latest
     ports:
-      - '3000:80'
+      - '3500:80'
